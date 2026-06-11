@@ -1,0 +1,22 @@
+{
+  "name": "cardio-checkup-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Cardio Check-up — Dr Sana Amraoui. Site vitrine cardiologie & rythmologie (prototype).",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "vite": "^5.4.10"
+  }
+}

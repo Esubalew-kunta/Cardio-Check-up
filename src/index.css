@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* ── Design system — pitch-deck palette ────────────────────────────────────
+   Colors verified against the Cardio Check-up pitch deck PDF and locked to
+   the canonical brand values. Color-psychology rationale per token:
+
+   • Burgundy #7B1C42 — PRIMARY. Authority, medical expertise and trust,
+     without the institutional coldness of blue. Warm, human, premium.
+   • Gold #C9A96E — ACCENT. Premium and warmth, refined rather than ostentatious.
+     Decorative only (mark, dividers, dots, numerals on dark).
+   • Cream #F5F0E8 — CANVAS. Calm and clinical cleanliness; a soft, reassuring
+     ground that lowers anxiety in a medical context.
+   • Off-white #FAF7F2 — text on dark (burgundy) surfaces.
+   • Ink #2C1810 — body text on light (warm near-black for high legibility).
+   • Muted #8C8275 — secondary / caption text only (never critical body copy).
+   • Signal red #C0392B — urgency + action. CTAs and the ECG line ONLY,
+     nowhere else, so red always reads as "act now," never as alarm.
+   ────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Primary — burgundy */
+  --color-burgundy: #7b1c42;
+  --color-burgundy-deep: #5c1030;
+
+  /* Accent — gold */
+  --color-gold: #c9a96e;
+  --color-gold-deep: #a8854d; /* darker gold for decorative numerals on light (contrast) */
+
+  /* Neutrals */
+  --color-cream: #f5f0e8;       /* page canvas */
+  --color-cream-soft: #efe7d8;  /* alternating section band */
+  --color-offwhite: #faf7f2;    /* text on dark surfaces */
+  --color-ink: #2c1810;         /* body text on light */
+  --color-muted: #8c8275;       /* secondary / caption text */
+
+  /* Action — signal red (CTA + ECG only) */
+  --color-signal: #c0392b;
+  --color-signal-deep: #a93226;
+
+  /* Fonts (loaded via index.html link tag) */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* offset for sticky header on anchor jumps */
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Lock background scroll when the mobile menu is open */
+body.menu-open {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--color-burgundy);
+  color: var(--color-offwhite);
+}
+
+/* ── Scroll-reveal ─────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── ECG heartbeat line motif ──────────────────────────────────────────── */
+.ecg-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: ecg-draw 4s ease-in-out infinite;
+}
+@keyframes ecg-draw {
+  0%   { stroke-dashoffset: 1000; }
+  60%  { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1000; }
+}
+
+/* ── Accordion ─────────────────────────────────────────────────────────── */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.faq-answer.open {
+  grid-template-rows: 1fr;
+}
+.faq-answer > div {
+  overflow: hidden;
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .ecg-path { animation: none; stroke-dashoffset: 0; }
+  .faq-answer { transition: none; }
+}
