@@ -1,5 +1,6 @@
 import { useReveal } from '../hooks/useReveal.js'
-import { SERVICES, CONTACT } from '../data/site.js'
+import { SERVICES } from '../data/site.js'
+import { openBookingModal } from '../utils/bookingModal.js'
 
 function ServiceCard({ service, index }) {
   const [ref, visible] = useReveal()
@@ -32,19 +33,23 @@ function ServiceCard({ service, index }) {
       <p className="mt-3 text-sm font-medium text-ink/80">{service.why}</p>
 
       {/* Detail: always visible on mobile/tablet, hover-reveal on desktop */}
-      <div className="mt-3 overflow-hidden opacity-100 max-h-40 lg:max-h-0 lg:opacity-0 transition-all duration-300 lg:group-hover:max-h-40 lg:group-hover:opacity-100 lg:group-focus-within:max-h-40 lg:group-focus-within:opacity-100">
+      <div className="mt-3 overflow-hidden opacity-100 max-h-48 lg:max-h-0 lg:opacity-0 transition-all duration-300 lg:group-hover:max-h-48 lg:group-hover:opacity-100 lg:group-focus-within:max-h-48 lg:group-focus-within:opacity-100">
         <p className="text-sm text-ink/75 leading-relaxed">{service.desc}</p>
+        {service.symptoms && (
+          <p className="mt-2 text-xs text-muted leading-relaxed">
+            <span className="font-semibold text-ink/70">Signes évocateurs :</span> {service.symptoms}
+          </p>
+        )}
       </div>
 
-      <a
-        href={CONTACT.doctolib}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        type="button"
+        onClick={openBookingModal}
         className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-signal hover:gap-2.5 transition-all"
       >
         Prendre rendez-vous
         <span aria-hidden="true">→</span>
-      </a>
+      </button>
     </article>
   )
 }

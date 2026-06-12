@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Logo from './Logo.jsx'
-import { NAV, CONTACT } from '../data/site.js'
+import { NAV } from '../data/site.js'
+import { openBookingModal } from '../utils/bookingModal.js'
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -55,14 +56,13 @@ export default function Header() {
                 {item.label}
               </a>
             ))}
-            <a
-              href={CONTACT.doctolib}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={openBookingModal}
               className="inline-flex items-center rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-signal-deep transition-colors"
             >
               Prendre rendez-vous
-            </a>
+            </button>
           </nav>
 
           {/* Mobile toggle */}
@@ -109,15 +109,16 @@ export default function Header() {
               {item.label}
             </a>
           ))}
-          <a
-            href={CONTACT.doctolib}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={close}
+          <button
+            type="button"
+            onClick={() => {
+              close()
+              openBookingModal()
+            }}
             className="mt-2 inline-flex items-center rounded-full bg-signal px-7 py-3 text-base font-semibold text-white"
           >
             Prendre rendez-vous
-          </a>
+          </button>
         </nav>
       </div>
     </header>

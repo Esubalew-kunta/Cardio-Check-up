@@ -1,5 +1,5 @@
 import EcgLine from './EcgLine.jsx'
-import { CONTACT } from '../data/site.js'
+import { openBookingModal } from '../utils/bookingModal.js'
 
 const TRUST = ['Conventionnée Secteur 2', 'Hôpital Américain de Paris', 'Diplômée LSE & Bordeaux']
 
@@ -19,7 +19,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-8 w-full pt-28 pb-24 sm:pb-20">
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8 w-full pt-28 pb-16 sm:pb-20">
         <div className="max-w-2xl">
           <p className="font-sans text-xs sm:text-sm tracking-[0.28em] uppercase text-gold mb-5">
             Cardiologie &amp; Rythmologie · Paris 17
@@ -37,26 +37,19 @@ export default function Hero() {
             suivi à Paris 17.
           </p>
 
-          {/* CTAs — min 44px touch targets */}
-          <div className="mt-9 flex flex-col sm:flex-row gap-4">
-            <a
-              href={CONTACT.doctolib}
-              target="_blank"
-              rel="noopener noreferrer"
+          {/* CTA — min 44px touch target */}
+          <div className="mt-9">
+            <button
+              type="button"
+              onClick={openBookingModal}
               className="inline-flex min-h-[3rem] items-center justify-center rounded-full bg-signal px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-signal-deep transition-colors"
             >
               Prendre rendez-vous
-            </a>
-            <a
-              href={CONTACT.phoneHref}
-              className="inline-flex min-h-[3rem] items-center justify-center rounded-full border border-offwhite/40 bg-offwhite/5 backdrop-blur px-8 py-4 text-base font-semibold text-offwhite hover:bg-offwhite/15 transition-colors"
-            >
-              {CONTACT.phone}
-            </a>
+            </button>
           </div>
 
           {/* Trust bar (merged into hero) — wraps cleanly on small screens */}
-          <ul className="mt-12 flex flex-wrap gap-x-6 gap-y-3 border-t border-offwhite/15 pt-6">
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-offwhite/15 pt-6">
             {TRUST.map((item) => (
               <li key={item} className="flex items-center gap-2 text-sm text-offwhite/80">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
@@ -65,12 +58,6 @@ export default function Hero() {
             ))}
           </ul>
         </div>
-      </div>
-
-      {/* Scroll hint */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-offwhite/60">
-        <span className="text-xs tracking-[0.2em] uppercase">Découvrir</span>
-        <span className="h-9 w-px bg-offwhite/40 animate-pulse" />
       </div>
     </section>
   )

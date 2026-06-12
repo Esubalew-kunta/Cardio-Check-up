@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CONTACT } from '../data/site.js'
+import { openBookingModal } from '../utils/bookingModal.js'
 
 // Persistent booking CTA on mobile — appears once the user scrolls past the hero.
 export default function MobileBookingBar() {
@@ -19,14 +20,13 @@ export default function MobileBookingBar() {
       }`}
     >
       <div className="flex gap-3">
-        <a
-          href={CONTACT.doctolib}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
+          onClick={openBookingModal}
           className="flex-1 inline-flex items-center justify-center rounded-full bg-signal px-5 py-3 text-sm font-semibold text-white"
         >
           Prendre rendez-vous
-        </a>
+        </button>
         <a
           href={CONTACT.phoneHref}
           aria-label="Appeler le cabinet"

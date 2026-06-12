@@ -1,16 +1,15 @@
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
-import SocialProof from './components/SocialProof.jsx'
 import Services from './components/Services.jsx'
-import Faq from './components/Faq.jsx'
 import Parcours from './components/Parcours.jsx'
-import Contact from './components/Contact.jsx'
+import Faq from './components/Faq.jsx'
 import Footer from './components/Footer.jsx'
 import MobileBookingBar from './components/MobileBookingBar.jsx'
+import FloatingContactButtons from './components/FloatingContactButtons.jsx'
+import BookingModal from './components/BookingModal.jsx'
 
-// Approved funnel order:
-// Hero (+ trust) → About → Social-proof numbers → Services → FAQ → Parcours → Contact
+// Funnel order: Hero (+ trust + stats) → Dr Amraoui → Nos Examens → Votre visite → FAQ → Footer
 export default function App() {
   return (
     <>
@@ -18,14 +17,14 @@ export default function App() {
       <main>
         <Hero />
         <About />
-        <SocialProof />
         <Services />
-        <Faq />
         <Parcours />
-        <Contact />
+        <Faq />
       </main>
       <Footer />
       <MobileBookingBar />
+      <FloatingContactButtons />
+      <BookingModal />
     </>
   )
 }

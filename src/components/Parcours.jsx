@@ -16,32 +16,29 @@ export default function Parcours() {
         <div className="absolute inset-0 bg-burgundy-deep/85" />
       </div>
 
-      <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''} relative mx-auto max-w-6xl px-5 sm:px-8`}>
+      <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''} relative mx-auto max-w-3xl px-5 sm:px-8`}>
         <div className="max-w-2xl">
           <p className="font-sans text-sm tracking-[0.28em] uppercase text-gold mb-4">
-            Votre parcours
+            Votre visite
           </p>
           <h2 className="font-display text-4xl sm:text-5xl font-semibold text-offwhite leading-tight">
             Une prise en charge simple et rassurante
           </h2>
         </div>
 
-        {/* Timeline */}
+        {/* Vertical timeline at all breakpoints */}
         <div className="relative mt-16">
-          {/* Connector line: vertical (down the left) on mobile, horizontal on desktop */}
-          <div
-            className="absolute bg-gold/30 left-5 top-0 bottom-0 w-px lg:left-0 lg:right-0 lg:top-5 lg:bottom-auto lg:h-px lg:w-auto"
-            aria-hidden="true"
-          />
+          {/* Connector line */}
+          <div className="absolute left-5 top-2 bottom-2 w-0.5 bg-gold" aria-hidden="true" />
 
-          <div className="grid gap-10 lg:grid-cols-4 lg:gap-8">
+          <div className="space-y-14 sm:space-y-16">
             {PARCOURS.map((step) => (
-              <div key={step.n} className="relative flex gap-5 lg:flex-col lg:gap-0">
+              <div key={step.n} className="relative flex gap-6">
                 {/* Node */}
-                <span className="relative z-10 grid place-items-center h-10 w-10 shrink-0 rounded-full bg-gold font-display text-lg font-semibold text-burgundy">
+                <span className="relative z-10 grid place-items-center h-10 w-10 shrink-0 rounded-full bg-burgundy ring-4 ring-burgundy-deep font-display text-lg font-semibold text-offwhite">
                   {step.n}
                 </span>
-                <div className="lg:mt-6">
+                <div className="pt-1">
                   <h3 className="font-display text-2xl font-semibold text-offwhite">
                     {step.title}
                   </h3>

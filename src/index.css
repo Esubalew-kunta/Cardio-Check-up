@@ -55,8 +55,9 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Lock background scroll when the mobile menu is open */
-body.menu-open {
+/* Lock background scroll when the mobile menu or booking modal is open */
+body.menu-open,
+body.modal-open {
   overflow: hidden;
 }
 
@@ -102,10 +103,24 @@ body.menu-open {
   overflow: hidden;
 }
 
+/* ── Collapsible panel (Dr Amraoui's full credentials) ────────────────── */
+.expand-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.expand-panel.open {
+  grid-template-rows: 1fr;
+}
+.expand-panel > div {
+  overflow: hidden;
+}
+
 /* ── Reduced motion ────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .ecg-path { animation: none; stroke-dashoffset: 0; }
   .faq-answer { transition: none; }
+  .expand-panel { transition: none; }
 }
