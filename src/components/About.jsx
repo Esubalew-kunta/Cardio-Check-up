@@ -149,15 +149,23 @@ export default function About() {
                 aria-expanded={open}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-burgundy hover:text-burgundy-deep transition-colors"
               >
-                {open ? 'Masquer le parcours complet' : 'Voir le parcours complet'}
-                <span
-                  className={`grid place-items-center h-6 w-6 rounded-full border border-burgundy/40 transition-transform duration-300 ${
-                    open ? 'rotate-45' : ''
+                {open ? 'Masquer le parcours complet' : 'Voir le parcours académique'}
+                <svg
+                  viewBox="0 0 24 24"
+                  className={`h-4 w-4 text-gold transition-transform duration-200 ease-in-out ${
+                    open ? 'rotate-180' : ''
                   }`}
+                  fill="none"
                   aria-hidden="true"
                 >
-                  +
-                </span>
+                  <path
+                    d="M5 9l7 7 7-7"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </button>
             </div>
 
