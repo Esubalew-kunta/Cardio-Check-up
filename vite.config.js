@@ -5,4 +5,8 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Allow any host for `vite preview` — the Railway domain can change.
+  preview: {
+    allowedHosts: true,
+  },
 })
