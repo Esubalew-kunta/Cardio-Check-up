@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom'
 import Logo from './Logo.jsx'
-import { CONTACT, LOCATIONS, NAV } from '../data/site.js'
+import { CONTACT, LOCATIONS, NAV, LEGAL_NAV } from '../data/site.js'
 
 // Secondary "dr_rythmo" red roundel mark (Instagram / personal brand).
 function RythmoMark() {
@@ -106,10 +107,10 @@ export default function Footer() {
             <h4 className="font-display text-lg font-semibold text-offwhite mb-4">Liens et réseaux</h4>
             <ul className="space-y-2.5">
               {NAV.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="text-sm hover:text-gold transition-colors">
+                <li key={item.to}>
+                  <Link to={item.to} className="text-sm hover:text-gold transition-colors">
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -155,8 +156,11 @@ export default function Footer() {
         <div className="mt-14 pt-6 border-t border-offwhite/15 flex flex-col sm:flex-row justify-between gap-3 text-xs text-offwhite/50">
           <p>© {year} Cardio Check-up Paris · {CONTACT.site}</p>
           <p className="flex gap-4">
-            <a href="#" className="hover:text-gold transition-colors">Mentions légales</a>
-            <a href="#" className="hover:text-gold transition-colors">Politique de confidentialité</a>
+            {LEGAL_NAV.map((item) => (
+              <Link key={item.to} to={item.to} className="hover:text-gold transition-colors">
+                {item.label}
+              </Link>
+            ))}
           </p>
         </div>
       </div>

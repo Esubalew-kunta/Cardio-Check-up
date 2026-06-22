@@ -90,6 +90,16 @@ body.modal-open {
   100% { stroke-dashoffset: -1000; }
 }
 
+/* ── Chat button gentle bob (continuous, up and down every 2s) ─────────── */
+@keyframes chat-bob {
+  0%,
+  100% { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+}
+.chat-bob {
+  animation: chat-bob 2s ease-in-out infinite;
+}
+
 /* ── Accordion ─────────────────────────────────────────────────────────── */
 .faq-answer {
   display: grid;
@@ -116,6 +126,25 @@ body.modal-open {
   overflow: hidden;
 }
 
+/* ── Collapsible (max-height) — academic timeline, mobile nav exam list ── */
+.collapse-mh {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.collapse-mh.open {
+  max-height: 40rem;
+}
+
+/* ── Hide scrollbars on horizontal scroll strips (scroll stays functional) */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
 /* ── Reduced motion ────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -123,4 +152,6 @@ body.modal-open {
   .ecg-path { animation: none; stroke-dashoffset: 0; }
   .faq-answer { transition: none; }
   .expand-panel { transition: none; }
+  .collapse-mh { transition: none; }
+  .chat-bob { animation: none; }
 }

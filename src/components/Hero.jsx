@@ -1,21 +1,24 @@
 import EcgLine from './EcgLine.jsx'
-import { openBookingModal } from '../utils/bookingModal.js'
 
-const TRUST = ['Conventionnée Secteur 2', 'Hôpital Américain de Paris', 'Diplômée LSE & Bordeaux']
+const TRUST = ['Conventionnée Secteur 2', 'Hôpital Américain de Paris', 'Formation internationale']
 
 export default function Hero() {
   return (
     <section id="top" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
+        {/* Mobile: anchor image left so the clinic logo/signage on the left of
+            the photo stays visible. Desktop: centred as before. */}
         <img
           src="/images/hero-reception.jpg"
           alt="Accueil du cabinet Cardio Check-up à Paris"
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-left sm:object-center"
         />
-        {/* Burgundy-toned overlays for brand cohesion + text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-deep/85 via-burgundy-deep/45 to-burgundy-deep/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-burgundy-deep/60 via-transparent to-burgundy-deep/20" />
+        {/* Burgundy-toned overlays for brand cohesion + text legibility.
+            Stronger on mobile (text sits over the busy left of the photo);
+            desktop values restored at sm+ so that layout is untouched. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-burgundy-deep/95 via-burgundy-deep/70 to-burgundy-deep/25 sm:from-burgundy-deep/85 sm:via-burgundy-deep/45 sm:to-burgundy-deep/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-burgundy-deep/75 via-transparent to-burgundy-deep/20 sm:from-burgundy-deep/60" />
       </div>
 
       {/* Content */}
@@ -36,17 +39,6 @@ export default function Hero() {
             Cabinet de cardiologie et rythmologie. Bilan cardiovasculaire, dépistage et
             suivi à Paris 17.
           </p>
-
-          {/* CTA — min 44px touch target */}
-          <div className="mt-9">
-            <button
-              type="button"
-              onClick={openBookingModal}
-              className="inline-flex min-h-[3rem] items-center justify-center rounded-full bg-signal px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-signal-deep transition-colors"
-            >
-              Prendre rendez-vous
-            </button>
-          </div>
 
           {/* Trust bar (merged into hero) — wraps cleanly on small screens */}
           <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-offwhite/15 pt-6">

@@ -12,6 +12,8 @@ const EMPTY_FORM = {
   location: '',
   reason: '',
   message: '',
+  consent: false,
+  company: '', // honeypot — must stay empty; bots tend to fill it
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -30,8 +32,9 @@ export default function BookingModal() {
   }
 
   useEffect(() => {
-    const onOpen = () => {
-      setForm(EMPTY_FORM)
+    const onOpen = (e) => {
+      const prefill = e?.detail || {}
+      setForm({ ...EMPTY_FORM, ...prefill })
       setErrors({})
       setStatus('idle')
       setOpen(true)
@@ -54,6 +57,7 @@ export default function BookingModal() {
   }, [open])
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }))
+  const updateChecked = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.checked }))
 
   const validate = () => {
     const next = {}
@@ -65,6 +69,7 @@ export default function BookingModal() {
     else if (!PHONE_RE.test(form.phone.trim())) next.phone = 'Numéro invalide'
     if (!form.location) next.location = 'Champ requis'
     if (!form.reason) next.reason = 'Champ requis'
+    if (!form.consent) next.consent = 'Votre consentement est requis pour traiter votre demande'
     setErrors(next)
     return Object.keys(next).length === 0
   }
@@ -72,6 +77,12 @@ export default function BookingModal() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validate()) return
+
+    // Honeypot: a filled hidden field means a bot. Pretend success silently.
+    if (form.company.trim()) {
+      setStatus('success')
+      return
+    }
 
     setStatus('loading')
     try {
@@ -86,6 +97,8 @@ export default function BookingModal() {
           location: form.location,
           reason: form.reason,
           message: form.message.trim(),
+          consent: form.consent,
+          company: form.company, // honeypot, checked server-side in n8n
           submitted_at: new Date().toISOString(),
           source: 'website',
         }),
@@ -269,6 +282,41 @@ export default function BookingModal() {
                 onChange={update('message')}
                 className="w-full rounded-lg border border-ink/15 bg-white px-3.5 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-burgundy/40"
               />
+            </div>
+
+            {/* Honeypot — visually hidden, off-screen, not announced */}
+            <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
+              <label htmlFor="company">Ne pas remplir</label>
+              <input
+                id="company"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.company}
+                onChange={update('company')}
+              />
+            </div>
+
+            {/* RGPD consent */}
+            <div>
+              <label htmlFor="consent" className="flex items-start gap-2.5 text-xs text-ink/70 leading-relaxed cursor-pointer">
+                <input
+                  id="consent"
+                  type="checkbox"
+                  checked={form.consent}
+                  onChange={updateChecked('consent')}
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-ink/30 text-burgundy focus:ring-burgundy/40"
+                />
+                <span>
+                  J'accepte que les informations transmises soient utilisées par le cabinet Cardio
+                  Check-up pour traiter ma demande de rendez-vous, conformément à la{' '}
+                  <a href="/confidentialite" target="_blank" rel="noopener noreferrer" className="font-semibold text-burgundy underline underline-offset-2 hover:text-burgundy-deep">
+                    politique de confidentialité
+                  </a>
+                  .
+                </span>
+              </label>
+              {errors.consent && <p className="mt-1 text-xs text-signal">{errors.consent}</p>}
             </div>
 
             {status === 'error' && (

@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { useReveal } from '../hooks/useReveal.js'
 import { SERVICES } from '../data/site.js'
-import { openBookingModal } from '../utils/bookingModal.js'
 
 function ServiceCard({ service, index }) {
   const [ref, visible] = useReveal()
@@ -8,7 +8,9 @@ function ServiceCard({ service, index }) {
     <article
       ref={ref}
       style={{ transitionDelay: `${index * 80}ms` }}
-      className={`reveal ${visible ? 'is-visible' : ''} group relative flex h-full flex-col rounded-2xl border border-gold/30 bg-white/60 p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-gold/60`}
+      className={`reveal ${visible ? 'is-visible' : ''} group relative flex h-full flex-col rounded-2xl border border-gold/30 bg-white/60 p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-gold/60 ${
+        service.placeholder ? 'lg:col-span-2' : ''
+      }`}
     >
       <div className="flex items-start justify-between gap-3">
         <span className="font-display text-2xl font-semibold text-gold-deep">
@@ -42,14 +44,13 @@ function ServiceCard({ service, index }) {
         )}
       </div>
 
-      <button
-        type="button"
-        onClick={openBookingModal}
+      <Link
+        to={`/examens/${service.id}`}
         className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-signal hover:gap-2.5 transition-all"
       >
-        Prendre rendez-vous
+        Découvrir cet examen
         <span aria-hidden="true">→</span>
-      </button>
+      </Link>
     </article>
   )
 }
