@@ -66,6 +66,28 @@ body.modal-open {
   color: var(--color-offwhite);
 }
 
+/* ── Typography system ─────────────────────────────────────────────────────
+   Cormorant Garamond = display only (headings, names, numerals).
+   Inter = everything functional (body, labels, nav, buttons).
+   Base rules below are a safety net; utility classes still override per element. */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+p, li, a, button, input, select, textarea, label, span {
+  font-family: var(--font-sans);
+}
+
+/* Eyebrow label — small tracked caps above headings. Inter 600, 11px, 0.2em. */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.6875rem; /* 11px */
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 /* ── Scroll-reveal ─────────────────────────────────────────────────────── */
 .reveal {
   opacity: 0;

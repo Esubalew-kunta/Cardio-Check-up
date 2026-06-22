@@ -71,7 +71,7 @@ export const DOCTORS = [
     photo: '/images/doctor-portrait.jpg',
     doctolib: CONTACT.doctolib,
     bioShort:
-      "Cardiologue rythmologue, le Dr Amraoui coordonne le conseil Cardio Check-up et dirige une unité de rythmologie à l'Hôpital Américain de Paris.",
+      'Cardiologue rythmologue interventionnelle, le Dr Amraoui coordonne le conseil Cardio Check-up et dirige une unité de rythmologie.',
     bio:
       "Diplômée de la faculté de médecine de Bordeaux et de la London School of Economics, ancienne cheffe de clinique du CHU de Bordeaux, le Dr Amraoui est responsable d'unité au service de rythmologie de l'Hôpital Américain de Paris. Elle a complété sa formation par des fellowships à St Thomas' Hospital (Londres) et à Columbia (New York). Elle accompagne ses patients dans le dépistage, le diagnostic et le suivi des maladies cardiovasculaires et des troubles du rythme cardiaque.",
     timeline: [
@@ -198,7 +198,7 @@ export const SERVICES = [
       "Le bilan cardiovasculaire réunit en un seul rendez-vous trois choses : une consultation avec le cardiologue, un enregistrement de l'activité électrique de votre cœur et une échographie du cœur.",
       "Il sert à faire le point sur la santé de votre cœur, à repérer une éventuelle anomalie et à mettre en place un suivi adapté. C'est l'examen de référence, en prévention comme avant une reprise du sport.",
     ],
-    videoId: 'la56HqMqMqA', // placeholder: same video on all exams until per-exam clips arrive
+    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
     symptomPills: ['Prévention', 'Suivi de routine', 'Avant le sport', 'Antécédents familiaux'],
     symptomContext:
       "Le bilan cardiovasculaire s'adresse aussi bien aux personnes sans symptôme, dans une démarche de prévention, qu'aux patients présentant un facteur de risque (hypertension, cholestérol, antécédents familiaux) ou souhaitant reprendre le sport en toute sécurité.",
@@ -250,7 +250,7 @@ export const SERVICES = [
       "Le Holter ECG est un petit boîtier que vous portez sur vous, relié à quelques pastilles collées sur la peau. Il enregistre l'activité électrique de votre cœur en continu, de 24 heures à 2 semaines selon la prescription.",
       "Ce suivi sur la durée permet de repérer un rythme cardiaque irrégulier qui n'apparaîtrait pas lors d'un examen de quelques secondes au cabinet. L'examen est indolore et ne vous empêche pas de vaquer à vos occupations.",
     ],
-    videoId: 'la56HqMqMqA', // placeholder: same video on all exams until per-exam clips arrive
+    videoId: 'c28UM-JdyQc', // « Le holter implantable expliqué par le Dr Sana Amraoui »
     symptomPills: ['Palpitations', 'Malaises', 'Perte de connaissance', "Cœur qui s'accélère"],
     symptomContext:
       "Le Holter ECG est prescrit lorsque vous ressentez des palpitations, des malaises ou des pertes de connaissance, ou pour contrôler l'efficacité d'un traitement du rythme cardiaque. Il aide à identifier des troubles du rythme intermittents, difficiles à saisir sur un examen ponctuel.",
@@ -306,7 +306,7 @@ export const SERVICES = [
       "La MAPA, ou Holter tensionnel, mesure automatiquement votre tension artérielle pendant 24 heures, grâce à un brassard relié à un petit boîtier que vous gardez sur vous.",
       "En suivant votre tension dans votre vie de tous les jours, elle donne une image bien plus fidèle qu'une seule mesure au cabinet et permet de vérifier qu'un traitement fonctionne bien.",
     ],
-    videoId: 'la56HqMqMqA', // placeholder: same video on all exams until per-exam clips arrive
+    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
     symptomPills: ['Hypertension', 'Hypotension', 'Vertiges', 'Suivi de traitement'],
     symptomContext:
       "La MAPA est prescrite en cas de tension instable, de suspicion d'hypertension ou d'hypotension, de vertiges, ou pour ajuster un traitement anti-hypertenseur. Elle aide à distinguer une véritable hypertension d'une simple poussée liée au stress de la consultation.",
@@ -358,7 +358,7 @@ export const SERVICES = [
       "La polygraphie nocturne recherche, depuis chez vous, les troubles de la respiration pendant le sommeil, comme les apnées (de courtes pauses de la respiration la nuit).",
       "Un appareil léger, que vous posez vous-même le soir, enregistre votre respiration, votre rythme cardiaque et votre oxygénation pendant la nuit. Mal repérées, les apnées fatiguent le cœur : les dépister protège votre santé.",
     ],
-    videoId: 'la56HqMqMqA', // placeholder: same video on all exams until per-exam clips arrive
+    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
     symptomPills: ['Ronflements', 'Somnolence en journée', 'Fatigue au réveil', 'Apnées suspectées'],
     symptomContext:
       "La polygraphie est indiquée en cas de ronflements importants, de somnolence dans la journée, de fatigue au réveil ou de pauses respiratoires constatées par l'entourage. Elle permet de confirmer un syndrome d'apnées du sommeil et d'en évaluer la sévérité.",
@@ -402,22 +402,22 @@ export const SERVICES = [
     indef: 'une',
     category: 'Rythmologie interventionnelle',
     headline: 'Traiter les troubles du rythme cardiaque complexes',
-    reassurance: 'Hôpital Américain de Paris · Prise en charge spécialisée',
-    where: 'Hôpital Américain de Paris',
+    reassurance: 'Prise en charge spécialisée en milieu hospitalier',
+    where: 'En milieu hospitalier',
     why: 'Prise en charge des arythmies complexes.',
     symptoms: 'Arythmies complexes nécessitant une prise en charge spécialisée.',
     desc: 'Ablation par cathéter, implantation de stimulateur (pacemaker) ou de défibrillateur, Holter implantable.',
     whatIs: [
       "La rythmologie interventionnelle regroupe les traitements des troubles du rythme cardiaque les plus complexes : remettre le cœur à un rythme régulier, ou poser un stimulateur (pacemaker) ou un défibrillateur.",
-      "Ces actes sont réalisés à l'Hôpital Américain de Paris. (Contenu provisoire, à compléter avant la mise en ligne.)",
+      "Ces actes sont réalisés en milieu hospitalier spécialisé. (Contenu provisoire, à compléter avant la mise en ligne.)",
     ],
-    videoId: 'la56HqMqMqA', // placeholder: same video on all exams until per-exam clips arrive
+    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
     symptomPills: ['Arythmie complexe', 'Fibrillation atriale', 'Suivi spécialisé'],
     symptomContext:
       "La rythmologie interventionnelle s'adresse aux patients présentant des troubles du rythme nécessitant un traitement spécialisé. (Contenu provisoire — à compléter.)",
     steps: [
       { title: 'Consultation spécialisée', text: 'Évaluation du trouble du rythme et discussion de la prise en charge. (Contenu provisoire.)' },
-      { title: 'Intervention', text: "L'acte est réalisé à l'Hôpital Américain de Paris. (Contenu provisoire.)" },
+      { title: 'Intervention', text: "L'acte est réalisé en milieu hospitalier spécialisé. (Contenu provisoire.)" },
       { title: 'Surveillance', text: 'Suivi post-intervention adapté. (Contenu provisoire.)' },
       { title: 'Suivi au long cours', text: 'Contrôles réguliers du dispositif ou du résultat. (Contenu provisoire.)' },
     ],
@@ -467,9 +467,9 @@ export const PARCOURS = [
 // Paris métro line colors (official RATP palette)
 const M1 = { line: '1', color: '#FFCD00', text: '#1c1810' }
 const M2 = { line: '2', color: '#0064B0', text: '#ffffff' }
-const M3 = { line: '3', color: '#9F9825', text: '#ffffff' }
 
-// §4.7 — Two locations
+// §4.7 — Practice location (cabinet). The Hôpital Américain reference was
+// removed from general site copy; it remains only on Dr Amraoui's profile.
 export const LOCATIONS = [
   {
     name: 'Cabinet Cardio Check-up',
@@ -483,20 +483,6 @@ export const LOCATIONS = [
     metro: [
       { ...M2, station: 'Ternes' },
       { ...M1, station: 'Charles de Gaulle–Étoile' },
-    ],
-  },
-  {
-    name: 'Hôpital Américain de Paris',
-    tag: 'Neuilly-sur-Seine',
-    address: '84 Bd de la Saussaye, 92200 Neuilly-sur-Seine, OPD 22 Bis',
-    phone: '07 55 50 52 58',
-    phoneHref: 'tel:+33755505258',
-    image: '/images/plaque-credentials.jpg',
-    note: 'Rythmologie interventionnelle.',
-    walking: '8 min à pied de Les Sablons',
-    metro: [
-      { ...M1, station: 'Les Sablons' },
-      { ...M3, station: 'Pont de Levallois–Bécon' },
     ],
   },
 ]

@@ -95,7 +95,7 @@ export default function ExamDetail() {
             ]}
           />
           <div className="mt-6 flex items-center gap-3">
-            <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy">{exam.category}</p>
+            <p className="eyebrow text-burgundy">{exam.category}</p>
             {exam.placeholder && (
               <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-amber-700 border border-amber-300">
                 Contenu provisoire
@@ -114,7 +114,7 @@ export default function ExamDetail() {
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal className="grid gap-6 lg:grid-cols-2 lg:gap-14 items-center">
             <div className="w-full">
-              <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-4">
+              <p className="eyebrow text-burgundy mb-4">
                 Qu'est-ce que c'est ?
               </p>
               <div className="w-full lg:max-w-[42ch] space-y-4 text-ink/80" style={{ lineHeight: 1.85 }}>
@@ -132,7 +132,7 @@ export default function ExamDetail() {
       <section className="bg-cream-soft py-20 sm:py-24">
         <div className="mx-auto max-w-4xl px-5 sm:px-8">
           <Reveal>
-            <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-6">
+            <p className="eyebrow text-burgundy mb-6">
               Signes évocateurs
             </p>
             <ul className="flex flex-wrap gap-3">
@@ -179,7 +179,7 @@ export default function ExamDetail() {
         <section className="bg-cream py-20 sm:py-24">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Reveal>
-              <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-8">
+              <p className="eyebrow text-burgundy mb-8">
                 Réalisé par
               </p>
               <div className="flex gap-5 overflow-x-auto no-scrollbar pb-4 -mx-1 px-1 snap-x">
@@ -197,7 +197,7 @@ export default function ExamDetail() {
       {/* S7 — Booking CTA (before prevention) */}
       <CtaStrip
         title={`Prendre rendez-vous pour ${exam.indef} ${exam.name}`}
-        subtitle="Paris 17 et Hôpital Américain de Paris · Réponse sous 24 à 48h"
+        subtitle="Cabinet Cardio Check-up, Paris 17 · Réponse sous 24 à 48h"
         primaryLabel="Réserver"
         onPrimary={() => openBookingModal({ reason: exam.name })}
       />
@@ -206,7 +206,7 @@ export default function ExamDetail() {
       <section className="bg-cream-soft py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Reveal>
-            <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-8">
+            <p className="eyebrow text-burgundy mb-8">
               Conseils de prévention
             </p>
             <div className="grid gap-6 sm:grid-cols-3">

@@ -34,7 +34,7 @@ export default function ExamTimeline({ steps, examName }) {
       </div>
 
       <div className="relative mx-auto max-w-3xl px-5 sm:px-8">
-        <p className="font-sans text-sm tracking-[0.28em] uppercase text-gold mb-4">Votre visite</p>
+        <p className="eyebrow text-gold mb-4">Votre visite</p>
         <h2 className="font-display text-3xl sm:text-4xl font-semibold text-offwhite leading-tight">
           Comment se déroule votre {examName} ?
         </h2>

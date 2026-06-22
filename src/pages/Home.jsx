@@ -13,22 +13,13 @@ const jsonLd = {
   telephone: '+33755505258',
   email: 'secretariatdramraoui@myeva.ovh',
   medicalSpecialty: 'Cardiology',
-  address: [
-    {
-      '@type': 'PostalAddress',
-      streetAddress: '29 Rue Bayen',
-      addressLocality: 'Paris',
-      postalCode: '75017',
-      addressCountry: 'FR',
-    },
-    {
-      '@type': 'PostalAddress',
-      streetAddress: '84 Bd de la Saussaye, OPD 22 Bis',
-      addressLocality: 'Neuilly-sur-Seine',
-      postalCode: '92200',
-      addressCountry: 'FR',
-    },
-  ],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '29 Rue Bayen',
+    addressLocality: 'Paris',
+    postalCode: '75017',
+    addressCountry: 'FR',
+  },
 }
 
 export default function Home() {
@@ -36,7 +27,7 @@ export default function Home() {
     <>
       <Seo
         title="Cardiologie & Rythmologie · Paris 17"
-        description="Cabinet de cardiologie et rythmologie à Paris 17 et à l'Hôpital Américain de Paris. Bilan cardiovasculaire, ECG, échographie, Holter, MAPA, polygraphie nocturne. Conventionné Secteur 2."
+        description="Cabinet de cardiologie et rythmologie à Paris 17. Bilan cardiovasculaire, ECG, échographie, Holter, MAPA, polygraphie nocturne. Conventionné Secteur 2."
         path="/"
         jsonLd={jsonLd}
       />

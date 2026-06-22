@@ -1,6 +1,6 @@
 import EcgLine from './EcgLine.jsx'
 
-const TRUST = ['Conventionnée Secteur 2', 'Hôpital Américain de Paris', 'Formation internationale']
+const TRUST = ['Conventionnée Secteur 2', 'Expertise reconnue en France et en Europe']
 
 export default function Hero() {
   return (
@@ -24,7 +24,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8 w-full pt-28 pb-16 sm:pb-20">
         <div className="max-w-2xl">
-          <p className="font-sans text-xs sm:text-sm tracking-[0.28em] uppercase text-gold mb-5">
+          <p className="eyebrow text-gold mb-5">
             Cardiologie &amp; Rythmologie · Paris 17
           </p>
 

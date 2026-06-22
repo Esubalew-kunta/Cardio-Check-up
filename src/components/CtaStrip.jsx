@@ -25,7 +25,7 @@ export default function CtaStrip({
             <button
               type="button"
               onClick={onPrimary}
-              className="inline-flex min-h-[3rem] items-center justify-center rounded-full bg-signal px-7 py-3 text-base font-semibold text-white shadow-lg hover:bg-signal-deep transition-colors"
+              className="inline-flex min-h-[3rem] items-center justify-center rounded-full bg-signal px-7 py-3 text-base font-semibold tracking-[0.03em] text-white shadow-lg hover:bg-signal-deep transition-colors"
             >
               {primaryLabel}
             </button>

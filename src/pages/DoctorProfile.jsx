@@ -38,7 +38,7 @@ function AcademicTimeline({ items }) {
   return (
     <section className="bg-cream-soft py-20 sm:py-24">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
-        <h2 className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-8">
+        <h2 className="eyebrow text-burgundy mb-8">
           Parcours académique
         </h2>
         <ul className="space-y-5">
@@ -79,7 +79,7 @@ function ExamStrip({ slug }) {
   return (
     <section className="bg-cream-soft py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <h2 className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-8">
+        <h2 className="eyebrow text-burgundy mb-8">
           Examens réalisés
         </h2>
         <div className="flex gap-5 overflow-x-auto no-scrollbar pb-4 -mx-1 px-1 snap-x">
@@ -109,7 +109,7 @@ function ProceduresSection({ procedures }) {
   return (
     <section className="bg-cream-soft py-20 sm:py-24">
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
-        <h2 className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-8">
+        <h2 className="eyebrow text-burgundy mb-8">
           Domaines d'expertise
         </h2>
         <ul className="flex flex-wrap gap-3">
@@ -172,7 +172,7 @@ export default function DoctorProfile() {
               <DoctorPortrait src={doctor.photo} alt={`Portrait du ${doctor.name}`} />
             </div>
             <div>
-              <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-3">
+              <p className="eyebrow text-burgundy mb-3">
                 {doctor.specialty}
               </p>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink leading-[1.05]">
@@ -192,7 +192,7 @@ export default function DoctorProfile() {
           {/* Highlight pull-quote (e.g. Pr Doguet's media + athletic life) */}
           {doctor.highlight && (
             <div className="mt-12 rounded-2xl border-l-4 border-gold bg-cream-soft p-7 sm:p-9">
-              <p className="font-sans text-xs tracking-[0.28em] uppercase text-burgundy mb-3">
+              <p className="eyebrow text-burgundy mb-3">
                 Au-delà de la chirurgie
               </p>
               <p className="font-display text-xl sm:text-2xl text-ink/85 leading-relaxed">
@@ -229,7 +229,7 @@ export default function DoctorProfile() {
         subtitle={
           doctor.procedures
             ? 'Notre équipe vous met en relation · Réponse sous 24 à 48h'
-            : 'Paris 17 et Hôpital Américain de Paris · Réponse sous 24 à 48h'
+            : 'Cabinet Cardio Check-up, Paris 17 · Réponse sous 24 à 48h'
         }
         onPrimary={() => openBookingModal({ message: `Demande de rendez-vous avec ${doctor.name}.` })}
       />

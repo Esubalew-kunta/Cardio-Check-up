@@ -110,7 +110,7 @@ export default function NotreConseil() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         {/* Heading */}
         <div ref={headRef} className={`reveal ${headVisible ? 'is-visible' : ''} max-w-2xl mx-auto text-center`}>
-          <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-4">Notre Conseil</p>
+          <p className="eyebrow text-burgundy mb-4">Notre Conseil</p>
           <h2 className="font-display text-4xl sm:text-5xl font-semibold text-ink leading-tight">
             Cinq cardiologues. Une mission.
           </h2>

@@ -44,7 +44,7 @@ export default function FaqAccordion({ items, eyebrow = 'Questions fréquentes',
   return (
     <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''}`}>
       <div className="text-center mb-12">
-        <p className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-4">{eyebrow}</p>
+        <p className="eyebrow text-burgundy mb-4">{eyebrow}</p>
         {title && (
           <h2 className="font-display text-4xl sm:text-5xl font-semibold text-ink leading-tight">
             {title}

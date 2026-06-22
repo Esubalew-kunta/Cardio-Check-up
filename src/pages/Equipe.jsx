@@ -22,7 +22,7 @@ export default function Equipe() {
     <>
       <Seo
         title="Notre équipe"
-        description="Rencontrez le conseil de cardiologues Cardio Check-up : cinq spécialistes complémentaires à Paris 17 et à l'Hôpital Américain de Paris."
+        description="Rencontrez le conseil de cardiologues Cardio Check-up : cinq spécialistes complémentaires, du dépistage au suivi, à Paris 17."
         path="/equipe"
       />
 
@@ -30,7 +30,7 @@ export default function Equipe() {
       <section className="bg-burgundy-deep pt-28 sm:pt-32 pb-16 sm:pb-20">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Breadcrumb items={[{ label: 'Accueil', to: '/' }, { label: 'Notre Équipe' }]} tone="dark" />
-          <p className="mt-6 font-sans text-sm tracking-[0.28em] uppercase text-gold mb-3">Notre Conseil</p>
+          <p className="mt-6 eyebrow text-gold mb-3">Notre Conseil</p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-offwhite leading-[1.1] max-w-3xl">
             Rencontrez notre équipe de cardiologues
           </h1>

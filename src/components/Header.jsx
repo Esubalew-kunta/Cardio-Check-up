@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import Logo from './Logo.jsx'
 import { NAV, SERVICES } from '../data/site.js'
 import { openBookingModal } from '../utils/bookingModal.js'
 
 const EXAM_LINKS = SERVICES.map((s) => ({ label: s.name, to: `/examens/${s.id}` }))
+
+// Only these routes have a dark full-bleed hero behind the transparent header.
+// Everywhere else the page starts on a light (cream) background, so the header
+// must use a light theme (burgundy links) to stay readable.
+const DARK_HERO_ROUTES = new Set(['/', '/equipe'])
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -58,20 +63,29 @@ export default function Header() {
     }
   }, [examsOpen])
 
-  const linkClass = 'text-sm font-medium text-offwhite/90 hover:text-gold transition-colors'
+  const { pathname } = useLocation()
+  const darkHero = DARK_HERO_ROUTES.has(pathname)
+  // Light theme = burgundy links on a solid cream header. Dark theme = off-white
+  // links over the dark hero / scrolled burgundy header.
+  const onLight = !darkHero
+
+  const headerBg = onLight
+    ? 'bg-offwhite/95 backdrop-blur-md border-b border-gold/30 shadow-[0_2px_20px_rgba(28,16,32,0.10)]'
+    : scrolled
+      ? 'bg-burgundy-deep/95 backdrop-blur-md border-b border-gold/30 shadow-[0_2px_20px_rgba(28,16,32,0.18)]'
+      : 'bg-transparent'
+
+  const linkClass = `text-sm font-medium transition-colors hover:text-gold ${
+    onLight ? 'text-burgundy' : 'text-offwhite/90'
+  }`
+  const barColor = onLight ? 'bg-burgundy' : 'bg-offwhite'
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-burgundy-deep/95 backdrop-blur-md border-b border-gold/30 shadow-[0_2px_20px_rgba(28,16,32,0.18)]'
-          : 'bg-transparent'
-      }`}
-    >
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${headerBg}`}>
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="flex items-center justify-between h-14 lg:h-16">
           <Link to="/" onClick={close} className="relative z-[60]">
-            <Logo variant="light" />
+            <Logo variant={onLight ? 'gold' : 'light'} />
           </Link>
 
           {/* Desktop nav */}
@@ -139,7 +153,7 @@ export default function Header() {
             <button
               type="button"
               onClick={openBookingModal}
-              className="inline-flex min-h-[2.75rem] items-center rounded-full bg-signal px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-signal-deep transition-colors"
+              className="inline-flex min-h-[2.75rem] items-center rounded-full bg-signal px-5 py-2.5 text-sm font-semibold tracking-[0.03em] text-white shadow-sm hover:bg-signal-deep transition-colors"
             >
               Prendre rendez-vous
             </button>
@@ -154,9 +168,9 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
           >
-            <span className={`h-0.5 w-6 bg-offwhite transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`} />
-            <span className={`h-0.5 w-6 bg-offwhite transition-opacity ${open ? 'opacity-0' : ''}`} />
-            <span className={`h-0.5 w-6 bg-offwhite transition-transform ${open ? '-translate-y-2 -rotate-45' : ''}`} />
+            <span className={`h-0.5 w-6 transition-transform ${open ? 'translate-y-2 rotate-45 bg-offwhite' : barColor}`} />
+            <span className={`h-0.5 w-6 transition-opacity ${open ? 'opacity-0 bg-offwhite' : barColor}`} />
+            <span className={`h-0.5 w-6 transition-transform ${open ? '-translate-y-2 -rotate-45 bg-offwhite' : barColor}`} />
           </button>
         </div>
       </div>
@@ -230,7 +244,7 @@ export default function Header() {
               close()
               openBookingModal()
             }}
-            className="mt-2 inline-flex min-h-[3rem] items-center rounded-full bg-signal px-7 py-3 text-base font-semibold text-white"
+            className="mt-2 inline-flex min-h-[3rem] items-center rounded-full bg-signal px-7 py-3 text-base font-semibold tracking-[0.03em] text-white"
           >
             Prendre rendez-vous
           </button>
