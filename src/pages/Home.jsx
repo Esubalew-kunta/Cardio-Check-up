@@ -4,6 +4,7 @@ import NotreConseil from '../components/NotreConseil.jsx'
 import Services from '../components/Services.jsx'
 import ReassuranceStrip from '../components/ReassuranceStrip.jsx'
 import Faq from '../components/Faq.jsx'
+import BlogPreview from '../components/BlogPreview.jsx'
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -36,6 +37,7 @@ export default function Home() {
       <Services />
       <ReassuranceStrip />
       <Faq />
+      <BlogPreview />
     </>
   )
 }

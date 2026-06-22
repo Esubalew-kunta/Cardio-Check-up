@@ -7,6 +7,8 @@ import Home from './pages/Home.jsx' // eager: the landing page stays instant
 const Equipe = lazy(() => import('./pages/Equipe.jsx'))
 const DoctorProfile = lazy(() => import('./pages/DoctorProfile.jsx'))
 const ExamDetail = lazy(() => import('./pages/ExamDetail.jsx'))
+const Actualites = lazy(() => import('./pages/Actualites.jsx'))
+const Article = lazy(() => import('./pages/Article.jsx'))
 const MentionsLegales = lazy(() => import('./pages/MentionsLegales.jsx'))
 const Confidentialite = lazy(() => import('./pages/Confidentialite.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
@@ -48,6 +50,22 @@ export default function App() {
           element={
             <Suspense fallback={<PageFallback />}>
               <ExamDetail />
+            </Suspense>
+          }
+        />
+        <Route
+          path="actualites"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Actualites />
+            </Suspense>
+          }
+        />
+        <Route
+          path="actualites/:slug"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Article />
             </Suspense>
           }
         />

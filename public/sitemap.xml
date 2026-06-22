@@ -12,6 +12,12 @@
   <url><loc>https://cardio-check-up.com/examens/mapa</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://cardio-check-up.com/examens/polygraphie</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://cardio-check-up.com/examens/rythmologie</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cardio-check-up.com/actualites</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cardio-check-up.com/actualites/qu-est-ce-qu-un-holter-ecg</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cardio-check-up.com/actualites/5-signes-consulter-cardiologue</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cardio-check-up.com/actualites/bien-se-preparer-bilan-cardiovasculaire</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cardio-check-up.com/actualites/qu-est-ce-que-l-ablation-par-catheter</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cardio-check-up.com/actualites/sport-apres-40-ans-sante-cardiaque</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://cardio-check-up.com/mentions-legales</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
   <url><loc>https://cardio-check-up.com/confidentialite</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>
