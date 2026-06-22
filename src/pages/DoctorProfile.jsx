@@ -13,7 +13,9 @@ import NotFound from './NotFound.jsx'
 function TimelineRow({ t }) {
   return (
     <li className="flex gap-5">
-      <span className="font-display text-xl font-semibold text-gold-deep w-16 shrink-0">{t.year}</span>
+      <span className="font-display text-xl font-semibold text-gold-deep w-16 shrink-0">
+        {t.year || <span className="text-gold">·</span>}
+      </span>
       <span className="text-sm sm:text-base text-ink/80 leading-relaxed pt-0.5">{t.text}</span>
     </li>
   )
@@ -25,8 +27,11 @@ function AcademicTimeline({ items }) {
   const [open, setOpen] = useState(false)
   if (!items?.length) return null
 
-  // Most recent first, so "2 most recent" are meaningful.
-  const ordered = [...items].sort((a, b) => Number(b.year) - Number(a.year))
+  // Diploma-style timelines are dated and authored oldest-first, so sort them
+  // newest-first. Career timelines (some undated milestones) are authored
+  // newest-first already — keep their given order.
+  const allDated = items.every((t) => t.year && !Number.isNaN(Number(t.year)))
+  const ordered = allDated ? [...items].sort((a, b) => Number(b.year) - Number(a.year)) : items
   const visible = ordered.slice(0, 2)
   const hidden = ordered.slice(2)
 
@@ -38,7 +43,7 @@ function AcademicTimeline({ items }) {
         </h2>
         <ul className="space-y-5">
           {visible.map((t) => (
-            <TimelineRow key={t.year} t={t} />
+            <TimelineRow key={t.text} t={t} />
           ))}
         </ul>
         {hidden.length > 0 && (
@@ -46,7 +51,7 @@ function AcademicTimeline({ items }) {
             <div className={`collapse-mh ${open ? 'open' : ''}`}>
               <ul className="space-y-5 pt-5">
                 {hidden.map((t) => (
-                  <TimelineRow key={t.year} t={t} />
+                  <TimelineRow key={t.text} t={t} />
                 ))}
               </ul>
             </div>
@@ -92,6 +97,33 @@ function ExamStrip({ slug }) {
             </Link>
           ))}
         </div>
+      </div>
+    </section>
+  )
+}
+
+// Surgical domains as static tags (no links — a surgeon is not mapped to the
+// ambulatory exam pages). Used instead of ExamStrip when `procedures` is set.
+function ProceduresSection({ procedures }) {
+  if (!procedures?.length) return null
+  return (
+    <section className="bg-cream-soft py-20 sm:py-24">
+      <div className="mx-auto max-w-3xl px-5 sm:px-8">
+        <h2 className="font-sans text-sm tracking-[0.28em] uppercase text-burgundy mb-8">
+          Domaines d'expertise
+        </h2>
+        <ul className="flex flex-wrap gap-3">
+          {procedures.map((p) => (
+            <li
+              key={p}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-burgundy"
+              style={{ backgroundColor: 'rgba(123,28,66,0.08)' }}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              {p}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )
@@ -156,6 +188,18 @@ export default function DoctorProfile() {
               <p className="mt-6 text-ink/80 leading-[1.8]">{doctor.bio}</p>
             </div>
           </div>
+
+          {/* Highlight pull-quote (e.g. Pr Doguet's media + athletic life) */}
+          {doctor.highlight && (
+            <div className="mt-12 rounded-2xl border-l-4 border-gold bg-cream-soft p-7 sm:p-9">
+              <p className="font-sans text-xs tracking-[0.28em] uppercase text-burgundy mb-3">
+                Au-delà de la chirurgie
+              </p>
+              <p className="font-display text-xl sm:text-2xl text-ink/85 leading-relaxed">
+                {doctor.highlight}
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -171,13 +215,22 @@ export default function DoctorProfile() {
         </section>
       )}
 
-      {/* Examens réalisés */}
-      <ExamStrip slug={doctor.slug} />
+      {/* Examens réalisés (ambulatory cardiologists) — or surgical domains */}
+      {doctor.procedures ? (
+        <ProceduresSection procedures={doctor.procedures} />
+      ) : (
+        <ExamStrip slug={doctor.slug} />
+      )}
 
-      {/* Booking CTA */}
+      {/* Booking CTA — location line follows the doctor (surgeons practise
+          outside the Paris cabinet, so don't assert the cabinet addresses). */}
       <CtaStrip
         title={`Prendre rendez-vous avec ${doctor.name}`}
-        subtitle="Paris 17 et Hôpital Américain de Paris · Réponse sous 24 à 48h"
+        subtitle={
+          doctor.procedures
+            ? 'Notre équipe vous met en relation · Réponse sous 24 à 48h'
+            : 'Paris 17 et Hôpital Américain de Paris · Réponse sous 24 à 48h'
+        }
         onPrimary={() => openBookingModal({ message: `Demande de rendez-vous avec ${doctor.name}.` })}
       />
     </>

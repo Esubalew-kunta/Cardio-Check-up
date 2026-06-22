@@ -84,21 +84,39 @@ export const DOCTORS = [
     stats: STATS, // rendered only on her page
   },
   {
-    slug: 'thomas-martin',
-    name: 'Dr Thomas Martin',
-    specialty: 'Cardiologie générale',
-    credibility: 'Cardiologue · Cabinet Cardio Check-up, Paris 17',
+    // Real doctor (replaced the demo "Dr Thomas Martin"). Cardiac surgeon — NOT
+    // mapped to any ambulatory exam page; his procedures show as static tags.
+    slug: 'fabien-doguet',
+    name: 'Pr. Fabien Doguet',
+    specialty: 'Chirurgien Cardiaque',
+    credibility: 'Chirurgien cardiaque · Hôpital Privé Jacques Cartier, Massy',
     isFounder: false,
-    demo: true,
-    photo: null,
+    demo: false,
+    photo: '/images/doguet.jpg',
     doctolib: CONTACT.doctolib,
+    badge: 'Chirurgie Cardiaque Mini-invasive',
     bioShort:
-      'Cardiologue généraliste, le Dr Martin réalise les bilans cardiovasculaires et le suivi des patients hypertendus. (Contenu de démonstration.)',
+      "Chirurgien cardiaque spécialisé en chirurgie mini-invasive, le Pr Doguet exerce à l'Hôpital Privé Jacques Cartier (Massy).",
     bio:
-      "Cardiologue généraliste, le Dr Martin accompagne les patients dans le bilan, la prévention et le suivi des maladies cardiovasculaires. Il accorde une place centrale à l'écoute et à la pédagogie, pour que chaque patient comprenne son examen et sa prise en charge. (Contenu de démonstration — à remplacer avant la mise en ligne.)",
+      "Professeur des Universités et ancien chef du service de chirurgie cardiaque au CHU de Rouen, le Pr Doguet exerce aujourd'hui à l'Hôpital Privé Jacques Cartier à Massy. Spécialisé en chirurgie mini-invasive, il est aussi connu du grand public comme co-animateur du Magazine de la Santé sur France 5 et auteur d'un livre sur le sport après 40 ans.",
+    highlight:
+      "Au-delà du bloc opératoire, le Pr Doguet co-anime le Magazine de la Santé sur France 5 et a publié un livre sur la pratique du sport après 40 ans. Passionné d'endurance, il a couru plus de 20 marathons et relevé certains des défis les plus exigeants au monde : l'UTMB, la Diagonale des Fous, le Marathon des Sables et l'Ironman.",
+    // Authored most-recent-first (these milestones are not all dated).
     timeline: [
-      { year: '2010', text: 'DES de cardiologie & maladies vasculaires (contenu de démonstration)' },
-      { year: '2013', text: "DIU d'échocardiographie (contenu de démonstration)" },
+      { year: '2021', text: 'Chirurgien cardiaque, Hôpital Privé Jacques Cartier, Massy (depuis novembre 2021)' },
+      { year: '', text: 'Directeur médical, 40e Marathon des Sables Legendary' },
+      { year: '', text: 'Co-animateur du Magazine de la Santé, France 5' },
+      { year: '', text: 'Chef du service de chirurgie cardiaque, CHU de Rouen' },
+      { year: '', text: 'Professeur des Universités — Praticien Hospitalier, CHU de Rouen' },
+      { year: '', text: 'Études de médecine en Normandie, spécialisation en chirurgie thoracique et cardiovasculaire' },
+    ],
+    // Surgical domains shown as static tags (no links — he is not an ambulatory
+    // cardiologist). Procedures: real links to be added before go-live.
+    procedures: [
+      'Chirurgie mini-invasive',
+      'Réparation et remplacement valvulaire (mitrale, aortique, tricuspide)',
+      'Chirurgie aortique',
+      'Pontages coronaires',
     ],
     stats: null,
   },
@@ -215,7 +233,7 @@ export const SERVICES = [
         a: 'Les résultats vous sont expliqués et commentés par le médecin le jour même de votre rendez-vous.',
       },
     ],
-    doctorSlugs: ['sana-amraoui', 'thomas-martin', 'claire-bernard'],
+    doctorSlugs: ['sana-amraoui', 'claire-bernard'],
     placeholder: false,
   },
   {
@@ -323,7 +341,7 @@ export const SERVICES = [
         a: 'Oui, vous pouvez poursuivre une journée normale. C’est même recommandé pour obtenir un profil de tension représentatif de votre quotidien.',
       },
     ],
-    doctorSlugs: ['paul-moreau', 'thomas-martin'],
+    doctorSlugs: ['paul-moreau'],
     placeholder: false,
   },
   {
