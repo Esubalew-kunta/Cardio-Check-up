@@ -1,33 +1,68 @@
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useReveal } from '../hooks/useReveal.js'
 import { SERVICES } from '../data/site.js'
 
-// Looping muted video strip at the top of each card. Plays (mounts the iframe)
-// only while the card is on screen, on desktop, with motion allowed. On mobile
-// or under reduced-motion it shows the static YouTube thumbnail instead.
+// Minimal, on-brand video facade for each card. Nothing plays on load — no more
+// five clips blaring at once. The card shows the exam title and a single
+// play/pause control over the poster. The first press mounts the YouTube embed
+// with its chrome stripped (no related videos, annotations, keyboard or visible
+// controls); the button then toggles play/pause via the IFrame postMessage API.
 function CardVideo({ id, name }) {
-  const [ref, inView] = useReveal({ threshold: 0.4, once: false })
-  const [canPlay, setCanPlay] = useState(false)
-
-  useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 768px)').matches
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    setCanPlay(desktop && !reduce)
-  }, [])
-
+  const containerRef = useRef(null)
+  const iframeRef = useRef(null)
+  const [started, setStarted] = useState(false)
+  const [playing, setPlaying] = useState(false)
   const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`
-  const play = canPlay && inView
+
+  const command = (func) =>
+    iframeRef.current?.contentWindow?.postMessage(
+      JSON.stringify({ event: 'command', func, args: [] }),
+      '*',
+    )
+
+  const toggle = () => {
+    if (!started) {
+      setStarted(true)
+      setPlaying(true)
+      return
+    }
+    if (playing) {
+      command('pauseVideo')
+      setPlaying(false)
+    } else {
+      command('playVideo')
+      setPlaying(true)
+    }
+  }
+
+  // Toggle native fullscreen on the card (starts the video if not yet playing).
+  const toggleFullscreen = () => {
+    const el = containerRef.current
+    if (!el) return
+    const fsEl = document.fullscreenElement || document.webkitFullscreenElement
+    if (fsEl === el) {
+      const exit = document.exitFullscreen || document.webkitExitFullscreen
+      exit?.call(document)
+      return
+    }
+    if (!started) {
+      setStarted(true)
+      setPlaying(true)
+    }
+    const req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen
+    req?.call(el)
+  }
 
   return (
-    <div ref={ref} className="relative w-full aspect-video overflow-hidden bg-burgundy-deep">
-      {play ? (
+    <div ref={containerRef} className="relative w-full aspect-video overflow-hidden bg-burgundy-deep">
+      {started ? (
         <iframe
-          src={`https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1&rel=0`}
-          title={`Aperçu vidéo : ${name}`}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          tabIndex={-1}
-          aria-hidden="true"
+          ref={iframeRef}
+          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&enablejsapi=1&controls=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&fs=1&disablekb=1&vq=hd720`}
+          title={`Vidéo : ${name}`}
+          allow="autoplay; encrypted-media; fullscreen"
+          allowFullScreen
           className="pointer-events-none absolute inset-0 h-full w-full"
         />
       ) : (
@@ -39,6 +74,41 @@ function CardVideo({ id, name }) {
           className="absolute inset-0 h-full w-full object-cover"
         />
       )}
+
+      {/* Our own minimal UI — legibility gradient, title and one control */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-burgundy-deep/85 via-burgundy-deep/10 to-transparent" />
+      <span className="pointer-events-none absolute bottom-4 left-4 right-28 text-sm font-medium text-offwhite/95 line-clamp-1 drop-shadow">
+        {name}
+      </span>
+      <div className="absolute bottom-3 right-3 flex items-center gap-2">
+        <button
+          type="button"
+          onClick={toggleFullscreen}
+          aria-label={`Plein écran : ${name}`}
+          className="grid h-10 w-10 place-items-center rounded-full bg-burgundy-deep/70 text-offwhite shadow-md backdrop-blur-sm transition-colors duration-200 hover:bg-burgundy-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={playing ? `Mettre en pause : ${name}` : `Lire la vidéo : ${name}`}
+          className="grid h-11 w-11 place-items-center rounded-full bg-gold text-burgundy-deep shadow-md transition-transform duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+        >
+          {playing ? (
+            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
+              <rect x="6" y="5" width="4" height="14" rx="1" />
+              <rect x="14" y="5" width="4" height="14" rx="1" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" className="h-5 w-5 translate-x-0.5 fill-current" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          )}
+        </button>
+      </div>
     </div>
   )
 }

@@ -86,7 +86,7 @@ export default function ExamDetail() {
 
       {/* S1 — Hero band (cream, calm) */}
       <section className="bg-cream pt-28 sm:pt-32 pb-14 sm:pb-16">
-        <div className="mx-auto max-w-4xl px-5 sm:px-8">
+        <div className="mx-auto max-w-5xl px-5 sm:px-8">
           <Breadcrumb
             items={[
               { label: 'Accueil', to: '/' },
@@ -94,18 +94,20 @@ export default function ExamDetail() {
               { label: exam.name },
             ]}
           />
-          <div className="mt-6 flex items-center gap-3">
-            <p className="eyebrow text-burgundy">{exam.category}</p>
-            {exam.placeholder && (
-              <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-amber-700 border border-amber-300">
-                Contenu provisoire
-              </span>
-            )}
+          <div className="mt-6 flex flex-col items-center text-center">
+            <div className="flex items-center gap-3">
+              <p className="eyebrow text-burgundy">{exam.category}</p>
+              {exam.placeholder && (
+                <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-amber-700 border border-amber-300">
+                  Contenu provisoire
+                </span>
+              )}
+            </div>
+            <h1 className="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink leading-[1.1] text-balance">
+              {exam.headline}
+            </h1>
+            <p className="mt-5 max-w-2xl text-base sm:text-lg text-ink/70">{exam.reassurance}</p>
           </div>
-          <h1 className="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-ink leading-[1.1] text-balance">
-            {exam.headline}
-          </h1>
-          <p className="mt-5 text-base sm:text-lg text-ink/70">{exam.reassurance}</p>
         </div>
       </section>
 
