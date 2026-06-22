@@ -3,6 +3,8 @@ dist
 dist-ssr
 *.local
 .vite
+vite.config.js.timestamp-*.mjs
+vite.config.*.timestamp-*
 
 # Logs
 npm-debug.log*
