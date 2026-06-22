@@ -64,7 +64,7 @@ export const DOCTORS = [
     slug: 'sana-amraoui',
     name: 'Dr Sana Amraoui',
     specialty: 'Cardiologue rythmologue interventionnelle',
-    credibility: "Responsable d'unité · Service de rythmologie, Hôpital Américain de Paris",
+    credibility: "Responsable d'unité · Service de rythmologie",
     isFounder: true,
     badge: 'Chairperson EHRA 2026',
     demo: false,
@@ -198,7 +198,7 @@ export const SERVICES = [
       "Le bilan cardiovasculaire réunit en un seul rendez-vous trois choses : une consultation avec le cardiologue, un enregistrement de l'activité électrique de votre cœur et une échographie du cœur.",
       "Il sert à faire le point sur la santé de votre cœur, à repérer une éventuelle anomalie et à mettre en place un suivi adapté. C'est l'examen de référence, en prévention comme avant une reprise du sport.",
     ],
-    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
+    videoId: 'Uu3n8ease_c', // Bilan cardiovasculaire — explainer video
     symptomPills: ['Prévention', 'Suivi de routine', 'Avant le sport', 'Antécédents familiaux'],
     symptomContext:
       "Le bilan cardiovasculaire s'adresse aussi bien aux personnes sans symptôme, dans une démarche de prévention, qu'aux patients présentant un facteur de risque (hypertension, cholestérol, antécédents familiaux) ou souhaitant reprendre le sport en toute sécurité.",
@@ -250,7 +250,7 @@ export const SERVICES = [
       "Le Holter ECG est un petit boîtier que vous portez sur vous, relié à quelques pastilles collées sur la peau. Il enregistre l'activité électrique de votre cœur en continu, de 24 heures à 2 semaines selon la prescription.",
       "Ce suivi sur la durée permet de repérer un rythme cardiaque irrégulier qui n'apparaîtrait pas lors d'un examen de quelques secondes au cabinet. L'examen est indolore et ne vous empêche pas de vaquer à vos occupations.",
     ],
-    videoId: 'c28UM-JdyQc', // « Le holter implantable expliqué par le Dr Sana Amraoui »
+    videoId: 'XusqaX3z1U8', // Holter ECG — explainer video
     symptomPills: ['Palpitations', 'Malaises', 'Perte de connaissance', "Cœur qui s'accélère"],
     symptomContext:
       "Le Holter ECG est prescrit lorsque vous ressentez des palpitations, des malaises ou des pertes de connaissance, ou pour contrôler l'efficacité d'un traitement du rythme cardiaque. Il aide à identifier des troubles du rythme intermittents, difficiles à saisir sur un examen ponctuel.",
@@ -306,7 +306,7 @@ export const SERVICES = [
       "La MAPA, ou Holter tensionnel, mesure automatiquement votre tension artérielle pendant 24 heures, grâce à un brassard relié à un petit boîtier que vous gardez sur vous.",
       "En suivant votre tension dans votre vie de tous les jours, elle donne une image bien plus fidèle qu'une seule mesure au cabinet et permet de vérifier qu'un traitement fonctionne bien.",
     ],
-    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
+    videoId: 'NiMYmKIRHWo', // MAPA — explainer video
     symptomPills: ['Hypertension', 'Hypotension', 'Vertiges', 'Suivi de traitement'],
     symptomContext:
       "La MAPA est prescrite en cas de tension instable, de suspicion d'hypertension ou d'hypotension, de vertiges, ou pour ajuster un traitement anti-hypertenseur. Elle aide à distinguer une véritable hypertension d'une simple poussée liée au stress de la consultation.",
@@ -358,7 +358,7 @@ export const SERVICES = [
       "La polygraphie nocturne recherche, depuis chez vous, les troubles de la respiration pendant le sommeil, comme les apnées (de courtes pauses de la respiration la nuit).",
       "Un appareil léger, que vous posez vous-même le soir, enregistre votre respiration, votre rythme cardiaque et votre oxygénation pendant la nuit. Mal repérées, les apnées fatiguent le cœur : les dépister protège votre santé.",
     ],
-    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
+    videoId: 'cUzh_W7415A', // Polygraphie nocturne — explainer video
     symptomPills: ['Ronflements', 'Somnolence en journée', 'Fatigue au réveil', 'Apnées suspectées'],
     symptomContext:
       "La polygraphie est indiquée en cas de ronflements importants, de somnolence dans la journée, de fatigue au réveil ou de pauses respiratoires constatées par l'entourage. Elle permet de confirmer un syndrome d'apnées du sommeil et d'en évaluer la sévérité.",
@@ -411,7 +411,7 @@ export const SERVICES = [
       "La rythmologie interventionnelle regroupe les traitements des troubles du rythme cardiaque les plus complexes : remettre le cœur à un rythme régulier, ou poser un stimulateur (pacemaker) ou un défibrillateur.",
       "Ces actes sont réalisés en milieu hospitalier spécialisé. (Contenu provisoire, à compléter avant la mise en ligne.)",
     ],
-    videoId: 'ivRofs7QAsA', // « Dr Amraoui présente sa spécialité » — universal placeholder
+    videoId: 'hgBSYW9V8S8', // Rythmologie interventionnelle — explainer video
     symptomPills: ['Arythmie complexe', 'Fibrillation atriale', 'Suivi spécialisé'],
     symptomContext:
       "La rythmologie interventionnelle s'adresse aux patients présentant des troubles du rythme nécessitant un traitement spécialisé. (Contenu provisoire — à compléter.)",
@@ -468,8 +468,8 @@ export const PARCOURS = [
 const M1 = { line: '1', color: '#FFCD00', text: '#1c1810' }
 const M2 = { line: '2', color: '#0064B0', text: '#ffffff' }
 
-// §4.7 — Practice location (cabinet). The Hôpital Américain reference was
-// removed from general site copy; it remains only on Dr Amraoui's profile.
+// §4.7 — Practice location (cabinet). The second-site hospital reference was
+// removed from general site copy; it remains only in Dr Amraoui's bio.
 export const LOCATIONS = [
   {
     name: 'Cabinet Cardio Check-up',
