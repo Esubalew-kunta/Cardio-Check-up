@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useReveal } from '../hooks/useReveal.js'
 import { getFounder, getPartners } from '../data/site.js'
 import DoctorPortrait from './DoctorPortrait.jsx'
+import { doctorInitials } from '../utils/initials.js'
 
 // Build the V order: outer-L, inner-L, APEX, inner-R, outer-R.
 // Founder is the apex; partners fill the wings in their declared order.
@@ -50,7 +51,11 @@ function Portrait({ doctor, heightClass, hovered, setHovered, reduce }) {
           }`}
           style={MASK}
         >
-          <DoctorPortrait src={doctor.photo} alt={`Portrait du ${doctor.name}`} />
+          <DoctorPortrait
+            src={doctor.photo}
+            alt={`Portrait du ${doctor.name}`}
+            monogram={doctor.noPhoto ? doctorInitials(doctor.name) : undefined}
+          />
         </div>
         {/* Name + specialty scrim */}
         <div className="absolute inset-x-0 bottom-0 pt-10 pb-4 px-3 text-center" style={SCRIM}>
@@ -88,7 +93,11 @@ function MobileCard({ doctor, tier }) {
       } ${protrude}`}
     >
       <div className="absolute inset-0">
-        <DoctorPortrait src={doctor.photo} alt={`Portrait du ${doctor.name}`} />
+        <DoctorPortrait
+          src={doctor.photo}
+          alt={`Portrait du ${doctor.name}`}
+          monogram={doctor.noPhoto ? doctorInitials(doctor.name) : undefined}
+        />
       </div>
       <div className="absolute inset-x-0 bottom-0 px-2 pt-8 pb-2.5 text-center" style={SCRIM}>
         <p className="font-display font-semibold text-offwhite leading-tight text-[13px]">{doctor.name}</p>
@@ -112,12 +121,13 @@ export default function NotreConseil() {
         <div ref={headRef} className={`reveal ${headVisible ? 'is-visible' : ''} max-w-2xl mx-auto text-center`}>
           <p className="eyebrow text-burgundy mb-4">Notre Conseil</p>
           <h2 className="font-display text-4xl sm:text-5xl font-semibold text-ink leading-tight">
-            Cinq cardiologues. Une mission.
+            Cinq spécialistes. Une mission.
           </h2>
           <p className="mt-5 text-ink/75 leading-relaxed">
-            Le cabinet Cardio Check-up réunit cinq spécialistes complémentaires, chacun expert dans
-            son domaine. Ensemble, ils couvrent l'ensemble du bilan cardiovasculaire, du dépistage au
-            suivi. Le Dr Amraoui, Chairperson de l'EHRA 2026, coordonne le conseil.
+            Le cabinet Cardio Check-up réunit cinq spécialistes complémentaires — cardiologie,
+            chirurgie cardiaque et vasculaire, médecine vasculaire et nutrition. Ensemble, ils
+            couvrent la santé cardiovasculaire dans sa globalité, du dépistage au suivi. Le Dr
+            Amraoui, Chairperson de l'EHRA 2026, coordonne le conseil.
           </p>
         </div>
 

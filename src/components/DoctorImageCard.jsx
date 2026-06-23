@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import DoctorPortrait from './DoctorPortrait.jsx'
 import { examsForDoctor } from '../data/site.js'
+import { doctorInitials } from '../utils/initials.js'
 
 // Doctor cards for /equipe.
 //
@@ -74,7 +75,11 @@ function PartnerCard({ doctor }) {
       className="group relative block aspect-[3/4] overflow-hidden rounded-2xl ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-gold/60"
     >
       <div className="absolute inset-0">
-        <DoctorPortrait src={doctor.photo} alt={`Portrait du ${doctor.name}`} />
+        <DoctorPortrait
+          src={doctor.photo}
+          alt={`Portrait du ${doctor.name}`}
+          monogram={doctor.noPhoto ? doctorInitials(doctor.name) : undefined}
+        />
       </div>
 
       {/* Rest scrim — name + specialty, always visible; fades out on hover */}

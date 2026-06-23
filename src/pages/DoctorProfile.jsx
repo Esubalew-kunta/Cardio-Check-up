@@ -8,6 +8,7 @@ import StatsRow from '../components/StatsRow.jsx'
 import { useReveal } from '../hooks/useReveal.js'
 import { getDoctor, examsForDoctor } from '../data/site.js'
 import { openBookingModal } from '../utils/bookingModal.js'
+import { doctorInitials } from '../utils/initials.js'
 import NotFound from './NotFound.jsx'
 
 function TimelineRow({ t }) {
@@ -164,12 +165,25 @@ export default function DoctorProfile() {
             ref={heroRef}
             className={`reveal ${heroVisible ? 'is-visible' : ''} mt-8 grid gap-10 lg:gap-14 lg:grid-cols-[42%_1fr] items-center`}
           >
-            <div
-              className={`h-[26rem] sm:h-[32rem] overflow-hidden rounded-2xl ${
-                doctor.isFounder ? 'ring-2 ring-gold/50' : ''
-              }`}
-            >
-              <DoctorPortrait src={doctor.photo} alt={`Portrait du ${doctor.name}`} />
+            <div>
+              <div
+                className={`h-[26rem] sm:h-[32rem] overflow-hidden rounded-2xl ${
+                  doctor.isFounder ? 'ring-2 ring-gold/50' : ''
+                }`}
+              >
+                <DoctorPortrait
+                  src={doctor.photo}
+                  alt={`Portrait du ${doctor.name}`}
+                  monogram={doctor.noPhoto ? doctorInitials(doctor.name) : undefined}
+                />
+              </div>
+              {!doctor.photo && (
+                <p className="mt-3 text-center text-xs text-muted">
+                  {doctor.noPhoto
+                    ? `Photo non communiquée — ${doctor.noPhotoReason || 'choix du médecin'}.`
+                    : 'Photographie à venir.'}
+                </p>
+              )}
             </div>
             <div>
               <p className="eyebrow text-burgundy mb-3">
@@ -186,14 +200,22 @@ export default function DoctorProfile() {
                 </span>
               )}
               <p className="mt-6 text-ink/80 leading-[1.8]">{doctor.bio}</p>
+              {doctor.languages?.length > 0 && (
+                <p className="mt-5 text-xs text-muted">
+                  <span className="font-semibold uppercase tracking-[0.12em] text-gold-deep">Langues</span>
+                  {'  '}
+                  {doctor.languages.join(' · ')}
+                </p>
+              )}
             </div>
           </div>
 
-          {/* Highlight pull-quote (e.g. Pr Doguet's media + athletic life) */}
+          {/* Highlight pull-quote (e.g. Pr Doguet's media + athletic life, or
+              Dr Taha's academic distinctions). Label is per-doctor. */}
           {doctor.highlight && (
             <div className="mt-12 rounded-2xl border-l-4 border-gold bg-cream-soft p-7 sm:p-9">
               <p className="eyebrow text-burgundy mb-3">
-                Au-delà de la chirurgie
+                {doctor.highlightLabel || 'Au-delà de la chirurgie'}
               </p>
               <p className="font-display text-xl sm:text-2xl text-ink/85 leading-relaxed">
                 {doctor.highlight}

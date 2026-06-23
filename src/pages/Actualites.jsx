@@ -30,7 +30,7 @@ export default function Actualites() {
     <>
       <Seo
         title="Actualités & conseils"
-        description="Le journal du cabinet Cardio Check-up : prévention, examens du cœur, rythmologie et conseils pratiques expliqués simplement par nos cardiologues."
+        description="Le journal du cabinet Cardio Check-up : prévention, examens du cœur, rythmologie et conseils pratiques expliqués simplement par nos médecins."
         path="/actualites"
         image="/images/hero-reception.jpg"
       />
@@ -46,7 +46,7 @@ export default function Actualites() {
             </h1>
             <p className="mt-5 text-ink/75 leading-relaxed">
               Comprendre vos examens, prévenir les maladies cardiovasculaires, prendre soin de
-              votre rythme : nos cardiologues partagent ici des repères clairs, fiables et sans
+              votre rythme : nos médecins partagent ici des repères clairs, fiables et sans
               jargon.
             </p>
           </Reveal>

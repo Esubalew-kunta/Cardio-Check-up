@@ -24,7 +24,11 @@ pnpm-debug.log*
 *.sw?
 .gstack/
 
-# Loose source images (web-ready copies live in public/images/)
+# Loose source images + docs (web-ready copies live in public/images/)
 /doctor image.jpg
 /doctor image 2.jpg
 /Pr Doguet ( cardiac surgeon).jpeg
+/Dr Leslie Berdah Sadaoui.jpeg
+/Ghita.jpeg
+/Maymouna.jpeg
+/Cardio Check-up.docx

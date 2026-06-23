@@ -18,7 +18,7 @@ export default function BlogPreview() {
               Comprendre votre cœur, article après article
             </h2>
             <p className="mt-5 text-ink/80 leading-relaxed">
-              Prévention, examens et conseils pratiques expliqués simplement par nos cardiologues.
+              Prévention, examens et conseils pratiques expliqués simplement par nos médecins.
             </p>
           </div>
           <Link

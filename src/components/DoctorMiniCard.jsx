@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import DoctorPortrait from './DoctorPortrait.jsx'
+import { doctorInitials } from '../utils/initials.js'
 
 // Compact doctor card for cross-link strips ("Réalisé par" on exam pages).
 // Circular portrait, name, specialty, profile link.
@@ -14,7 +15,11 @@ export default function DoctorMiniCard({ doctor }) {
           doctor.isFounder ? 'ring-2 ring-gold/60' : 'ring-1 ring-gold/20'
         }`}
       >
-        <DoctorPortrait src={doctor.photo} alt={`Portrait du ${doctor.name}`} />
+        <DoctorPortrait
+          src={doctor.photo}
+          alt={`Portrait du ${doctor.name}`}
+          monogram={doctor.noPhoto ? doctorInitials(doctor.name) : undefined}
+        />
       </div>
       <p className="mt-4 font-display text-xl font-semibold text-ink">{doctor.name}</p>
       <p className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-gold-deep">

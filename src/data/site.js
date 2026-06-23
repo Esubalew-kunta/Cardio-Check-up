@@ -1,11 +1,12 @@
 // Central content + contact constants for the Cardio Check-up site.
 // French-only per the approved plan. Single source of truth for every template.
 //
-// NOTE ON DEMO DATA: Dr Sana Amraoui's content is real. The four partner
-// doctors (Martin, Bernard, Moreau, Fabre) and the exam<->doctor mapping are
-// DEMO content derived from the specialties in the build brief. Replace before
-// go-live. Demo doctors carry `demo: true` and `photo: null` (placeholder
-// portrait renders automatically). See "Missing content" in the brief.
+// All doctor profiles are real. Photo flags: `photoPlaceholder: true` (portrait
+// pending from the client — silhouette renders) and `noPhoto: true` +
+// `noPhotoReason` (doctor declined a photo by choice — monogram renders). The
+// ambulatory cardiac exams are performed/supervised by Dr Amraoui (the practice
+// cardiologue-rythmologue); the vascular and general-medicine doctors list their
+// expertise via `procedures`.
 
 export const WEBHOOK_URL = 'https://esubalewk.app.n8n.cloud/webhook/cardio-booking-request'
 
@@ -122,62 +123,114 @@ export const DOCTORS = [
     stats: null,
   },
   {
-    slug: 'claire-bernard',
-    name: 'Dr Claire Bernard',
-    specialty: 'Échocardiographie',
-    credibility: 'Cardiologue échographiste · Cabinet Cardio Check-up, Paris 17',
+    slug: 'leslie-berdah-sadaoui',
+    name: 'Dr Leslie Berdah Sadaoui',
+    specialty: 'Médecin généraliste · Nutrition',
+    credibility: 'Médecine générale & nutrition · Ancienne Cheffe de clinique (AP-HP, Cochin Port-Royal)',
     isFounder: false,
-    demo: true,
-    photo: '/images/doctor-claire-bernard.jpg',
+    demo: false,
+    photo: '/images/leslie-berdah-sadaoui.jpg',
     doctolib: CONTACT.doctolib,
+    badge: 'Nutrition & prévention',
+    languages: ['Français', 'Anglais', 'Espagnol'],
     bioShort:
-      "Spécialiste de l'échographie cardiaque, le Dr Bernard réalise les bilans d'imagerie du cœur. (Contenu de démonstration.)",
+      'Médecin généraliste avec une expertise en nutrition et prise en charge du surpoids, le Dr Berdah Sadaoui adopte une approche globale et préventive de la santé.',
     bio:
-      "Spécialiste de l'imagerie cardiaque, le Dr Bernard réalise les échographies cardiaques trans-thoraciques et participe aux bilans cardiovasculaires complets. Elle met son expertise au service d'un diagnostic précis et rassurant. (Contenu de démonstration — à remplacer avant la mise en ligne.)",
+      "Médecin généraliste avec une expertise en nutrition et prise en charge du surpoids, le Dr Berdah Sadaoui adopte une approche globale et préventive de la santé. Ancienne Cheffe de clinique assistante (AP-HP – Cochin Port-Royal) et titulaire d'un D.U. de Nutrition (Université Paris Cité – Paris 5 Descartes), elle propose un accompagnement nutritionnel personnalisé, centré sur l'amaigrissement et la prévention des facteurs de risque cardio-vasculaire.",
     timeline: [
-      { year: '2012', text: "DIU d'échocardiographie (contenu de démonstration)" },
-      { year: '2014', text: 'DES de cardiologie & maladies vasculaires (contenu de démonstration)' },
+      { year: '2013', text: 'Master de psychologie clinique, Université Paris V Descartes' },
+      { year: '2022', text: 'D.E.S. de Médecine générale, Université Paris Cité – Paris V' },
+      { year: '2024', text: 'D.U. de Nutrition, Université Paris Cité' },
+    ],
+    procedures: [
+      'Médecine générale',
+      'Nutrition',
+      'Amaigrissement / surpoids',
+      'Prévention cardio-vasculaire',
+      'Bilan de santé',
     ],
     stats: null,
   },
   {
-    slug: 'paul-moreau',
-    name: 'Dr Paul Moreau',
-    specialty: 'Holter et MAPA',
-    credibility: 'Cardiologue · Cabinet Cardio Check-up, Paris 17',
+    slug: 'adam-taha',
+    name: 'Dr Adam Taha',
+    specialty: 'Chirurgien vasculaire et endovasculaire',
+    credibility: 'Chirurgie vasculaire & endovasculaire · Ancien Interne des Hôpitaux de Paris',
     isFounder: false,
-    demo: true,
-    photo: '/images/doctor-paul-moreau.jpg',
-    doctolib: CONTACT.doctolib,
-    bioShort:
-      "Spécialiste de l'enregistrement ambulatoire, le Dr Moreau interprète les Holter ECG et les MAPA. (Contenu de démonstration.)",
-    bio:
-      "Le Dr Moreau est spécialisé dans l'enregistrement ambulatoire du rythme cardiaque et de la pression artérielle. Il interprète les Holter ECG et les MAPA pour détecter les troubles du rythme et adapter les traitements. (Contenu de démonstration — à remplacer avant la mise en ligne.)",
-    timeline: [
-      { year: '2011', text: 'DES de cardiologie & maladies vasculaires (contenu de démonstration)' },
-      { year: '2015', text: 'DIU de rythmologie (contenu de démonstration)' },
-    ],
-    stats: null,
-  },
-  {
-    slug: 'isabelle-fabre',
-    name: 'Dr Isabelle Fabre',
-    specialty: 'Médecine du sommeil',
-    credibility: 'Cardiologue · Médecine du sommeil, Cabinet Cardio Check-up',
-    isFounder: false,
-    demo: true,
+    demo: false,
     photo: null,
+    photoPlaceholder: true, // real portrait pending from the client
     doctolib: CONTACT.doctolib,
+    badge: 'Chirurgie vasculaire mini-invasive',
     bioShort:
-      "Spécialiste des troubles du sommeil, le Dr Fabre prend en charge le dépistage des apnées. (Contenu de démonstration.)",
+      'Chirurgien vasculaire et endovasculaire, le Dr Taha prend en charge les pathologies artérielles et veineuses, en alliant chirurgie conventionnelle et techniques mini-invasives.',
     bio:
-      "Le Dr Fabre associe cardiologie et médecine du sommeil pour dépister et accompagner les troubles respiratoires du sommeil, comme les apnées, qui retentissent sur le cœur. (Contenu de démonstration — à remplacer avant la mise en ligne.)",
+      "Le Dr Adam Taha est chirurgien vasculaire et endovasculaire, spécialisé dans la prise en charge des pathologies artérielles et veineuses. Son activité couvre l'ensemble de la chirurgie vasculaire, associant chirurgie conventionnelle et techniques endovasculaires mini-invasives — une double expertise qui lui permet de proposer à chaque patient une prise en charge sur mesure, fondée sur l'écoute et la confiance. Ancien Interne des Hôpitaux de Paris, il a été formé dans des centres de référence nationaux et internationaux, notamment l'Hôpital Européen Georges-Pompidou et la Pitié-Salpêtrière, et a exercé à l'Hôpital Américain de Paris ainsi qu'à la Clinique Turin.",
+    highlightLabel: 'Distinctions & titres',
+    highlight:
+      "Titulaire du D.E.S. de Chirurgie Vasculaire et Endovasculaire, le Dr Taha est Lauréat et Médaillé de la Faculté de Médecine de l'Université Paris-Cité. Sa thèse de doctorat, consacrée aux anévrysmes aortiques, a été distinguée par une mention et les félicitations du jury.",
     timeline: [
-      { year: '2012', text: 'DES de cardiologie & maladies vasculaires (contenu de démonstration)' },
-      { year: '2016', text: 'DIU du sommeil et de sa pathologie (contenu de démonstration)' },
+      { year: '', text: 'Ancien Interne des Hôpitaux de Paris' },
+      { year: '', text: "Formation à l'Hôpital Européen Georges-Pompidou et à la Pitié-Salpêtrière" },
+      { year: '', text: "Exercice à l'Hôpital Américain de Paris et à la Clinique Turin" },
+      { year: '', text: 'D.E.S. de Chirurgie Vasculaire et Endovasculaire — Lauréat et Médaillé, Faculté de Médecine Paris-Cité' },
+      { year: '', text: 'Thèse de doctorat sur les anévrysmes aortiques (mention et félicitations du jury)' },
+    ],
+    procedures: [
+      "Anévrysmes de l'aorte et lésions occlusives aorto-iliaques",
+      "Maladies artérielles périphériques (sténoses carotidiennes, artérite des membres inférieurs)",
+      'Anévrysmes périphériques (poplités)',
+      'Pathologies des artères digestives et rénales',
+      'Insuffisance veineuse chronique et varices',
+      'Syndromes de congestion pelvienne, embolisations',
+      'Varicocèle',
+      'Accès vasculaires pour hémodialyse',
+      'Malformations vasculaires',
+      "Pathologies vasculaires du sportif (artère poplitée piégée, endofibrose iliaque, syndrome de loge)",
     ],
     stats: null,
   },
+  {
+    slug: 'rabiaa-hakem',
+    name: 'Dr Rabiaa Hakem',
+    specialty: 'Médecin vasculaire (Angiologue)',
+    credibility: 'Médecine vasculaire & écho-Doppler · Louis-Mourier (AP-HP) – CH Victor Dupouy',
+    isFounder: false,
+    demo: false,
+    photo: null,
+    noPhoto: true, // declined a photograph by personal choice
+    noPhotoReason: 'choix du médecin',
+    doctolib: CONTACT.doctolib,
+    badge: 'Écho-Doppler vasculaire',
+    bioShort:
+      "Médecin vasculaire (angiologue), le Dr Hakem diagnostique et traite les maladies des vaisseaux : varices, phlébites, artérite et anévrismes, avec une expertise en écho-Doppler.",
+    bio:
+      "Le médecin vasculaire (angiologue) est le spécialiste des maladies des vaisseaux sanguins et lymphatiques : varices, phlébites, artérite, anévrismes et autres troubles de la circulation. Le Dr Hakem réalise les examens d'écho-Doppler nécessaires au diagnostic et au suivi de ces pathologies, et couvre la prévention, le dépistage et le traitement des affections vasculaires.",
+    timeline: [
+      { year: '2018', text: "Internat de médecine vasculaire, CHU d'Amiens (2018–2022)" },
+      { year: '2022', text: 'Assistante des hôpitaux, Louis-Mourier (AP-HP) – CH Victor Dupouy (2022–2024)' },
+      { year: '2024', text: 'Praticienne contractuelle, Louis-Mourier (AP-HP) – CH Victor Dupouy (2024–2026)' },
+      { year: '', text: 'DIU Plaie et Cicatrisation – Sorbonne Université' },
+      { year: '', text: "DIU d'Imagerie Vasculaire Non Invasive – Sorbonne Université" },
+      { year: '', text: 'DIU Lasers Médicaux – Sorbonne Université' },
+    ],
+    procedures: [
+      'Écho-Doppler vasculaire artériel (TSA, membres, rénal, transcrânien, digestif) et veineux',
+      "Pathologies artérielles des membres et de l'aorte (claudication, sténoses, anévrismes)",
+      'Maladie thrombo-embolique et traitements antithrombotiques',
+      'Varices : sclérothérapie à la mousse, laser endoveineux',
+      'Ulcères vasculaires des membres inférieurs',
+    ],
+    stats: null,
+  },
+]
+
+// Medical secretaries — support staff shown on /equipe (no profile pages).
+// Kept separate from DOCTORS so they never appear in doctor lookups, the
+// V-formation, or exam cross-links.
+export const SECRETARIES = [
+  { name: 'Ghita', role: 'Secrétaire médicale', photo: '/images/ghita.jpg' },
+  { name: 'Maymouna', role: 'Secrétaire médicale', photo: '/images/maymouna.jpg' },
 ]
 
 // §4.4 — Exams / Nos Examens. Each entry is self-contained so any exam page
@@ -234,7 +287,7 @@ export const SERVICES = [
         a: 'Les résultats vous sont expliqués et commentés par le médecin le jour même de votre rendez-vous.',
       },
     ],
-    doctorSlugs: ['sana-amraoui', 'claire-bernard'],
+    doctorSlugs: ['sana-amraoui'],
     placeholder: false,
   },
   {
@@ -290,7 +343,7 @@ export const SERVICES = [
         a: 'De 24 heures à 2 semaines, selon la prescription de votre cardiologue.',
       },
     ],
-    doctorSlugs: ['paul-moreau', 'sana-amraoui'],
+    doctorSlugs: ['sana-amraoui'],
     placeholder: false,
   },
   {
@@ -342,7 +395,7 @@ export const SERVICES = [
         a: 'Oui, vous pouvez poursuivre une journée normale. C’est même recommandé pour obtenir un profil de tension représentatif de votre quotidien.',
       },
     ],
-    doctorSlugs: ['paul-moreau'],
+    doctorSlugs: ['sana-amraoui'],
     placeholder: false,
   },
   {
@@ -394,7 +447,7 @@ export const SERVICES = [
         a: 'Non. L’appareil est conçu pour être posé soi-même. Une notice claire et une explication au cabinet vous guident pas à pas.',
       },
     ],
-    doctorSlugs: ['isabelle-fabre'],
+    doctorSlugs: ['sana-amraoui'],
     placeholder: false,
   },
   {
@@ -666,7 +719,7 @@ export const POSTS = [
     slug: 'bien-se-preparer-bilan-cardiovasculaire',
     title: "Comment bien se préparer pour votre bilan cardiovasculaire",
     category: 'Conseils pratiques',
-    author: 'claire-bernard',
+    author: 'leslie-berdah-sadaoui',
     date: '2026-05-06',
     readingMin: 4,
     cover: '/images/doctor-bw.jpg',
@@ -715,7 +768,7 @@ export const POSTS = [
       {
         type: 'quote',
         text: "Un patient détendu, c'est un meilleur examen. Arriver en avance, sans stress, en sachant à quoi s'attendre : c'est déjà la moitié du chemin vers un bilan de qualité.",
-        cite: 'Dr Claire Bernard',
+        cite: 'Dr Leslie Berdah Sadaoui',
       },
       {
         type: 'p',
