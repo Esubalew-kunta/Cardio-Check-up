@@ -22,7 +22,7 @@ export default function Equipe() {
     <>
       <Seo
         title="Notre équipe"
-        description="Rencontrez l'équipe médicale Cardio Check-up : cinq spécialistes complémentaires — cardiologie, chirurgie cardiaque et vasculaire, médecine vasculaire et nutrition — à Paris 17."
+        description="Rencontrez l'équipe médicale Cardio Check-up : cinq spécialistes complémentaires (cardiologie, chirurgie cardiaque et vasculaire, médecine vasculaire et nutrition) à Paris 17."
         path="/equipe"
       />
 

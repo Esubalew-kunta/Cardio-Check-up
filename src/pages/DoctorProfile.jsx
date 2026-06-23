@@ -180,7 +180,7 @@ export default function DoctorProfile() {
               {!doctor.photo && (
                 <p className="mt-3 text-center text-xs text-muted">
                   {doctor.noPhoto
-                    ? `Photo non communiquée — ${doctor.noPhotoReason || 'choix du médecin'}.`
+                    ? `Photo non communiquée (${doctor.noPhotoReason || 'choix du médecin'}).`
                     : 'Photographie à venir.'}
                 </p>
               )}

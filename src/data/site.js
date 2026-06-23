@@ -109,7 +109,7 @@ export const DOCTORS = [
       { year: '', text: 'Directeur médical, 40e Marathon des Sables Legendary' },
       { year: '', text: 'Co-animateur du Magazine de la Santé, France 5' },
       { year: '', text: 'Chef du service de chirurgie cardiaque, CHU de Rouen' },
-      { year: '', text: 'Professeur des Universités — Praticien Hospitalier, CHU de Rouen' },
+      { year: '', text: 'Professeur des Universités-Praticien Hospitalier, CHU de Rouen' },
       { year: '', text: 'Études de médecine en Normandie, spécialisation en chirurgie thoracique et cardiovasculaire' },
     ],
     // Surgical domains shown as static tags (no links — he is not an ambulatory
@@ -136,10 +136,10 @@ export const DOCTORS = [
     bioShort:
       'Médecin généraliste avec une expertise en nutrition et prise en charge du surpoids, le Dr Berdah Sadaoui adopte une approche globale et préventive de la santé.',
     bio:
-      "Médecin généraliste avec une expertise en nutrition et prise en charge du surpoids, le Dr Berdah Sadaoui adopte une approche globale et préventive de la santé. Ancienne Cheffe de clinique assistante (AP-HP – Cochin Port-Royal) et titulaire d'un D.U. de Nutrition (Université Paris Cité – Paris 5 Descartes), elle propose un accompagnement nutritionnel personnalisé, centré sur l'amaigrissement et la prévention des facteurs de risque cardio-vasculaire.",
+      "Médecin généraliste avec une expertise en nutrition et prise en charge du surpoids, le Dr Berdah Sadaoui adopte une approche globale et préventive de la santé. Ancienne Cheffe de clinique assistante (AP-HP, Cochin Port-Royal) et titulaire d'un D.U. de Nutrition (Université Paris Cité, Paris 5 Descartes), elle propose un accompagnement nutritionnel personnalisé, centré sur l'amaigrissement et la prévention des facteurs de risque cardio-vasculaire.",
     timeline: [
       { year: '2013', text: 'Master de psychologie clinique, Université Paris V Descartes' },
-      { year: '2022', text: 'D.E.S. de Médecine générale, Université Paris Cité – Paris V' },
+      { year: '2022', text: 'D.E.S. de Médecine générale, Université Paris Cité, Paris V' },
       { year: '2024', text: 'D.U. de Nutrition, Université Paris Cité' },
     ],
     procedures: [
@@ -165,7 +165,7 @@ export const DOCTORS = [
     bioShort:
       'Chirurgien vasculaire et endovasculaire, le Dr Taha prend en charge les pathologies artérielles et veineuses, en alliant chirurgie conventionnelle et techniques mini-invasives.',
     bio:
-      "Le Dr Adam Taha est chirurgien vasculaire et endovasculaire, spécialisé dans la prise en charge des pathologies artérielles et veineuses. Son activité couvre l'ensemble de la chirurgie vasculaire, associant chirurgie conventionnelle et techniques endovasculaires mini-invasives — une double expertise qui lui permet de proposer à chaque patient une prise en charge sur mesure, fondée sur l'écoute et la confiance. Ancien Interne des Hôpitaux de Paris, il a été formé dans des centres de référence nationaux et internationaux, notamment l'Hôpital Européen Georges-Pompidou et la Pitié-Salpêtrière, et a exercé à l'Hôpital Américain de Paris ainsi qu'à la Clinique Turin.",
+      "Le Dr Adam Taha est chirurgien vasculaire et endovasculaire, spécialisé dans la prise en charge des pathologies artérielles et veineuses. Son activité couvre l'ensemble de la chirurgie vasculaire, associant chirurgie conventionnelle et techniques endovasculaires mini-invasives. Cette double expertise lui permet de proposer à chaque patient une prise en charge sur mesure, fondée sur l'écoute et la confiance. Ancien Interne des Hôpitaux de Paris, il a été formé dans des centres de référence nationaux et internationaux, notamment l'Hôpital Européen Georges-Pompidou et la Pitié-Salpêtrière, et a exercé à l'Hôpital Américain de Paris ainsi qu'à la Clinique Turin.",
     highlightLabel: 'Distinctions & titres',
     highlight:
       "Titulaire du D.E.S. de Chirurgie Vasculaire et Endovasculaire, le Dr Taha est Lauréat et Médaillé de la Faculté de Médecine de l'Université Paris-Cité. Sa thèse de doctorat, consacrée aux anévrysmes aortiques, a été distinguée par une mention et les félicitations du jury.",
@@ -173,7 +173,7 @@ export const DOCTORS = [
       { year: '', text: 'Ancien Interne des Hôpitaux de Paris' },
       { year: '', text: "Formation à l'Hôpital Européen Georges-Pompidou et à la Pitié-Salpêtrière" },
       { year: '', text: "Exercice à l'Hôpital Américain de Paris et à la Clinique Turin" },
-      { year: '', text: 'D.E.S. de Chirurgie Vasculaire et Endovasculaire — Lauréat et Médaillé, Faculté de Médecine Paris-Cité' },
+      { year: '', text: 'D.E.S. de Chirurgie Vasculaire et Endovasculaire, Lauréat et Médaillé de la Faculté de Médecine Paris-Cité' },
       { year: '', text: 'Thèse de doctorat sur les anévrysmes aortiques (mention et félicitations du jury)' },
     ],
     procedures: [
@@ -194,7 +194,7 @@ export const DOCTORS = [
     slug: 'rabiaa-hakem',
     name: 'Dr Rabiaa Hakem',
     specialty: 'Médecin vasculaire (Angiologue)',
-    credibility: 'Médecine vasculaire & écho-Doppler · Louis-Mourier (AP-HP) – CH Victor Dupouy',
+    credibility: 'Médecine vasculaire & écho-Doppler · Louis-Mourier (AP-HP), CH Victor Dupouy',
     isFounder: false,
     demo: false,
     photo: null,
@@ -207,12 +207,12 @@ export const DOCTORS = [
     bio:
       "Le médecin vasculaire (angiologue) est le spécialiste des maladies des vaisseaux sanguins et lymphatiques : varices, phlébites, artérite, anévrismes et autres troubles de la circulation. Le Dr Hakem réalise les examens d'écho-Doppler nécessaires au diagnostic et au suivi de ces pathologies, et couvre la prévention, le dépistage et le traitement des affections vasculaires.",
     timeline: [
-      { year: '2018', text: "Internat de médecine vasculaire, CHU d'Amiens (2018–2022)" },
-      { year: '2022', text: 'Assistante des hôpitaux, Louis-Mourier (AP-HP) – CH Victor Dupouy (2022–2024)' },
-      { year: '2024', text: 'Praticienne contractuelle, Louis-Mourier (AP-HP) – CH Victor Dupouy (2024–2026)' },
-      { year: '', text: 'DIU Plaie et Cicatrisation – Sorbonne Université' },
-      { year: '', text: "DIU d'Imagerie Vasculaire Non Invasive – Sorbonne Université" },
-      { year: '', text: 'DIU Lasers Médicaux – Sorbonne Université' },
+      { year: '2018', text: "Internat de médecine vasculaire, CHU d'Amiens (2018-2022)" },
+      { year: '2022', text: 'Assistante des hôpitaux, Louis-Mourier (AP-HP), CH Victor Dupouy (2022-2024)' },
+      { year: '2024', text: 'Praticienne contractuelle, Louis-Mourier (AP-HP), CH Victor Dupouy (2024-2026)' },
+      { year: '', text: 'DIU Plaie et Cicatrisation, Sorbonne Université' },
+      { year: '', text: "DIU d'Imagerie Vasculaire Non Invasive, Sorbonne Université" },
+      { year: '', text: 'DIU Lasers Médicaux, Sorbonne Université' },
     ],
     procedures: [
       'Écho-Doppler vasculaire artériel (TSA, membres, rénal, transcrânien, digestif) et veineux',
@@ -468,7 +468,7 @@ export const SERVICES = [
     videoId: 'hgBSYW9V8S8', // Rythmologie interventionnelle — explainer video
     symptomPills: ['Arythmie complexe', 'Fibrillation atriale', 'Suivi spécialisé'],
     symptomContext:
-      "La rythmologie interventionnelle s'adresse aux patients présentant des troubles du rythme nécessitant un traitement spécialisé. (Contenu provisoire — à compléter.)",
+      "La rythmologie interventionnelle s'adresse aux patients présentant des troubles du rythme nécessitant un traitement spécialisé. (Contenu provisoire, à compléter.)",
     steps: [
       { title: 'Consultation spécialisée', text: 'Évaluation du trouble du rythme et discussion de la prise en charge. (Contenu provisoire.)' },
       { title: 'Intervention', text: "L'acte est réalisé en milieu hospitalier spécialisé. (Contenu provisoire.)" },
@@ -533,10 +533,10 @@ export const LOCATIONS = [
     phoneHref: 'tel:+33186471316',
     image: '/images/plaque-cabinet.jpg',
     note: 'Consultations, bilans cardiovasculaires et examens (ECG, ETT, Holter, MAPA, polygraphie).',
-    walking: '5 min à pied de Charles de Gaulle–Étoile',
+    walking: '5 min à pied de Charles de Gaulle-Étoile',
     metro: [
       { ...M2, station: 'Ternes' },
-      { ...M1, station: 'Charles de Gaulle–Étoile' },
+      { ...M1, station: 'Charles de Gaulle-Étoile' },
     ],
   },
 ]
@@ -634,7 +634,7 @@ export const POSTS = [
       { type: 'h3', text: "Pendant l'enregistrement" },
       {
         type: 'p',
-        text: "Vous vivez normalement : travail, marche, sommeil, activités habituelles. C'est même tout l'intérêt de l'examen — capturer votre cœur dans la vraie vie. On vous remet un petit carnet pour noter l'heure de vos symptômes (palpitations, malaise…), ce qui aide votre cardiologue à relier une sensation à un tracé précis.",
+        text: "Vous vivez normalement : travail, marche, sommeil, activités habituelles. C'est même tout l'intérêt de l'examen : capturer votre cœur dans la vraie vie. On vous remet un petit carnet pour noter l'heure de vos symptômes (palpitations, malaise…), ce qui aide votre cardiologue à relier une sensation à un tracé précis.",
       },
       {
         type: 'tip',
@@ -671,7 +671,7 @@ export const POSTS = [
     body: [
       {
         type: 'p',
-        text: "Le cœur sait se faire discret, mais il envoie aussi des signaux. Savoir les reconnaître permet de consulter au bon moment — ni dans l'angoisse permanente, ni trop tard. Voici cinq symptômes qui méritent l'avis d'un cardiologue. Aucun d'eux n'est synonyme de maladie grave, mais chacun mérite d'être pris au sérieux.",
+        text: "Le cœur sait se faire discret, mais il envoie aussi des signaux. Savoir les reconnaître permet de consulter au bon moment, ni dans l'angoisse permanente, ni trop tard. Voici cinq symptômes qui méritent l'avis d'un cardiologue. Aucun d'eux n'est synonyme de maladie grave, mais chacun mérite d'être pris au sérieux.",
       },
       { type: 'h2', text: '1. Une douleur ou une oppression dans la poitrine' },
       {
@@ -706,7 +706,7 @@ export const POSTS = [
       },
       {
         type: 'quote',
-        text: "Consulter, ce n'est pas s'alarmer : c'est reprendre le contrôle. La très grande majorité de ces symptômes ont une explication simple — encore faut-il l'entendre d'un professionnel plutôt que de l'imaginer seul.",
+        text: "Consulter, ce n'est pas s'alarmer : c'est reprendre le contrôle. La très grande majorité de ces symptômes ont une explication simple, encore faut-il l'entendre d'un professionnel plutôt que de l'imaginer seul.",
         cite: 'Dr Sana Amraoui',
       },
       {
@@ -763,7 +763,7 @@ export const POSTS = [
       { type: 'h2', text: 'Le jour J, étape par étape' },
       {
         type: 'p',
-        text: "Le rendez-vous se déroule sans surprise : un temps d'échange avec le cardiologue sur vos antécédents et votre mode de vie, puis l'électrocardiogramme — rapide et indolore — et enfin l'échographie cardiaque, qui visualise la structure et le fonctionnement de votre cœur grâce à une simple sonde posée sur la peau. Les résultats vous sont expliqués le jour même.",
+        text: "Le rendez-vous se déroule sans surprise : un temps d'échange avec le cardiologue sur vos antécédents et votre mode de vie, puis l'électrocardiogramme (rapide et indolore) et enfin l'échographie cardiaque, qui visualise la structure et le fonctionnement de votre cœur grâce à une simple sonde posée sur la peau. Les résultats vous sont expliqués le jour même.",
       },
       {
         type: 'quote',
@@ -784,7 +784,7 @@ export const POSTS = [
     date: '2026-04-18',
     readingMin: 7,
     cover: '/images/rythmo-tee.jpg',
-    coverAlt: "Rythmologie interventionnelle — traitement des troubles du rythme",
+    coverAlt: "Rythmologie interventionnelle, traitement des troubles du rythme",
     excerpt:
       "Une technique de référence pour traiter durablement certains troubles du rythme cardiaque, sans chirurgie à cœur ouvert. Explications en mots simples.",
     body: [
@@ -795,7 +795,7 @@ export const POSTS = [
       { type: 'h2', text: "Le principe de l'ablation" },
       {
         type: 'p',
-        text: "Certaines arythmies naissent d'un petit foyer de cellules cardiaques qui émet des impulsions électriques anarchiques, ou d'un circuit électrique anormal au sein du cœur. L'ablation consiste à neutraliser très précisément cette zone responsable, à l'aide d'un cathéter — un fin tuyau souple — introduit jusqu'au cœur par une veine, le plus souvent au pli de l'aine.",
+        text: "Certaines arythmies naissent d'un petit foyer de cellules cardiaques qui émet des impulsions électriques anarchiques, ou d'un circuit électrique anormal au sein du cœur. L'ablation consiste à neutraliser très précisément cette zone responsable, à l'aide d'un cathéter (un fin tuyau souple) introduit jusqu'au cœur par une veine, le plus souvent au pli de l'aine.",
       },
       {
         type: 'p',
@@ -853,11 +853,11 @@ export const POSTS = [
     cover: '/images/doguet.jpg',
     coverAlt: "Pr Fabien Doguet, chirurgien cardiaque et marathonien",
     excerpt:
-      "Reprendre ou intensifier le sport après 40 ans est l'une des meilleures décisions pour votre cœur — à condition de respecter quelques règles simples. Les conseils du Pr Doguet.",
+      "Reprendre ou intensifier le sport après 40 ans est l'une des meilleures décisions pour votre cœur, à condition de respecter quelques règles simples. Les conseils du Pr Doguet.",
     body: [
       {
         type: 'p',
-        text: "Chirurgien cardiaque le jour, coureur de fond le reste du temps, j'ai couru plus de vingt marathons et relevé quelques-uns des défis les plus exigeants au monde — l'UTMB, la Diagonale des Fous, le Marathon des Sables, l'Ironman. Je peux vous l'affirmer des deux côtés du bistouri : il n'y a pas d'âge pour prendre soin de son cœur par le mouvement.",
+        text: "Chirurgien cardiaque le jour, coureur de fond le reste du temps, j'ai couru plus de vingt marathons et relevé quelques-uns des défis les plus exigeants au monde : l'UTMB, la Diagonale des Fous, le Marathon des Sables, l'Ironman. Je peux vous l'affirmer des deux côtés du bistouri : il n'y a pas d'âge pour prendre soin de son cœur par le mouvement.",
       },
       {
         type: 'quote',
@@ -867,7 +867,7 @@ export const POSTS = [
       { type: 'h2', text: 'Pourquoi le sport est votre meilleur allié cardiaque' },
       {
         type: 'p',
-        text: "L'activité physique régulière est l'une des interventions les plus puissantes que l'on connaisse pour le cœur — et aucune chirurgie ne la remplace. Pratiquée avec régularité, elle :",
+        text: "L'activité physique régulière est l'une des interventions les plus puissantes que l'on connaisse pour le cœur, et aucune chirurgie ne la remplace. Pratiquée avec régularité, elle :",
       },
       {
         type: 'list',

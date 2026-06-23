@@ -20,7 +20,7 @@ function FounderCard({ doctor }) {
   return (
     <Link
       to={`/equipe/${doctor.slug}`}
-      aria-label={`${doctor.name} — ${doctor.specialty}`}
+      aria-label={`${doctor.name}, ${doctor.specialty}`}
       className="group mx-auto block w-full max-w-sm overflow-hidden rounded-2xl bg-cream ring-1 ring-gold/50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-gold"
     >
       {/* Photo — face centred, taller crop so it frames well */}
@@ -71,7 +71,7 @@ function PartnerCard({ doctor }) {
   return (
     <Link
       to={`/equipe/${doctor.slug}`}
-      aria-label={`${doctor.name} — ${doctor.specialty}`}
+      aria-label={`${doctor.name}, ${doctor.specialty}`}
       className="group relative block aspect-[3/4] overflow-hidden rounded-2xl ring-1 ring-transparent transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-gold/60"
     >
       <div className="absolute inset-0">

@@ -34,7 +34,7 @@ function Portrait({ doctor, heightClass, hovered, setHovered, reduce }) {
       onFocus={() => setHovered(doctor.slug)}
       onBlur={() => setHovered(null)}
       className="block"
-      aria-label={`${doctor.name} — ${doctor.specialty}`}
+      aria-label={`${doctor.name}, ${doctor.specialty}`}
     >
       <motion.div
         whileHover={reduce ? undefined : { y: -14, scale: 1.06 }}
@@ -87,7 +87,7 @@ function MobileCard({ doctor, tier }) {
   return (
     <Link
       to={`/equipe/${doctor.slug}`}
-      aria-label={`${doctor.name} — ${doctor.specialty}`}
+      aria-label={`${doctor.name}, ${doctor.specialty}`}
       className={`relative shrink-0 snap-start w-[130px] aspect-[2/3] overflow-hidden rounded-[14px] origin-bottom ${
         doctor.isFounder ? 'ring-1 ring-gold/60' : ''
       } ${protrude}`}
@@ -124,7 +124,7 @@ export default function NotreConseil() {
             Cinq spécialistes. Une mission.
           </h2>
           <p className="mt-5 text-ink/75 leading-relaxed">
-            Le cabinet Cardio Check-up réunit cinq spécialistes complémentaires — cardiologie,
+            Le cabinet Cardio Check-up réunit cinq spécialistes complémentaires : cardiologie,
             chirurgie cardiaque et vasculaire, médecine vasculaire et nutrition. Ensemble, ils
             couvrent la santé cardiovasculaire dans sa globalité, du dépistage au suivi. Le Dr
             Amraoui, Chairperson de l'EHRA 2026, coordonne le conseil.

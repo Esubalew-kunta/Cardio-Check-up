@@ -79,7 +79,7 @@ export default function ExamDetail() {
     <>
       <Seo
         title={exam.name}
-        description={exam.reassurance + ' — ' + exam.headline}
+        description={exam.reassurance + ' · ' + exam.headline}
         path={path}
         jsonLd={jsonLd}
       />
