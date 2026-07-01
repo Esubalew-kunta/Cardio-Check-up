@@ -1,18 +1,46 @@
 import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useReveal } from '../hooks/useReveal.js'
-import { SERVICES } from '../data/site.js'
+import { SERVICES, EXAM_GROUPS } from '../data/site.js'
 
-// Minimal, on-brand video facade for each card. Nothing plays on load — no more
-// five clips blaring at once. The card shows the exam title and a single
-// play/pause control over the poster. The first press mounts the YouTube embed
-// with its chrome stripped (no related videos, annotations, keyboard or visible
-// controls); the button then toggles play/pause via the IFrame postMessage API.
-function CardVideo({ id, name }) {
+// Line glyphs per exam family (used in group headers + soft posters).
+const GROUP_ICONS = {
+  heart: 'M12 21s-7.5-4.6-10-9.2C.6 8.9 2.2 5.5 5.5 5.5c1.9 0 3.3 1 4.5 2.6C11.2 6.5 12.6 5.5 14.5 5.5c3.3 0 4.9 3.4 3.5 6.3C19.5 16.4 12 21 12 21z',
+  clock: 'M12 7v5l3 2M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18z',
+  vessel: 'M3 12h4l2-6 4 12 2-6h6',
+}
+
+// Soft, on-brand poster shown when an exam has no explainer video yet. A faint
+// family glyph behind a burgundy play affordance — swaps to the real video
+// automatically once a `videoId` is supplied.
+function CardPoster({ icon }) {
+  return (
+    <div className="relative w-full aspect-video overflow-hidden bg-gradient-to-br from-cream to-cream-soft">
+      <svg
+        viewBox="0 0 24 24"
+        className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 text-burgundy/10"
+        fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
+      >
+        <path d={GROUP_ICONS[icon] || GROUP_ICONS.heart} />
+      </svg>
+      <span className="absolute left-1/2 top-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-burgundy text-offwhite shadow-md">
+        <svg viewBox="0 0 24 24" className="h-5 w-5 translate-x-0.5 fill-current" aria-hidden="true">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </span>
+    </div>
+  )
+}
+
+// Minimal, on-brand video facade. Nothing plays on load. The first press mounts
+// the YouTube embed with its chrome stripped; the button then toggles play/pause
+// via the IFrame postMessage API. When no videoId exists, a soft poster is shown.
+function CardVideo({ id, name, icon }) {
   const containerRef = useRef(null)
   const iframeRef = useRef(null)
   const [started, setStarted] = useState(false)
   const [playing, setPlaying] = useState(false)
+  if (!id) return <CardPoster icon={icon} />
   const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`
 
   const command = (func) =>
@@ -36,7 +64,6 @@ function CardVideo({ id, name }) {
     }
   }
 
-  // Toggle native fullscreen on the card (starts the video if not yet playing).
   const toggleFullscreen = () => {
     const el = containerRef.current
     if (!el) return
@@ -75,7 +102,6 @@ function CardVideo({ id, name }) {
         />
       )}
 
-      {/* Our own minimal UI — legibility gradient, title and one control */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-burgundy-deep/85 via-burgundy-deep/10 to-transparent" />
       <span className="pointer-events-none absolute bottom-4 left-4 right-28 text-sm font-medium text-offwhite/95 line-clamp-1 drop-shadow">
         {name}
@@ -113,21 +139,19 @@ function CardVideo({ id, name }) {
   )
 }
 
-function ServiceCard({ service, index }) {
+function ServiceCard({ service, index, groupIcon }) {
   const [ref, visible] = useReveal()
   return (
     <article
       ref={ref}
       style={{ transitionDelay: `${index * 80}ms` }}
-      className={`reveal ${visible ? 'is-visible' : ''} group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gold/30 bg-white/60 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-gold/60 ${
-        service.placeholder ? 'lg:col-span-2' : ''
-      }`}
+      className={`reveal ${visible ? 'is-visible' : ''} group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gold/30 bg-white/60 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-gold/60`}
     >
-      <CardVideo id={service.videoId} name={service.name} />
+      <CardVideo id={service.videoId} name={service.name} icon={groupIcon} />
 
-      <div className="flex flex-1 flex-col p-7">
+      <div className="flex flex-1 flex-col p-6">
         <div className="flex items-start justify-between gap-3">
-          <span className="font-display text-2xl font-semibold text-gold-deep">0{index + 1}</span>
+          <span className="font-display text-xl font-semibold text-gold-deep">0{index + 1}</span>
           {service.placeholder && (
             <span className="rounded-full bg-amber-100 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-amber-700 border border-amber-300 whitespace-nowrap">
               Contenu provisoire
@@ -135,7 +159,7 @@ function ServiceCard({ service, index }) {
           )}
         </div>
 
-        <h3 className="mt-3 font-display text-2xl font-semibold text-ink leading-tight">
+        <h3 className="mt-2 font-display text-xl font-semibold text-ink leading-tight">
           {service.name}
         </h3>
         {service.where && (
@@ -144,16 +168,11 @@ function ServiceCard({ service, index }) {
           </p>
         )}
 
-        <p className="mt-3 text-sm font-medium text-ink/80">{service.why}</p>
+        <p className="mt-2 text-sm font-medium text-ink/80">{service.why}</p>
 
         {/* Detail: always visible on mobile/tablet, hover-reveal on desktop */}
-        <div className="mt-3 overflow-hidden opacity-100 max-h-48 lg:max-h-0 lg:opacity-0 transition-all duration-300 lg:group-hover:max-h-48 lg:group-hover:opacity-100 lg:group-focus-within:max-h-48 lg:group-focus-within:opacity-100">
+        <div className="mt-2 overflow-hidden opacity-100 max-h-48 lg:max-h-0 lg:opacity-0 transition-all duration-300 lg:group-hover:max-h-48 lg:group-hover:opacity-100 lg:group-focus-within:max-h-48 lg:group-focus-within:opacity-100">
           <p className="text-sm text-ink/75 leading-relaxed">{service.desc}</p>
-          {service.symptoms && (
-            <p className="mt-2 text-xs text-muted leading-relaxed">
-              <span className="font-semibold text-ink/70">Signes évocateurs :</span> {service.symptoms}
-            </p>
-          )}
         </div>
 
         <Link
@@ -168,26 +187,77 @@ function ServiceCard({ service, index }) {
   )
 }
 
+function GroupHeader({ group, count }) {
+  return (
+    <div>
+      <h3 className="font-display text-3xl sm:text-4xl font-semibold text-ink leading-tight">
+        {group.label}
+      </h3>
+      <div className="mt-2 flex items-center gap-2.5">
+        <span className="grid h-7 w-7 place-items-center rounded-full border border-gold/50 text-burgundy">
+          <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d={GROUP_ICONS[group.icon]} />
+          </svg>
+        </span>
+        <span className="eyebrow text-gold-deep">
+          {count} examen{count > 1 ? 's' : ''}
+        </span>
+      </div>
+      <p className="mt-3 max-w-xl text-ink/70 leading-relaxed">{group.desc}</p>
+    </div>
+  )
+}
+
 export default function Services() {
   return (
     <section id="examens" className="py-24 sm:py-32 bg-cream-soft scroll-mt-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="max-w-2xl">
-          <p className="eyebrow text-burgundy mb-4">Nos Examens</p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-ink leading-tight">
-            Un dépistage cardiaque complet, en un seul lieu
+        {/* Centered intro + jump nav */}
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow text-burgundy">Nos Examens</p>
+          <span className="mx-auto mt-3 block h-px w-12 bg-gold" aria-hidden="true" />
+          <h2 className="mt-5 font-display text-4xl sm:text-5xl font-semibold text-ink leading-tight">
+            Le bon examen, pour chaque situation
           </h2>
           <p className="mt-5 text-ink/80 leading-relaxed">
-            Du bilan de prévention aux examens spécialisés, chaque examen répond à un besoin
-            précis.
+            Nos examens, répartis en trois grands domaines, du dépistage au suivi le plus
+            spécialisé.
           </p>
+          <nav className="mt-7 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm">
+            <span className="text-muted">Aller à :</span>
+            {EXAM_GROUPS.map((g, i) => (
+              <span key={g.key} className="flex items-center gap-2.5">
+                <a
+                  href={`#${g.key}`}
+                  className="font-semibold text-burgundy border-b border-burgundy/30 pb-0.5 hover:border-burgundy transition-colors"
+                >
+                  {g.label}
+                </a>
+                {i < EXAM_GROUPS.length - 1 && <span className="text-gold" aria-hidden="true">·</span>}
+              </span>
+            ))}
+          </nav>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
-          {SERVICES.map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} />
-          ))}
-        </div>
+        {/* One block per group */}
+        {EXAM_GROUPS.map((group, gi) => {
+          const items = SERVICES.filter((s) => s.group === group.key)
+          if (!items.length) return null
+          return (
+            <div
+              key={group.key}
+              id={group.key}
+              className={`scroll-mt-24 ${gi === 0 ? 'mt-16' : 'mt-12 border-t border-gold/30 pt-12'}`}
+            >
+              <GroupHeader group={group} count={items.length} />
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+                {items.map((service, i) => (
+                  <ServiceCard key={service.id} service={service} index={i} groupIcon={group.icon} />
+                ))}
+              </div>
+            </div>
+          )
+        })}
       </div>
     </section>
   )

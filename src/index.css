@@ -122,6 +122,21 @@ p, li, a, button, input, select, textarea, label, span {
   animation: chat-bob 2s ease-in-out infinite;
 }
 
+/* ── Anatomy figure (Doppler hub) — animated highlight ring over the base image */
+@keyframes pulse-ring {
+  0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 0.6; }
+  70%  { transform: translate(-50%, -50%) scale(2.6); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(2.6); opacity: 0; }
+}
+.pulse-ring { animation: pulse-ring 1.9s ease-out infinite; }
+
+@keyframes fade-swap {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: none; }
+}
+.fade-swap { animation: fade-swap 0.4s ease; }
+.anat-in { animation: fade-swap 0.5s ease; }
+
 /* ── Accordion ─────────────────────────────────────────────────────────── */
 .faq-answer {
   display: grid;
@@ -176,4 +191,6 @@ p, li, a, button, input, select, textarea, label, span {
   .expand-panel { transition: none; }
   .collapse-mh { transition: none; }
   .chat-bob { animation: none; }
+  .pulse-ring { animation: none; opacity: 0; }
+  .fade-swap, .anat-in { animation: none; }
 }

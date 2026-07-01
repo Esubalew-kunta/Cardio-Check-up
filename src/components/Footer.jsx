@@ -54,6 +54,24 @@ export default function Footer() {
             >
               Vous préférez réserver via Doctolib ?
             </a>
+
+            {/* Review QR */}
+            <div className="mt-7">
+              <p className="mb-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-gold">
+                Votre avis compte
+              </p>
+              <div className="flex items-center gap-3.5">
+                <img
+                  src="/images/qr-avis.png"
+                  alt="QR code pour laisser un avis au cabinet Cardio Check-up"
+                  className="h-24 w-24 shrink-0 rounded-lg bg-white"
+                  loading="lazy"
+                />
+                <p className="max-w-[9rem] text-xs leading-relaxed text-offwhite/60">
+                  Scannez pour partager votre expérience.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Adresses */}

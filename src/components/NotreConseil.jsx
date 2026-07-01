@@ -1,96 +1,64 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion } from 'framer-motion'
 import { useReveal } from '../hooks/useReveal.js'
 import { getFounder, getPartners } from '../data/site.js'
 import DoctorPortrait from './DoctorPortrait.jsx'
 import { doctorInitials } from '../utils/initials.js'
 
-// Build the V order: outer-L, inner-L, APEX, inner-R, outer-R.
-// Founder is the apex; partners fill the wings in their declared order.
 const founder = getFounder()
-const partners = getPartners()
-const V_ORDER = [partners[0], partners[1], founder, partners[2], partners[3]].filter(Boolean)
+const partners = getPartners() // declared order: Doguet, Berdah, Sofiane, Hakem, Taha
 
-// height tier + entrance delay per position (apex first, then inner, then outer)
-const TIERS = ['outer', 'inner', 'apex', 'inner', 'outer']
-const HEIGHTS = { apex: 'h-[24rem]', inner: 'h-[20rem]', outer: 'h-[16.5rem]' }
-const DELAYS = { apex: 0, inner: 0.08, outer: 0.16 }
+// Balanced arc of six: the founder sits at the centre (gold ring, tallest tier);
+// partners fan out on each side in the client's declared order.
+const ARC = [partners[0], partners[1], founder, partners[2], partners[3], partners[4]].filter(Boolean)
+const TIERS = ['out', 'mid', 'tall', 'tall', 'mid', 'out']
+const HEIGHTS = { tall: 'h-[21rem]', mid: 'h-[18.5rem]', out: 'h-[16rem]' }
 
 const MASK = {
-  maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
-  WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
+  maskImage: 'linear-gradient(to bottom, black 72%, transparent 100%)',
+  WebkitMaskImage: 'linear-gradient(to bottom, black 72%, transparent 100%)',
 }
-const SCRIM = { background: 'linear-gradient(to top, rgba(18,5,12,0.88), transparent)' }
+const SCRIM = { background: 'linear-gradient(to top, rgba(18,5,12,0.9), transparent)' }
 
-function Portrait({ doctor, heightClass, hovered, setHovered, reduce }) {
+// Desktop tiered portrait (masked bottom fade, name + role scrim).
+function Portrait({ doctor, heightClass }) {
   const isFounder = doctor.isFounder
-  const dim = hovered && hovered !== doctor.slug
   return (
     <Link
       to={`/equipe/${doctor.slug}`}
-      onMouseEnter={() => setHovered(doctor.slug)}
-      onMouseLeave={() => setHovered(null)}
-      onFocus={() => setHovered(doctor.slug)}
-      onBlur={() => setHovered(null)}
-      className="block"
       aria-label={`${doctor.name}, ${doctor.specialty}`}
+      className="group block w-full"
     >
-      <motion.div
-        whileHover={reduce ? undefined : { y: -14, scale: 1.06 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-        className={`relative w-full ${heightClass}`}
-        style={{
-          filter: dim ? 'brightness(0.58) saturate(0.6)' : 'none',
-          transition: 'filter 0.3s ease',
-        }}
-      >
-        <div
-          className={`absolute inset-0 ${isFounder ? 'ring-1 ring-gold/50' : ''} ${
-            isFounder && hovered === doctor.slug ? 'ring-gold' : ''
-          }`}
-          style={MASK}
-        >
+      <div className={`relative w-full ${heightClass} transition-transform duration-300 group-hover:-translate-y-2`}>
+        <div className={`absolute inset-0 overflow-hidden ${isFounder ? 'ring-1 ring-gold/70' : ''}`} style={MASK}>
           <DoctorPortrait
             src={doctor.photo}
             alt={`Portrait du ${doctor.name}`}
             monogram={doctor.noPhoto ? doctorInitials(doctor.name) : undefined}
           />
         </div>
-        {/* Name + specialty scrim */}
-        <div className="absolute inset-x-0 bottom-0 pt-10 pb-4 px-3 text-center" style={SCRIM}>
-          <p
-            className={`font-display text-base font-semibold leading-tight transition-colors ${
-              hovered === doctor.slug ? 'text-offwhite' : 'text-offwhite/85'
-            }`}
-          >
-            {doctor.name}
-          </p>
-          <p
-            className={`mt-0.5 text-[0.6rem] font-semibold uppercase tracking-[0.12em] transition-colors ${
-              hovered === doctor.slug ? 'text-gold' : 'text-gold/80'
-            }`}
-          >
-            {doctor.specialty}
+        <div className="absolute inset-x-0 bottom-0 px-2 pt-10 pb-3 text-center" style={SCRIM}>
+          {isFounder && (
+            <p className="text-[0.55rem] font-semibold uppercase tracking-[0.18em] text-gold/90">Fondatrice</p>
+          )}
+          <p className="font-display text-base font-semibold leading-tight text-offwhite">{doctor.name}</p>
+          <p className="mt-0.5 text-[0.58rem] font-semibold uppercase tracking-[0.1em] text-gold">
+            {doctor.specialtyShort || doctor.specialty}
           </p>
         </div>
-      </motion.div>
+      </div>
     </Link>
   )
 }
 
-// Mobile card: a soft rounded portrait (not masked like the desktop V). The
-// apex (Dr Amraoui) protrudes to preserve the V-depth feel in a flat strip.
-function MobileCard({ doctor, tier }) {
-  const protrude =
-    tier === 'apex' ? '-translate-y-2 scale-[1.06]' : tier === 'outer' ? 'scale-[0.94]' : ''
+// Mobile card: soft rounded portrait; the founder protrudes to keep her apex.
+function MobileCard({ doctor }) {
   return (
     <Link
       to={`/equipe/${doctor.slug}`}
       aria-label={`${doctor.name}, ${doctor.specialty}`}
-      className={`relative shrink-0 snap-start w-[130px] aspect-[2/3] overflow-hidden rounded-[14px] origin-bottom ${
-        doctor.isFounder ? 'ring-1 ring-gold/60' : ''
-      } ${protrude}`}
+      className={`relative shrink-0 snap-start w-[132px] aspect-[2/3] overflow-hidden rounded-[14px] origin-bottom ${
+        doctor.isFounder ? 'ring-1 ring-gold/60 -translate-y-2 scale-[1.05]' : ''
+      }`}
     >
       <div className="absolute inset-0">
         <DoctorPortrait
@@ -102,7 +70,7 @@ function MobileCard({ doctor, tier }) {
       <div className="absolute inset-x-0 bottom-0 px-2 pt-8 pb-2.5 text-center" style={SCRIM}>
         <p className="font-display font-semibold text-offwhite leading-tight text-[13px]">{doctor.name}</p>
         <p className="mt-0.5 font-semibold uppercase tracking-[0.1em] text-gold leading-tight text-[9px]">
-          {doctor.specialty}
+          {doctor.specialtyShort || doctor.specialty}
         </p>
       </div>
     </Link>
@@ -111,63 +79,46 @@ function MobileCard({ doctor, tier }) {
 
 export default function NotreConseil() {
   const [headRef, headVisible] = useReveal()
-  const [hovered, setHovered] = useState(null)
-  const reduce = useReducedMotion()
+  const [gridRef, gridVisible] = useReveal()
 
   return (
     <section className="bg-cream py-24 sm:py-32 overflow-hidden">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         {/* Heading */}
-        <div ref={headRef} className={`reveal ${headVisible ? 'is-visible' : ''} max-w-2xl mx-auto text-center`}>
-          <p className="eyebrow text-burgundy mb-4">Notre Conseil</p>
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-ink leading-tight">
-            Cinq spécialistes. Une mission.
+        <div ref={headRef} className={`reveal ${headVisible ? 'is-visible' : ''} mx-auto max-w-2xl text-center`}>
+          <p className="eyebrow text-burgundy">Notre Conseil</p>
+          <span className="mx-auto mt-3 block h-px w-12 bg-gold" aria-hidden="true" />
+          <h2 className="mt-5 font-display text-4xl sm:text-5xl font-semibold text-ink leading-tight">
+            Six médecins, une exigence commune
           </h2>
           <p className="mt-5 text-ink/75 leading-relaxed">
-            Le cabinet Cardio Check-up réunit cinq spécialistes complémentaires : cardiologie,
-            chirurgie cardiaque et vasculaire, médecine vasculaire et nutrition. Ensemble, ils
-            couvrent la santé cardiovasculaire dans sa globalité, du dépistage au suivi. Le Dr
-            Amraoui, Chairperson de l'EHRA 2026, coordonne le conseil.
+            Une équipe resserrée, réunie autour du Dr Amraoui, Chairperson de l'EHRA 2026, pour un
+            suivi cardiovasculaire attentif et personnalisé, du dépistage au traitement.
           </p>
         </div>
 
-        {/* Desktop V-formation */}
-        <div className="mt-16 hidden lg:flex items-end justify-center gap-5">
-          {V_ORDER.map((doctor, i) => {
-            const tier = TIERS[i]
-            return (
-              <motion.div
-                key={doctor.slug}
-                className="w-44"
-                initial={reduce ? false : { opacity: 0, y: 28 }}
-                whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.6, ease: 'easeOut', delay: DELAYS[tier] }}
-              >
-                <Portrait
-                  doctor={doctor}
-                  heightClass={HEIGHTS[tier]}
-                  hovered={hovered}
-                  setHovered={setHovered}
-                  reduce={reduce}
-                />
-              </motion.div>
-            )
-          })}
-        </div>
-
-        {/* Mobile horizontal scroll strip — V-rhythm preserved, no scrollbar.
-            5 cards overflow the viewport, so the last peeks to hint scroll. */}
-        <div className="mt-12 lg:hidden -mx-5">
-          <div className="flex items-end gap-3 overflow-x-auto no-scrollbar px-5 pt-4 pb-6 snap-x">
-            {V_ORDER.map((doctor, i) => (
-              <MobileCard key={doctor.slug} doctor={doctor} tier={TIERS[i]} />
+        <div ref={gridRef} className={`reveal ${gridVisible ? 'is-visible' : ''}`}>
+          {/* Desktop arc */}
+          <div className="mt-16 hidden lg:flex items-end justify-center gap-4">
+            {ARC.map((d, i) => (
+              <div key={d.slug} className="w-[156px]">
+                <Portrait doctor={d} heightClass={HEIGHTS[TIERS[i]]} />
+              </div>
             ))}
+          </div>
+
+          {/* Mobile horizontal strip */}
+          <div className="mt-12 lg:hidden -mx-5">
+            <div className="flex items-end gap-3 overflow-x-auto no-scrollbar px-5 pt-4 pb-6 snap-x">
+              {ARC.map((d) => (
+                <MobileCard key={d.slug} doctor={d} />
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Quiet CTA */}
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <Link
             to="/equipe"
             className="inline-flex items-center gap-1.5 text-sm font-semibold text-burgundy border-b border-burgundy/40 pb-0.5 hover:border-burgundy transition-colors"

@@ -30,6 +30,8 @@ export const NAV = [
   { label: 'Accueil', to: '/' },
   { label: 'Notre Équipe', to: '/equipe' },
   { label: 'Nos Examens', to: '/#examens', dropdown: 'exams' },
+  { label: 'Consultations', to: '/consultations' },
+  { label: 'Pathologies', to: '/pathologies' },
   { label: 'FAQ', to: '/#faq' },
   { label: 'Actualités', to: '/actualites' },
 ]
@@ -64,8 +66,10 @@ export const STATS = [
 export const DOCTORS = [
   {
     slug: 'sana-amraoui',
+    order: 1,
     name: 'Dr Sana Amraoui',
     specialty: 'Cardiologue rythmologue interventionnelle',
+    specialtyShort: 'Cardiologue rythmologue', // compact label for the homepage team card
     credibility: "Responsable d'unité · Service de rythmologie",
     isFounder: true,
     badge: 'Chairperson EHRA 2026',
@@ -76,6 +80,10 @@ export const DOCTORS = [
       'Cardiologue rythmologue interventionnelle, le Dr Amraoui coordonne le conseil Cardio Check-up et dirige une unité de rythmologie.',
     bio:
       "Diplômée de la faculté de médecine de Bordeaux et de la London School of Economics, ancienne cheffe de clinique du CHU de Bordeaux, le Dr Amraoui est responsable d'unité au service de rythmologie de l'Hôpital Américain de Paris. Elle a complété sa formation par des fellowships à St Thomas' Hospital (Londres) et à Columbia (New York). Elle accompagne ses patients dans le dépistage, le diagnostic et le suivi des maladies cardiovasculaires et des troubles du rythme cardiaque.",
+    highlightLabel: 'Rythmologie interventionnelle',
+    // TODO: validation médicale — affirmations à valider avant publication (brief §12)
+    highlight:
+      "Le Dr Amraoui est précurseur des ablations de fibrillation atriale en hospitalisation ambulatoire en France, lorsque les paramètres cliniques le permettent, ainsi que de l'ablation par électroporation 3D, technique innovante de pointe dans le traitement de cette arythmie.",
     timeline: [
       { year: '2011', text: "DIU d'échocardiographie, Université Bordeaux Segalen" },
       { year: '2012', text: 'DES de cardiologie & maladies vasculaires · Doctorat en sciences médicales' },
@@ -89,6 +97,7 @@ export const DOCTORS = [
     // Real doctor (replaced the demo "Dr Thomas Martin"). Cardiac surgeon — NOT
     // mapped to any ambulatory exam page; his procedures show as static tags.
     slug: 'fabien-doguet',
+    order: 2,
     name: 'Pr. Fabien Doguet',
     specialty: 'Chirurgien Cardiaque',
     credibility: 'Chirurgien cardiaque · Hôpital Privé Jacques Cartier, Massy',
@@ -124,6 +133,7 @@ export const DOCTORS = [
   },
   {
     slug: 'leslie-berdah-sadaoui',
+    order: 3,
     name: 'Dr Leslie Berdah Sadaoui',
     specialty: 'Médecin généraliste · Nutrition',
     credibility: 'Médecine générale & nutrition · Ancienne Cheffe de clinique (AP-HP, Cochin Port-Royal)',
@@ -152,7 +162,38 @@ export const DOCTORS = [
     stats: null,
   },
   {
+    // Placeholder profile — only the name, role and exam mapping were supplied by
+    // the practice (brief §9). TODO: full name, bio, diplomas, timeline and photo
+    // are pending and must be completed before go-live.
+    slug: 'sofiane',
+    order: 4,
+    name: 'Dr Sofiane',
+    specialty: 'Cardiologue',
+    credibility: 'Cardiologie · Consultation, ECG et échographie cardiaque',
+    isFounder: false,
+    demo: false,
+    photo: null,
+    photoPlaceholder: true, // portrait pending from the client
+    doctolib: CONTACT.doctolib,
+    badge: 'Cardiologie générale',
+    bioShort:
+      'Cardiologue, le Dr Sofiane assure les consultations de cardiologie, la prise en charge des facteurs de risque et la réalisation des ECG et échographies cardiaques.',
+    bio:
+      "Cardiologue au sein de Cardio Check-up, le Dr Sofiane prend en charge les consultations de cardiologie, le dépistage et le suivi des facteurs de risque cardiovasculaire (notamment l'hypertension artérielle) et l'exploration de la douleur thoracique, et réalise les électrocardiogrammes et les échographies cardiaques. (Biographie complète à compléter avant la mise en ligne.)",
+    timeline: [],
+    procedures: [
+      'Consultation de cardiologie',
+      'Douleur thoracique',
+      'Facteurs de risque cardiovasculaires',
+      'Hypertension artérielle',
+      'Électrocardiogramme',
+      'Échographie cardiaque',
+    ],
+    stats: null,
+  },
+  {
     slug: 'adam-taha',
+    order: 6,
     name: 'Dr Adam Taha',
     specialty: 'Chirurgien vasculaire et endovasculaire',
     credibility: 'Chirurgie vasculaire & endovasculaire · Ancien Interne des Hôpitaux de Paris',
@@ -192,6 +233,7 @@ export const DOCTORS = [
   },
   {
     slug: 'rabiaa-hakem',
+    order: 5,
     name: 'Dr Rabiaa Hakem',
     specialty: 'Médecin vasculaire (Angiologue)',
     credibility: 'Médecine vasculaire & écho-Doppler · Louis-Mourier (AP-HP), CH Victor Dupouy',
@@ -243,6 +285,8 @@ export const SERVICES = [
     name: 'Bilan cardiovasculaire',
     indef: 'un', // indefinite article for "Prendre rendez-vous pour …"
     category: 'Consultation & dépistage',
+    group: 'consultation', // listed under /consultations, not in the exams grid
+
     headline: 'Un bilan complet de la santé de votre cœur, en un rendez-vous',
     reassurance: 'Sans préparation · ECG et échographie sur place · Résultats commentés le jour même',
     why: 'Pour faire le point sur la santé de votre cœur.',
@@ -291,10 +335,99 @@ export const SERVICES = [
     placeholder: false,
   },
   {
+    id: 'ecg',
+    name: 'Électrocardiogramme (ECG)',
+    indef: 'un',
+    category: 'Cœur · diagnostic',
+    group: 'coeur',
+    headline: "L'examen de référence du rythme et de l'activité électrique du cœur",
+    reassurance: 'Totalement indolore · Quelques minutes · Réalisé en consultation',
+    why: 'Bilan de routine, palpitations, douleurs thoraciques ou essoufflement.',
+    symptoms: 'Palpitations, douleurs thoraciques, essoufflement, bilan systématique.',
+    desc: "Enregistrement de l'activité électrique du cœur grâce à de petites électrodes posées sur la peau.",
+    whatIs: [
+      "L'électrocardiogramme enregistre l'activité électrique de votre cœur grâce à de petites électrodes posées sur la peau, au niveau de la poitrine, des bras et des jambes. Il permet d'analyser le rythme cardiaque, de détecter d'éventuels troubles de la conduction électrique ou des signes pouvant évoquer une atteinte du muscle cardiaque.",
+      "C'est un examen de référence, réalisé systématiquement en consultation de cardiologie, qu'il s'agisse d'un bilan de routine ou de l'exploration de symptômes comme les palpitations, les douleurs thoraciques ou l'essoufflement. L'examen est totalement indolore et ne dure que quelques minutes : vous restez allongé(e), détendu(e), pendant que le tracé s'enregistre.",
+    ],
+    videoId: 'DEB-WcBdBR8',
+    symptomPills: ['Palpitations', 'Douleurs thoraciques', 'Essoufflement', 'Bilan de routine'],
+    symptomContext:
+      "L'ECG est réalisé aussi bien dans le cadre d'un bilan systématique que pour explorer des symptômes comme des palpitations, une douleur dans la poitrine ou un essoufflement. C'est souvent le tout premier examen du cœur, simple et immédiat.",
+    steps: [
+      { title: 'Installation', text: "Vous êtes allongé(e) et détendu(e) ; l'assistante médicale pose quelques électrodes sur la poitrine, les bras et les jambes." },
+      { title: 'Enregistrement', text: "Le tracé de l'activité électrique du cœur s'enregistre en quelques secondes, sans aucune gêne." },
+      { title: 'Lecture', text: "Le cardiologue analyse le tracé à la recherche d'une anomalie du rythme ou de la conduction." },
+      { title: 'Résultats', text: 'Les résultats vous sont expliqués sur place, le jour même.' },
+    ],
+    preparation: [
+      'Aucune préparation particulière : vous pouvez manger et prendre vos traitements normalement.',
+      'Prévoyez un haut facile à retirer pour la pose des électrodes.',
+      "Évitez crèmes et huiles sur la peau le jour de l'examen, pour une meilleure adhérence.",
+      'Apportez vos précédents ECG si vous en avez.',
+    ],
+    prevention: [
+      { title: 'Bougez régulièrement', text: "Trente minutes d'activité modérée par jour protègent durablement votre cœur." },
+      { title: 'Surveillez vos facteurs de risque', text: 'Tension, cholestérol et glycémie méritent un contrôle régulier.' },
+      { title: 'Limitez les excitants', text: 'Café, tabac et alcool en excès peuvent perturber le rythme cardiaque.' },
+    ],
+    faq: [
+      { q: "L'ECG est-il douloureux ?", a: "Non, l'examen est totalement indolore. On pose simplement des électrodes sur la peau ; rien n'est injecté et vous ne ressentez rien." },
+      { q: 'Combien de temps dure un ECG ?', a: "L'enregistrement ne dure que quelques secondes à quelques minutes. C'est l'un des examens les plus rapides de la cardiologie." },
+      { q: 'Faut-il une préparation ?', a: "Aucune. Vous pouvez manger, boire et prendre vos traitements habituels avant l'examen." },
+    ],
+    doctorSlugs: ['sana-amraoui', 'sofiane'],
+    placeholder: false,
+  },
+  {
+    id: 'echographie-cardiaque',
+    name: 'Échographie cardiaque (ETT)',
+    indef: 'une',
+    category: 'Imagerie cardiaque',
+    group: 'coeur',
+    headline: 'Visualiser votre cœur en mouvement, sans aucune irradiation',
+    reassurance: 'Indolore · Sans irradiation · 15 à 30 minutes',
+    why: 'Évaluer la structure et le fonctionnement du cœur et des valves.',
+    symptoms: "Souffle au cœur, essoufflement, suivi d'une valvulopathie ou d'une insuffisance cardiaque.",
+    desc: "Examen d'imagerie par ultrasons qui visualise les cavités, le muscle cardiaque et les valves.",
+    whatIs: [
+      "L'échographie cardiaque trans-thoracique est un examen d'imagerie qui permet de visualiser le cœur en mouvement grâce aux ultrasons, sans aucune irradiation. Une sonde est posée sur la poitrine, le plus souvent au niveau du thorax gauche, pour observer la taille et le fonctionnement des cavités cardiaques, la qualité de la contraction du muscle cardiaque, ainsi que l'état des valves.",
+      "Cet examen permet de dépister ou de suivre de nombreuses pathologies cardiaques : valvulopathies, insuffisance cardiaque, anomalies congénitales. Il est totalement indolore et dure généralement entre 15 et 30 minutes ; vous serez simplement allongé(e) sur le côté gauche pendant la réalisation de l'examen.",
+    ],
+    videoId: 'OWkstGh5i0U',
+    symptomPills: ['Souffle cardiaque', 'Essoufflement', 'Valvulopathie', 'Insuffisance cardiaque'],
+    symptomContext:
+      "L'échographie cardiaque est demandée pour explorer un souffle, un essoufflement, ou pour suivre une valvulopathie ou une insuffisance cardiaque connue. Elle donne une image précise du fonctionnement du cœur.",
+    steps: [
+      { title: 'Installation', text: 'Vous êtes allongé(e) sur le côté gauche, le thorax dégagé.' },
+      { title: 'Échographie', text: 'Le cardiologue déplace une sonde sur la poitrine pour visualiser le cœur en mouvement.' },
+      { title: 'Analyse', text: "La taille des cavités, la contraction du muscle et l'état des valves sont évalués en direct." },
+      { title: 'Résultats', text: 'Le médecin vous explique les résultats le jour même.' },
+    ],
+    preparation: [
+      'Aucun jeûne nécessaire : vous pouvez manger normalement.',
+      "Prenez vos traitements habituels comme d'habitude.",
+      'Prévoyez une tenue facile à retirer pour le haut du corps.',
+      'Apportez vos précédentes échographies cardiaques si vous en avez.',
+    ],
+    prevention: [
+      { title: 'Mangez équilibré', text: 'Privilégiez fruits, légumes et bonnes graisses ; limitez le sel.' },
+      { title: 'Bougez régulièrement', text: "L'activité physique régulière renforce le muscle cardiaque." },
+      { title: 'Suivez vos contrôles', text: "Un suivi régulier permet de surveiller l'évolution d'une valvulopathie." },
+    ],
+    faq: [
+      { q: "L'échographie cardiaque est-elle dangereuse ?", a: "Non. Elle utilise des ultrasons, sans aucune irradiation ni injection. L'examen est parfaitement indolore." },
+      { q: "Combien de temps dure l'examen ?", a: 'Généralement entre 15 et 30 minutes.' },
+      { q: 'Faut-il être à jeun ?', a: "Non, aucune préparation particulière n'est nécessaire." },
+    ],
+    doctorSlugs: ['sana-amraoui', 'sofiane'],
+    placeholder: false,
+  },
+  {
     id: 'holter-ecg',
-    name: 'Holter ECG',
+    name: 'Holter rythmique',
     indef: 'un',
     category: 'Enregistrement ambulatoire',
+    group: 'ambulatoire',
     headline: 'Un enregistreur porté 24h qui veille sur votre rythme cardiaque',
     reassurance: 'Examen indolore · Pose en 10 minutes · Résultats commentés par votre médecin',
     why: 'Palpitations, malaises ou troubles du rythme suspectés.',
@@ -348,9 +481,10 @@ export const SERVICES = [
   },
   {
     id: 'mapa',
-    name: 'MAPA (Holter tensionnel)',
+    name: 'Holter tensionnel (MAPA)',
     indef: 'un',
     category: 'Mesure ambulatoire de la pression',
+    group: 'ambulatoire',
     headline: 'Surveiller votre tension artérielle sur 24 heures, chez vous',
     reassurance: 'Indolore · Mesures automatiques · Vous gardez vos activités',
     why: "Hyper- ou hypotension, contrôle d'un traitement.",
@@ -358,7 +492,7 @@ export const SERVICES = [
     desc: 'Enregistrement de la tension artérielle durant 24 h : mesure toutes les 20 min le jour et toutes les heures la nuit.',
     whatIs: [
       "La MAPA, ou Holter tensionnel, mesure automatiquement votre tension artérielle pendant 24 heures, grâce à un brassard relié à un petit boîtier que vous gardez sur vous.",
-      "En suivant votre tension dans votre vie de tous les jours, elle donne une image bien plus fidèle qu'une seule mesure au cabinet et permet de vérifier qu'un traitement fonctionne bien.",
+      "En suivant votre tension dans votre vie de tous les jours, elle donne une image bien plus fidèle qu'une seule mesure au cabinet et permet de vérifier qu'un traitement fonctionne bien. Le cabinet dispose de quatre tailles de brassard, adaptées au périmètre du bras, pour une mesure fiable et confortable.",
     ],
     videoId: 'NiMYmKIRHWo', // MAPA — explainer video
     symptomPills: ['Hypertension', 'Hypotension', 'Vertiges', 'Suivi de traitement'],
@@ -400,9 +534,10 @@ export const SERVICES = [
   },
   {
     id: 'polygraphie',
-    name: 'Polygraphie nocturne',
+    name: 'Polygraphie ventilatoire nocturne',
     indef: 'une',
     category: 'Dépistage du sommeil à domicile',
+    group: 'ambulatoire',
     headline: 'Dépister les apnées du sommeil depuis votre domicile',
     reassurance: 'À domicile · Appareil léger · Une seule nuit',
     why: 'Ronflements, fatigue, apnées du sommeil suspectées.',
@@ -451,10 +586,224 @@ export const SERVICES = [
     placeholder: false,
   },
   {
+    // TODO: validation médicale — la cliente a signalé que le texte de
+    // l'épreuve d'effort était à reprendre/clarifier (note interne, brief §4.12).
+    id: 'epreuve-effort',
+    name: "Épreuve d'effort",
+    indef: 'une',
+    category: 'Cœur · effort',
+    group: 'coeur',
+    headline: "Évaluer votre cœur à l'effort, sous surveillance médicale",
+    reassurance: 'Effort progressif · Surveillance continue · Environ 30 minutes',
+    why: "Dépister une insuffisance coronarienne ou un trouble du rythme à l'effort.",
+    symptoms: "Douleur thoracique à l'effort, essoufflement, bilan avant reprise du sport.",
+    desc: "Effort physique progressif et contrôlé sur vélo ou tapis, avec surveillance de l'ECG et de la tension.",
+    whatIs: [
+      "L'épreuve d'effort évalue le comportement de votre cœur pendant un effort physique progressif et contrôlé, réalisé sur un vélo ou un tapis de marche, sous surveillance médicale continue. Votre ECG, votre tension artérielle et vos symptômes sont enregistrés tout au long de l'effort, augmenté par paliers jusqu'à un niveau adapté à vos capacités.",
+      "Cet examen permet de dépister une insuffisance coronarienne (un rétrécissement des artères du cœur), d'évaluer la tolérance à l'effort, de rechercher des troubles du rythme déclenchés par l'effort, ou de contrôler l'efficacité d'un traitement. Il n'est pas douloureux, bien qu'il demande un effort physique réel ; il dure environ 30 minutes au total, préparation et récupération comprises.",
+    ],
+    videoId: '',
+    symptomPills: ["Douleur à l'effort", 'Essoufflement', 'Avant le sport', 'Suivi coronarien'],
+    symptomContext:
+      "L'épreuve d'effort est indiquée pour explorer une douleur ou un essoufflement survenant à l'effort, dépister une atteinte des artères coronaires, ou évaluer le cœur avant une reprise sportive. (Texte à faire relire avant publication.)",
+    steps: [
+      { title: 'Préparation', text: "Des électrodes et un brassard de tension sont installés ; le médecin vérifie votre état avant de commencer." },
+      { title: 'Effort progressif', text: "Vous pédalez ou marchez, l'effort augmentant par paliers, sous surveillance continue." },
+      { title: 'Surveillance', text: "ECG, tension et symptômes sont suivis en permanence par l'équipe médicale." },
+      { title: 'Récupération & résultats', text: 'Après une phase de récupération, le médecin vous explique les résultats.' },
+    ],
+    preparation: [
+      'Prévoyez une tenue et des chaussures de sport confortables.',
+      "Évitez un repas lourd dans les deux heures précédant l'examen.",
+      "Ne modifiez aucun traitement sans avis : demandez à votre médecin si une adaptation est nécessaire.",
+      'Apportez vos précédents examens cardiologiques.',
+    ],
+    prevention: [
+      { title: 'Reprenez progressivement', text: "Augmentez l'intensité du sport par étapes, sans brûler les paliers." },
+      { title: 'Échauffez-vous', text: 'Un bon échauffement protège le cœur et les muscles.' },
+      { title: 'Écoutez les signaux', text: "Douleur, essoufflement anormal ou malaise à l'effort imposent l'arrêt et un avis médical." },
+    ],
+    faq: [
+      { q: "L'épreuve d'effort est-elle risquée ?", a: "Elle se déroule sous surveillance médicale continue, avec une équipe prête à intervenir. L'effort est adapté à vos capacités et interrompu au moindre signe anormal." },
+      { q: 'Combien de temps dure-t-elle ?', a: 'Environ 30 minutes au total, préparation et récupération comprises.' },
+      { q: 'Vais-je devoir beaucoup forcer ?', a: "L'effort est progressif et adapté à votre condition ; il augmente par paliers jusqu'à un niveau raisonnable pour vous." },
+    ],
+    doctorSlugs: ['sana-amraoui'],
+    placeholder: false,
+  },
+  {
+    // Vascular Doppler "hub": one page, six sub-explorations (see ExamHub.jsx).
+    // Performed by the practice's médecin vasculaire (Dr Hakem).
+    id: 'doppler-vasculaire',
+    name: 'Échographie Doppler vasculaire',
+    indef: 'une',
+    category: 'Examen vasculaire',
+    group: 'vasculaire',
+    headline: 'Échographie Doppler vasculaire',
+    reassurance:
+      "Un examen indolore et précis pour explorer la circulation du sang (artères et veines) et vous expliquer chaque résultat avec clarté, le jour même.",
+    introLead:
+      "Six explorations, une seule prise de rendez-vous. Repérez en un coup d'œil celle qui vous concerne : chaque carte mène directement à sa fiche détaillée.",
+    why: 'Explorer les artères et les veines : cou, jambes, bras, reins et aorte.',
+    symptoms: "Douleurs à la marche, jambes lourdes, hypertension, dépistage d'anévrisme.",
+    desc: 'Six explorations Doppler en un seul rendez-vous, pour les artères et les veines, par le médecin vasculaire.',
+    videoId: '',
+    doctorNote:
+      "Chaque examen est réalisé personnellement par le Dr Hakem, de l'acquisition des images à l'interprétation. Le compte-rendu vous est remis et expliqué le jour même, en consultation.",
+    // Animated anatomy figure: base image + per-territory highlight points
+    // (x/y as % of the image). Tuned to public/images/anatomy-vascular.jpg.
+    anatomy: {
+      image: '/images/anatomy-vascular.jpg',
+      points: {
+        tsa: [{ x: 50, y: 15 }],
+        'ms-arteres': [{ x: 27, y: 43 }, { x: 73, y: 43 }],
+        renales: [{ x: 43, y: 40 }, { x: 57, y: 40 }],
+        aorte: [{ x: 50, y: 45 }],
+        'mi-arteres': [{ x: 47, y: 61 }, { x: 54, y: 61 }],
+        veineux: [{ x: 41, y: 79 }, { x: 59, y: 79 }],
+      },
+    },
+    subExams: [
+      {
+        key: 'tsa',
+        icon: 'tsa',
+        region: 'Cou & cerveau',
+        title: 'Doppler des troncs supra-aortiques (TSA)',
+        cardTitle: 'Troncs supra-aortiques',
+        cardTeaser: "Carotides, vertébrales · risque d'AVC",
+        meta: ['Environ 15 min', 'Allongé(e), tête légèrement tournée', 'Aucune préparation'],
+        body: [
+          "Cet examen explore les artères carotides et vertébrales, qui acheminent le sang vers le cerveau. Il permet de repérer d'éventuelles plaques d'athérome ou un rétrécissement (sténose) de ces vaisseaux.",
+          "Totalement indolore, il consiste à passer une sonde le long du cou. Les résultats aident à évaluer le risque d'accident vasculaire cérébral et à adapter, si besoin, votre traitement.",
+        ],
+        concernedIf: [
+          'Facteurs de risque cardiovasculaire (tension, cholestérol, tabac)',
+          "Antécédent familial d'AVC",
+          'Souffle entendu au stéthoscope',
+          'Bilan de routine après 50 ans',
+        ],
+      },
+      {
+        key: 'mi-arteres',
+        icon: 'jambes',
+        region: 'Jambes · artères',
+        title: 'Doppler des artères des membres inférieurs',
+        cardTitle: 'Artères des membres inférieurs',
+        cardTeaser: 'Artérite, douleur à la marche',
+        meta: ['20 à 30 min', 'Allongé(e) sur le dos', 'Aucune préparation'],
+        body: [
+          "Cet examen suit le trajet des artères des jambes, de l'aine jusqu'aux pieds, afin de détecter un rétrécissement ou une obstruction liés à l'athérosclérose.",
+          "Il est particulièrement recommandé en cas de douleur à la marche, de diabète ou de tabagisme, pour évaluer la sévérité de l'atteinte et orienter la prise en charge.",
+        ],
+        concernedIf: [
+          'Douleur au mollet à la marche (claudication)',
+          'Diabète',
+          'Tabagisme',
+          'Pied froid ou plaie qui cicatrise mal',
+        ],
+      },
+      {
+        key: 'renales',
+        icon: 'reins',
+        region: 'Reins',
+        title: 'Doppler des artères rénales',
+        cardTitle: 'Artères rénales',
+        cardTeaser: 'Tension difficile à équilibrer',
+        meta: ['Environ 15 min', 'Allongé(e) sur le dos', 'Idéalement à jeun, sans tabac avant'],
+        body: [
+          "Cet examen étudie les artères qui alimentent les reins, à la recherche d'un rétrécissement pouvant expliquer une tension artérielle difficile à équilibrer ou une baisse de la fonction rénale.",
+          "Il se déroule allongé(e), sonde posée sur l'abdomen. Pour une image optimale, il est conseillé de venir à jeun et sans avoir fumé dans les heures précédentes.",
+        ],
+        concernedIf: [
+          'Hypertension résistante aux traitements',
+          'Dégradation de la fonction rénale',
+          'Bilan avant certains traitements',
+        ],
+      },
+      {
+        key: 'aorte',
+        icon: 'aorte',
+        region: 'Abdomen',
+        title: "Doppler de l'aorte abdominale",
+        cardTitle: 'Aorte abdominale',
+        cardTeaser: "Dépistage d'anévrisme",
+        meta: ['Environ 15 min', 'Allongé(e) sur le dos', 'Idéalement à jeun'],
+        body: [
+          "L'aorte abdominale est la plus grande artère de l'organisme. Cet examen mesure son diamètre afin de dépister un anévrisme, une dilatation qui doit être surveillée.",
+          "Il est particulièrement recommandé après 60 ans, chez les fumeurs ou en cas d'antécédent familial. Simple et rapide, il se fait idéalement à jeun pour une meilleure visualisation.",
+        ],
+        concernedIf: [
+          'Plus de 60 ans',
+          'Tabagisme',
+          "Antécédent familial d'anévrisme",
+          'Dépistage de routine',
+        ],
+      },
+      {
+        key: 'ms-arteres',
+        icon: 'bras',
+        region: 'Bras & mains',
+        title: 'Doppler des artères des membres supérieurs',
+        cardTitle: 'Artères des membres supérieurs',
+        cardTeaser: 'Douleur, engourdissement',
+        meta: ['15 à 20 min', 'Assis(e) ou allongé(e)', 'Aucune préparation'],
+        body: [
+          "Cet examen explore les artères des bras, de l'épaule jusqu'à la main, pour détecter une atteinte artérielle ou un syndrome du défilé thoracique pouvant comprimer les vaisseaux.",
+          "Indolore, il se réalise assis(e) ou allongé(e), parfois bras en mouvement pour reproduire la gêne ressentie. Aucune préparation particulière n'est nécessaire.",
+        ],
+        concernedIf: [
+          'Main froide ou engourdie',
+          "Douleur du bras à l'effort",
+          'Fourmillements liés à la position du bras',
+        ],
+      },
+      {
+        key: 'veineux',
+        icon: 'veines',
+        region: 'Jambes · veines',
+        title: 'Doppler veineux des membres inférieurs',
+        cardTitle: 'Veines des membres inférieurs',
+        cardTeaser: 'Phlébite, varices',
+        meta: ['20 à 30 min', 'Debout puis allongé(e)', 'Aucune préparation'],
+        body: [
+          "Cet examen explore les veines des jambes, de l'aine au pied, pour rechercher une phlébite (thrombose veineuse) ou une insuffisance veineuse à l'origine de varices.",
+          "Il commence debout, puis se poursuit allongé(e), pour étudier la circulation dans des conditions différentes. Il peut aussi s'inscrire dans le bilan d'un malaise ou d'une chute de tension en position debout.",
+        ],
+        concernedIf: [
+          'Jambes lourdes ou gonflées',
+          'Varices',
+          'Suspicion de phlébite',
+          'Malaises au lever',
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: 'Dois-je être à jeun ?',
+        a: "Cela dépend du territoire exploré : les Doppler des artères rénales et de l'aorte abdominale se font idéalement à jeun, pour limiter les gaz digestifs. Les autres explorations ne nécessitent aucune préparation.",
+      },
+      {
+        q: "L'examen est-il douloureux ?",
+        a: "Non, l'échographie Doppler est totalement indolore et sans irradiation. Une sonde est simplement déplacée sur la peau, avec un peu de gel.",
+      },
+      {
+        q: "Ai-je besoin d'une ordonnance ?",
+        a: 'Une prescription de votre médecin est généralement nécessaire. En cas de doute, notre secrétariat vous renseigne.',
+      },
+      {
+        q: 'Quand aurai-je les résultats ?',
+        a: 'Les résultats vous sont expliqués par le médecin le jour même de votre examen.',
+      },
+    ],
+    doctorSlugs: ['rabiaa-hakem'],
+    placeholder: false,
+  },
+  {
     id: 'rythmologie',
     name: 'Rythmologie interventionnelle',
     indef: 'une',
     category: 'Rythmologie interventionnelle',
+    group: 'vasculaire',
     headline: 'Traiter les troubles du rythme cardiaque complexes',
     reassurance: 'Prise en charge spécialisée en milieu hospitalier',
     where: 'En milieu hospitalier',
@@ -489,23 +838,73 @@ export const SERVICES = [
   },
 ]
 
+// Homepage exam categories (display order). Each exam carries a `group` key
+// matching one of these; Services.jsx renders one block per group.
+export const EXAM_GROUPS = [
+  { key: 'coeur', label: 'Cœur', icon: 'heart', desc: "Explorer le fonctionnement du cœur, du repos à l'effort." },
+  { key: 'ambulatoire', label: 'Ambulatoire', icon: 'clock', desc: 'Mesurer sur la durée, en conditions de vie réelle.' },
+  { key: 'vasculaire', label: 'Vasculaire & spécialisé', icon: 'vessel', desc: 'Des explorations ciblées pour des besoins spécifiques.' },
+]
+
+// §8 — Cardiovascular risk factors (shown via <FacteursRisque/>, e.g. on the
+// Hypertension pathology page). Screening + target from the brief.
+// TODO: validation médicale — objectifs chiffrés à valider avant publication (brief §12)
+export const RISK_FACTORS = [
+  { key: 'hypertension', name: 'Hypertension artérielle', icon: 'pulse', screening: "Mesure répétée de la tension, complétée si besoin d'un holter tensionnel de 24 h.", target: '< 135/85 mmHg' },
+  { key: 'diabete', name: 'Diabète', icon: 'drop', screening: 'Glycémie à jeun et hémoglobine glyquée (HbA1c).', target: 'HbA1c < 7 %' },
+  { key: 'cholesterol', name: 'Cholestérol (dyslipidémie)', icon: 'flask', screening: 'Bilan lipidique : LDL, HDL et triglycérides.', target: 'LDL selon le risque' },
+  { key: 'tabac', name: 'Tabac', icon: 'smoke', screening: 'Interrogatoire, avec quantification en paquets-années.', target: 'Arrêt complet' },
+  { key: 'surpoids', name: 'Surpoids', icon: 'scale', screening: 'Indice de masse corporelle (IMC) et tour de taille.', target: 'IMC < 25 · tour < 94/80 cm' },
+  { key: 'sedentarite', name: 'Sédentarité', icon: 'run', screening: "Évaluation du niveau d'activité physique habituel.", target: '≥ 150 min / semaine' },
+  { key: 'antecedents', name: 'Antécédents familiaux', icon: 'family', screening: 'Interrogatoire : événement cardiovasculaire précoce chez un parent proche.', target: 'Dépistage plus précoce', label: 'Repère' },
+]
+
+// §5 — Consultations & motifs de consultation. Listed on /consultations, grouped
+// by domain. Copy is shortened from the brief (§5). Each books via the modal.
+export const CONSULTATION_GROUPS = [
+  { key: 'cardiologie', label: 'Cardiologie', icon: 'heart', desc: "Le suivi cardiologique courant, du contrôle de routine à l'exploration du rythme." },
+  { key: 'bilans', label: 'Bilans & motifs', icon: 'doc', desc: "Une consultation ciblée, organisée autour d'un symptôme ou d'un diagnostic déjà identifié." },
+  { key: 'chirurgie', label: 'Chirurgie', icon: 'scalpel', desc: "Une consultation avant ou après une intervention, en lien avec l'équipe chirurgicale." },
+  { key: 'nutrition', label: 'Nutrition & prévention', icon: 'leaf', desc: "Un accompagnement pour agir sur l'hygiène de vie et les facteurs de risque modifiables." },
+]
+
+export const CONSULTATIONS = [
+  { id: 'consultation-cardiologie', group: 'cardiologie', name: 'Consultation de cardiologie', teaser: "Un examen clinique complet pour faire le point sur votre cœur, vos antécédents et vos facteurs de risque." },
+  { id: 'consultation-rythmologie', group: 'cardiologie', name: 'Consultation de rythmologie', teaser: "Dédiée aux troubles du rythme cardiaque : palpitations, fibrillation atriale, ou suivi d'un traitement." },
+  { id: 'bilan-cardiovasculaire', group: 'cardiologie', name: 'Bilan cardiovasculaire', teaser: "Un point complet sur la santé de votre cœur en un rendez-vous : consultation, ECG et échographie cardiaque.", detailTo: '/examens/bilan' },
+  { id: 'douleur-thoracique', group: 'bilans', name: 'Bilan de douleur thoracique', teaser: "Une évaluation en cas de douleur dans la poitrine, pour en identifier l'origine et écarter une cause cardiaque." },
+  { id: 'dyspnee', group: 'bilans', name: "Bilan d'essoufflement (dyspnée)", teaser: "Pour explorer un essoufflement inhabituel, à l'effort ou au repos, et en comprendre la cause." },
+  { id: 'valvulopathie', group: 'bilans', name: 'Bilan de valvulopathie', teaser: "Le suivi d'une atteinte des valves cardiaques, connue ou suspectée, avec adaptation du traitement si besoin." },
+  { id: 'insuffisance-cardiaque', group: 'bilans', name: "Suivi d'insuffisance cardiaque", teaser: "Un accompagnement régulier pour ajuster le traitement et suivre une insuffisance cardiaque connue." },
+  { id: 'chirurgie-cardiaque', group: 'chirurgie', name: 'Consultation de chirurgie cardiaque', teaser: "Évaluer l'indication d'une intervention sur le cœur : chirurgie valvulaire, pontage, chirurgie de l'aorte." },
+  { id: 'chirurgie-vasculaire', group: 'chirurgie', name: 'Consultation de chirurgie vasculaire', teaser: "Prise en charge des artères et des veines, par techniques mini-invasives ou chirurgie conventionnelle." },
+  { id: 'bilan-nutritionnel', group: 'nutrition', name: 'Bilan nutritionnel', teaser: "Un point sur vos habitudes alimentaires et un rééquilibrage personnalisé, adapté à votre profil cardiovasculaire." },
+  { id: 'vitaminotherapie', group: 'nutrition', name: 'Vitaminothérapie', teaser: "Supplémentation en vitamines et oligo-éléments, prescrite après une carence avérée par bilan biologique." },
+]
+
 // §4.5 — Global FAQ (homepage). Distinct from per-exam FAQ above.
+// Homepage FAQ: kept short and broad on purpose — the most common questions a
+// patient asks before booking. Exam-specific questions live on each exam page.
 export const FAQ = [
   {
-    q: "Qu'est-ce qu'un Holter ECG ?",
-    a: "Le Holter ECG est un enregistreur de l'électrocardiogramme porté de 24 h jusqu'à 2 semaines. Il met en évidence un trouble du rythme cardiaque et peut servir à contrôler l'efficacité d'un traitement. L'examen est indolore et n'entrave pas vos activités quotidiennes.",
+    q: 'Vos examens sont-ils douloureux ?',
+    a: "Non. L'ECG, l'échographie cardiaque, les Holters, le Doppler et la polygraphie sont indolores et sans irradiation. Seule l'épreuve d'effort demande un effort physique réel, réalisé sous surveillance médicale continue.",
   },
   {
-    q: "Puis-je me doucher avec l'appareil ?",
-    a: "Non. La douche est interdite avec l'appareil, qui n'est pas étanche. Il ne faut pas non plus l'arrêter pendant la durée de l'enregistrement.",
+    q: 'Faut-il être à jeun ou prévoir une préparation ?',
+    a: "La plupart de nos examens ne nécessitent aucune préparation. Seuls le Doppler des artères rénales et de l'aorte abdominale se font idéalement à jeun. Les consignes vous sont précisées lors de la prise de rendez-vous.",
   },
   {
-    q: "Qu'est-ce qu'un MAPA (holter tensionnel) ?",
-    a: "Le MAPA est un appareil d'enregistrement de la tension artérielle durant 24 h. Il contrôle les variations de la tension (hypo- ou hypertension) tout au long de la journée et peut vérifier l'efficacité d'un traitement. La mesure se fait automatiquement toutes les 20 minutes le jour et toutes les heures la nuit.",
+    q: 'Quand vais-je recevoir mes résultats ?',
+    a: 'Pour les examens réalisés au cabinet, vos résultats vous sont expliqués par le médecin le jour même de votre rendez-vous.',
   },
   {
-    q: "Qu'est-ce que la polygraphie nocturne ?",
-    a: "C'est un examen qui permet de diagnostiquer à domicile les troubles respiratoires du sommeil, comme les apnées. Un appareil léger, posé le soir, enregistre votre respiration pendant la nuit. Il peut aussi servir à contrôler l'efficacité d'un traitement par PPC.",
+    q: 'Faut-il une ordonnance pour prendre rendez-vous ?',
+    a: 'Une prescription de votre médecin est généralement nécessaire pour les examens. En cas de doute, notre secrétariat vous renseigne.',
+  },
+  {
+    q: "Que faire en cas d'urgence ?",
+    a: "En cas d'urgence vitale (douleur thoracique intense et prolongée, malaise avec perte de connaissance, essoufflement brutal), appelez immédiatement le 15 (SAMU) ou le 112.",
   },
 ]
 
@@ -545,7 +944,8 @@ export const LOCATIONS = [
 export const getDoctor = (slug) => DOCTORS.find((d) => d.slug === slug) || null
 export const getExam = (slug) => SERVICES.find((s) => s.id === slug) || null
 export const getFounder = () => DOCTORS.find((d) => d.isFounder) || DOCTORS[0]
-export const getPartners = () => DOCTORS.filter((d) => !d.isFounder)
+export const getPartners = () =>
+  DOCTORS.filter((d) => !d.isFounder).sort((a, b) => (a.order ?? 99) - (b.order ?? 99))
 
 // Doctors who perform a given exam (in DOCTORS display order).
 export const doctorsForExam = (examSlug) => {
@@ -589,7 +989,7 @@ export const POSTS = [
     author: 'sana-amraoui',
     date: '2026-06-04',
     readingMin: 5,
-    cover: '/images/consultation.jpg',
+    cover: '/images/news-holter.jpg',
     coverAlt: "Consultation de cardiologie au cabinet Cardio Check-up",
     excerpt:
       "Un petit boîtier qui enregistre votre cœur de 24 heures à 2 semaines. On vous explique simplement à quoi il sert, comment il se déroule et pourquoi votre cardiologue vous l'a prescrit.",
@@ -664,7 +1064,7 @@ export const POSTS = [
     author: 'sana-amraoui',
     date: '2026-05-21',
     readingMin: 6,
-    cover: '/images/hero-reception.jpg',
+    cover: '/images/news-signes.jpg',
     coverAlt: "Accueil du cabinet de cardiologie Cardio Check-up à Paris 17",
     excerpt:
       "Douleur dans la poitrine, essoufflement inhabituel, palpitations… Voici cinq signaux que votre cœur vous envoie et qu'il vaut mieux ne pas ignorer.",
@@ -722,7 +1122,7 @@ export const POSTS = [
     author: 'leslie-berdah-sadaoui',
     date: '2026-05-06',
     readingMin: 4,
-    cover: '/images/doctor-bw.jpg',
+    cover: '/images/news-preparation.jpg',
     coverAlt: "Cardiologue préparant un bilan cardiovasculaire",
     excerpt:
       "Faut-il être à jeun ? Quels documents apporter ? Comment s'habiller ? Tout ce qu'il faut savoir pour arriver serein le jour de votre bilan.",
@@ -783,7 +1183,7 @@ export const POSTS = [
     author: 'sana-amraoui',
     date: '2026-04-18',
     readingMin: 7,
-    cover: '/images/rythmo-tee.jpg',
+    cover: '/images/news-ablation.jpg',
     coverAlt: "Rythmologie interventionnelle, traitement des troubles du rythme",
     excerpt:
       "Une technique de référence pour traiter durablement certains troubles du rythme cardiaque, sans chirurgie à cœur ouvert. Explications en mots simples.",
@@ -850,7 +1250,7 @@ export const POSTS = [
     author: 'fabien-doguet',
     date: '2026-03-29',
     readingMin: 6,
-    cover: '/images/doguet.jpg',
+    cover: '/images/news-sport.jpg',
     coverAlt: "Pr Fabien Doguet, chirurgien cardiaque et marathonien",
     excerpt:
       "Reprendre ou intensifier le sport après 40 ans est l'une des meilleures décisions pour votre cœur, à condition de respecter quelques règles simples. Les conseils du Pr Doguet.",
@@ -931,3 +1331,107 @@ export const getRelatedPosts = (post, n = 3) => {
   )
   return [...sameCat, ...others].slice(0, n)
 }
+
+// ── Pathologies ───────────────────────────────────────────────────────────
+// Disease pages (brief §7). Same block schema as POSTS, but a separate set so
+// they are NOT mixed with the Actualités news feed; listed at /pathologies and
+// read at /pathologies/:slug (rendered by the shared Article template).
+// `showRiskFactors` + `riskHighlight` render the <FacteursRisque/> table.
+// Covers reuse existing imagery as placeholders (to refine before go-live).
+// Epidemiology figures and clinical claims are flagged for validation (§12).
+export const PATHOLOGIES = [
+  {
+    slug: 'fibrillation-atriale',
+    title: 'La fibrillation atriale',
+    category: 'Pathologie',
+    author: 'sana-amraoui',
+    date: '2026-06-20',
+    readingMin: 6,
+    cover: '/images/patho-fibrillation.jpg',
+    coverAlt: 'Rythmologie : prise en charge de la fibrillation atriale',
+    excerpt:
+      "Le trouble du rythme le plus fréquent chez l'adulte. Comprendre la fibrillation atriale, ses risques pour le cœur et le cerveau, et les traitements, dont l'ablation.",
+    body: [
+      { type: 'p', text: "La fibrillation atriale est le trouble du rythme cardiaque le plus fréquent chez l'adulte. Elle se caractérise par une activité électrique anarchique des oreillettes, qui perdent leur contraction coordonnée et entraînent un rythme cardiaque irrégulier, souvent rapide." },
+      { type: 'h2', text: 'Une arythmie très fréquente' },
+      // TODO: validation médicale — chiffres de prévalence à valider (brief §12)
+      { type: 'p', text: "La fibrillation atriale touche plus de 750 000 personnes en France, avec entre 110 000 et 230 000 nouveaux cas chaque année. Sa fréquence augmente fortement avec l'âge : de 2 à 4 % après 60 ans à plus de 10 % au-delà de 80 ans." },
+      { type: 'h2', text: 'Les facteurs favorisants' },
+      { type: 'p', text: "Plusieurs facteurs favorisent son apparition. Les corriger, en complément du traitement de l'arythmie, permet généralement de mieux la contrôler." },
+      { type: 'list', items: [
+        "Facteurs modifiables : hypertension artérielle, diabète, surpoids, consommation d'alcool et syndrome d'apnée du sommeil (souvent sous-diagnostiqué)",
+        'Facteurs non modifiables : âge, sexe et antécédents familiaux',
+      ] },
+      { type: 'h2', text: 'Les symptômes' },
+      { type: 'p', text: "Elle peut se manifester par des palpitations, un essoufflement, une fatigue inhabituelle, une gêne thoracique ou des malaises. Elle peut aussi rester totalement silencieuse et n'être découverte que lors d'un examen systématique (ECG, holter rythmique), ce qui souligne l'importance d'un dépistage régulier." },
+      { type: 'h2', text: 'Les nouveaux outils de dépistage' },
+      // TODO: validation médicale — mentions des montres connectées à valider (brief §12)
+      { type: 'p', text: "Le dépistage bénéficie aujourd'hui des objets connectés (montres, bracelets) équipés de capteurs, et parfois d'un ECG à une dérivation. Ils permettent de repérer une irrégularité du rythme au quotidien, en particulier lorsque la fibrillation atriale reste silencieuse. Toute alerte doit néanmoins être confirmée par un avis médical." },
+      { type: 'h2', text: 'Pourquoi la traiter ?' },
+      { type: 'p', text: "La fibrillation atriale n'est pas seulement gênante : en favorisant la formation de caillots dans les oreillettes, elle augmente le risque d'accident vasculaire cérébral, et peut à terme favoriser une insuffisance cardiaque. Sa prise en charge associe l'évaluation du risque thrombo-embolique, avec si besoin un traitement anticoagulant, et le traitement du trouble du rythme." },
+      { type: 'h2', text: 'Le traitement par ablation' },
+      { type: 'p', text: "Lorsque le traitement médicamenteux ne suffit pas, une ablation peut être proposée. Cette technique vise à neutraliser les zones du cœur responsables de l'arythmie, principalement par isolation des veines pulmonaires. Elle permet, chez de nombreux patients, de réduire la fréquence des épisodes, voire de retrouver un rythme régulier durable." },
+      // TODO: validation médicale — affirmations ablation ambulatoire + électroporation 3D (brief §12)
+      { type: 'tip', title: "L'expertise du Dr Amraoui", text: "Rythmologue interventionnelle, le Dr Amraoui est spécialisée dans le traitement de la fibrillation atriale par ablation. Elle est précurseur des ablations en hospitalisation ambulatoire en France et de l'ablation par électroporation 3D." },
+    ],
+  },
+  {
+    slug: 'syndrome-apnee-du-sommeil',
+    title: "Le syndrome d'apnée du sommeil",
+    category: 'Pathologie',
+    author: 'sana-amraoui',
+    date: '2026-06-12',
+    readingMin: 5,
+    cover: '/images/patho-apnee.jpg',
+    coverAlt: "Dépistage du syndrome d'apnée du sommeil",
+    excerpt:
+      "Ronflements, fatigue, somnolence : le syndrome d'apnée du sommeil est fréquent, souvent sous-diagnostiqué, et lourd de conséquences pour le cœur.",
+    body: [
+      { type: 'p', text: "Le syndrome d'apnées-hypopnées obstructives du sommeil (SAOS) se caractérise par des épisodes répétés d'arrêt (apnée) ou de réduction (hypopnée) de la respiration pendant le sommeil, liés à un relâchement des muscles des voies aériennes supérieures." },
+      { type: 'h2', text: 'Une affection fréquente et sous-diagnostiquée' },
+      // TODO: validation médicale — chiffres de prévalence à valider (brief §12)
+      { type: 'p', text: "Le SAOS concerne entre 4 et 10 % de la population adulte selon l'âge, et augmente nettement avec celui-ci. Il reste largement sous-diagnostiqué : environ 8 patients sur 10 ne sont pas encore diagnostiqués." },
+      { type: 'h2', text: 'Les symptômes' },
+      { type: 'p', text: "Il se manifeste surtout par des ronflements importants, des pauses respiratoires constatées par l'entourage et une somnolence excessive dans la journée. Il peut aussi entraîner des troubles de la mémoire et de la concentration, ainsi que des troubles de l'humeur. Ces symptômes résultent des micro-réveils répétés qui fragmentent le sommeil et empêchent un repos réparateur." },
+      { type: 'h2', text: 'Les risques pour le cœur' },
+      { type: 'p', text: "Non traité, le SAOS a un impact important sur la santé cardiovasculaire. Il est fortement associé à l'hypertension artérielle, notamment résistante, et au diabète. Il favorise les troubles du rythme, en particulier la fibrillation atriale, et peut conduire à une insuffisance cardiaque. Il augmente aussi le risque d'accident vasculaire cérébral." },
+      { type: 'h2', text: 'Le dépistage' },
+      { type: 'p', text: "Le dépistage repose sur la polygraphie ventilatoire nocturne, réalisée à votre domicile : un appareil léger enregistre votre respiration, votre oxygénation et votre rythme cardiaque pendant une nuit, sans contrainte particulière." },
+      { type: 'h2', text: 'Le traitement' },
+      { type: 'p', text: "La prise en charge repose d'abord sur les mesures hygiéno-diététiques : la perte de poids est efficace quel que soit le degré de sévérité, et la réduction de l'alcool comme l'arrêt du tabac sont recommandés. Lorsque ces mesures ne suffisent pas, le traitement de référence est la ventilation en pression positive continue (PPC). D'autres options existent selon les cas : orthèse d'avancée mandibulaire, traitement positionnel." },
+    ],
+  },
+  {
+    slug: 'hypertension-arterielle',
+    title: "L'hypertension artérielle",
+    category: 'Pathologie',
+    author: 'sana-amraoui',
+    date: '2026-06-06',
+    readingMin: 5,
+    cover: '/images/patho-hypertension.jpg',
+    coverAlt: "Consultation et suivi de l'hypertension artérielle",
+    excerpt:
+      "La maladie chronique la plus fréquente, et souvent silencieuse. Comprendre l'hypertension, son diagnostic et sa prise en charge.",
+    showRiskFactors: true,
+    riskHighlight: 'hypertension',
+    body: [
+      { type: 'p', text: "L'hypertension artérielle correspond à une élévation anormale et persistante de la pression du sang dans les artères. C'est la maladie chronique la plus fréquente, et l'un des principaux facteurs de risque cardiovasculaire." },
+      { type: 'h2', text: 'Le « tueur silencieux »' },
+      { type: 'p', text: "Elle est souvent appelée le « tueur silencieux », car elle peut ne provoquer aucun symptôme. La seule façon de la détecter est de mesurer régulièrement sa tension. Lorsque des symptômes surviennent (maux de tête, vertiges, troubles visuels, essoufflement), la maladie est souvent déjà évoluée." },
+      { type: 'h2', text: 'Une maladie très répandue' },
+      // TODO: validation médicale — chiffres d'épidémiologie à valider (brief §12)
+      { type: 'p', text: "L'hypertension touche environ 17 millions de personnes en France, soit près de 30 % des adultes. Une grande partie l'ignorent, et de nombreux patients traités ne sont pas équilibrés." },
+      { type: 'h2', text: 'Comment fait-on le diagnostic ?' },
+      { type: 'p', text: "Le diagnostic repose sur la mesure répétée de la tension, à plusieurs reprises et à des jours différents. L'automesure à domicile ou le holter tensionnel de 24 h permettent de confirmer le diagnostic dans les conditions de vie habituelles, et de démasquer une hypertension « blouse blanche » ou, à l'inverse, masquée." },
+      { type: 'h2', text: 'Les risques' },
+      { type: 'p', text: "Non traitée, l'hypertension expose à des complications sérieuses : infarctus du myocarde, accident vasculaire cérébral, complications rénales. Elle favorise aussi les troubles du rythme, notamment la fibrillation atriale, et l'insuffisance cardiaque." },
+      { type: 'h2', text: 'La prise en charge' },
+      { type: 'p', text: "Elle repose d'abord sur des mesures hygiéno-diététiques : une alimentation plus saine, l'arrêt du tabac et une activité physique régulière. Lorsqu'elles ne suffisent pas, un traitement médicamenteux est mis en place, avec un suivi régulier pour ajuster le traitement et dépister précocement les complications." },
+    ],
+  },
+]
+
+export const getPathologie = (slug) => PATHOLOGIES.find((p) => p.slug === slug) || null
+export const getPathologies = () => [...PATHOLOGIES].sort(byDateDesc)
+export const getRelatedPathologies = (current, n = 3) =>
+  getPathologies().filter((p) => p.slug !== current.slug).slice(0, n)

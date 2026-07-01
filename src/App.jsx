@@ -5,10 +5,12 @@ import Home from './pages/Home.jsx' // eager: the landing page stays instant
 
 // Inner templates are split into their own chunks, fetched on first navigation.
 const Equipe = lazy(() => import('./pages/Equipe.jsx'))
+const Consultations = lazy(() => import('./pages/Consultations.jsx'))
 const DoctorProfile = lazy(() => import('./pages/DoctorProfile.jsx'))
 const ExamDetail = lazy(() => import('./pages/ExamDetail.jsx'))
 const Actualites = lazy(() => import('./pages/Actualites.jsx'))
 const Article = lazy(() => import('./pages/Article.jsx'))
+const Pathologies = lazy(() => import('./pages/Pathologies.jsx'))
 const MentionsLegales = lazy(() => import('./pages/MentionsLegales.jsx'))
 const Confidentialite = lazy(() => import('./pages/Confidentialite.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
@@ -46,6 +48,14 @@ export default function App() {
           }
         />
         <Route
+          path="consultations"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Consultations />
+            </Suspense>
+          }
+        />
+        <Route
           path="examens/:slug"
           element={
             <Suspense fallback={<PageFallback />}>
@@ -63,6 +73,22 @@ export default function App() {
         />
         <Route
           path="actualites/:slug"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Article />
+            </Suspense>
+          }
+        />
+        <Route
+          path="pathologies"
+          element={
+            <Suspense fallback={<PageFallback />}>
+              <Pathologies />
+            </Suspense>
+          }
+        />
+        <Route
+          path="pathologies/:slug"
           element={
             <Suspense fallback={<PageFallback />}>
               <Article />

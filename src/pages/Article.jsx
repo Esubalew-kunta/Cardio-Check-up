@@ -6,7 +6,8 @@ import ArticleBody from '../components/ArticleBody.jsx'
 import ArticleCard from '../components/ArticleCard.jsx'
 import DoctorPortrait from '../components/DoctorPortrait.jsx'
 import CtaStrip from '../components/CtaStrip.jsx'
-import { getPost, getDoctor, getRelatedPosts } from '../data/site.js'
+import FacteursRisque from '../components/FacteursRisque.jsx'
+import { getPost, getPathologie, getDoctor, getRelatedPosts, getRelatedPathologies } from '../data/site.js'
 import { formatFrenchDate } from '../utils/formatDate.js'
 import { openBookingModal } from '../utils/bookingModal.js'
 import NotFound from './NotFound.jsx'
@@ -15,12 +16,18 @@ const SITE = 'https://cardio-check-up.com'
 
 export default function Article() {
   const { slug } = useParams()
-  const post = getPost(slug)
+  const post = getPost(slug) || getPathologie(slug)
   if (!post) return <NotFound />
 
+  // Pathologie pages reuse this template but live under /pathologies and link to
+  // their own listing + related set.
+  const isPatho = post.category === 'Pathologie'
+  const indexLabel = isPatho ? 'Pathologies' : 'Actualités'
+  const indexTo = isPatho ? '/pathologies' : '/actualites'
+
   const author = getDoctor(post.author)
-  const related = getRelatedPosts(post, 3)
-  const path = `/actualites/${post.slug}`
+  const related = isPatho ? getRelatedPathologies(post, 3) : getRelatedPosts(post, 3)
+  const path = `${indexTo}/${post.slug}`
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -59,7 +66,7 @@ export default function Article() {
             <Breadcrumb
               items={[
                 { label: 'Accueil', to: '/' },
-                { label: 'Actualités', to: '/actualites' },
+                { label: indexLabel, to: indexTo },
                 { label: post.title },
               ]}
             />
@@ -140,6 +147,9 @@ export default function Article() {
         </div>
       </article>
 
+      {/* Risk-factors reference (pathology pages flagged with showRiskFactors) */}
+      {post.showRiskFactors && <FacteursRisque highlight={post.riskHighlight} />}
+
       {/* Related articles */}
       {related.length > 0 && (
         <section className="bg-cream-soft py-20 sm:py-24">
@@ -152,16 +162,16 @@ export default function Article() {
                 </h2>
               </div>
               <Link
-                to="/actualites"
+                to={indexTo}
                 className="hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-signal transition-all hover:gap-2.5 sm:inline-flex"
               >
-                Tous les articles <span aria-hidden="true">→</span>
+                {isPatho ? 'Toutes les pathologies' : 'Tous les articles'} <span aria-hidden="true">→</span>
               </Link>
             </Reveal>
             <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p, i) => (
                 <Reveal key={p.slug} delay={(i % 3) * 90}>
-                  <ArticleCard post={p} />
+                  <ArticleCard post={p} base={indexTo} />
                 </Reveal>
               ))}
             </div>

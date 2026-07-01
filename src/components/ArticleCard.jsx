@@ -34,9 +34,9 @@ function CategoryPill({ category }) {
 
 // Editorial article card. `featured` renders a large horizontal split (image +
 // text) for the lead story; the default is a vertical card for grids.
-export default function ArticleCard({ post, featured = false }) {
+export default function ArticleCard({ post, featured = false, base = '/actualites' }) {
   const author = getDoctor(post.author)
-  const to = `/actualites/${post.slug}`
+  const to = `${base}/${post.slug}`
 
   if (featured) {
     return (

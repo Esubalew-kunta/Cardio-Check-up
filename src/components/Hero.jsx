@@ -29,15 +29,15 @@ export default function Hero() {
           </p>
 
           <h1 className="font-display text-[2.5rem] leading-[1.08] sm:text-6xl lg:text-7xl sm:leading-[1.05] font-semibold text-offwhite text-balance">
-            La santé de votre cœur est notre priorité.
+            Mieux dépister pour mieux prévenir
           </h1>
 
           {/* ECG motif under the headline */}
           <EcgLine className="mt-6 max-w-md" />
 
           <p className="mt-6 text-base sm:text-lg text-offwhite/85 leading-relaxed max-w-xl">
-            Cabinet de cardiologie et rythmologie. Bilan cardiovasculaire, dépistage et
-            suivi à Paris 17.
+            Cardio Check-up, centre médical de cardiologie au cœur de Paris. Bilan
+            cardiovasculaire, dépistage et suivi personnalisé de votre santé.
           </p>
 
           {/* Trust bar (merged into hero) — wraps cleanly on small screens */}

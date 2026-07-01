@@ -5,6 +5,7 @@ import ExamTimeline from '../components/ExamTimeline.jsx'
 import FaqAccordion from '../components/FaqAccordion.jsx'
 import DoctorMiniCard from '../components/DoctorMiniCard.jsx'
 import CtaStrip from '../components/CtaStrip.jsx'
+import ExamHub from '../components/ExamHub.jsx'
 import { useReveal } from '../hooks/useReveal.js'
 import { getExam, doctorsForExam } from '../data/site.js'
 import { openBookingModal } from '../utils/bookingModal.js'
@@ -62,6 +63,7 @@ export default function ExamDetail() {
   const { slug } = useParams()
   const exam = getExam(slug)
   if (!exam) return <NotFound />
+  if (exam.subExams) return <ExamHub exam={exam} />
 
   const doctors = doctorsForExam(slug)
   const path = `/examens/${exam.id}`

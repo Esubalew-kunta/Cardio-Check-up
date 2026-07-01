@@ -1,5 +1,6 @@
 import Seo from '../components/Seo.jsx'
 import Hero from '../components/Hero.jsx'
+import Pourquoi from '../components/Pourquoi.jsx'
 import NotreConseil from '../components/NotreConseil.jsx'
 import Services from '../components/Services.jsx'
 import ReassuranceStrip from '../components/ReassuranceStrip.jsx'
@@ -33,6 +34,7 @@ export default function Home() {
         jsonLd={jsonLd}
       />
       <Hero />
+      <Pourquoi />
       <NotreConseil />
       <Services />
       <ReassuranceStrip />
