@@ -1,7 +1,9 @@
 # Project status — Cardio Check-up content overhaul
 
 Single source of truth for progress. Read this first to continue the work.
-Last updated during the session that built WP1–WP7.
+Last updated: all 7 WPs built and **pushed to GitHub `main`** (commit `898452b`).
+Post-WP extras also done: ECG/ETT videos, all 8 cover images, consultations →
+Doctolib, review QR in footer.
 
 ---
 
@@ -63,21 +65,26 @@ medical-centre site.
 - Épreuve d'effort ⏳ + Doppler ⏳ — prompts in `gemini-video-prompts.md`.
   Doppler is a hub page (no inline slot yet).
 
-## PENDING (non-code)
-- Client validation (see VALIDATION-CHECKLIST.md): figures, AI claim, ablation/
-  électroporation, épreuve d'effort text, spelling.
-- Dr Sofiane: surname, bio, diplomas, **photo** (brief gives only name + 6 areas +
+## Also DONE (post-WP)
+- ECG + ETT explainer videos live (YouTube ids in site.js: `DEB-WcBdBR8`, `OWkstGh5i0U`).
+- All 8 pathology + news cover images replaced (`public/images/patho-*`, `news-*`).
+- Consultations booking (cards + bottom CTA) → Dr's Doctolib, **same-tab redirect**
+  (`utils/doctolibModal.js` `openDoctolib()`; Doctolib blocks iframe embedding via
+  X-Frame-Options SAMEORIGIN, so no true in-site embed is possible).
+- **Review QR** in the footer ("Votre avis compte") — `public/images/qr-avis.png`
+  (source `content/Dr.Amraoui Review QR-4.png`).
+- Pushed to GitHub `main` (commit `898452b`); `.env` is gitignored (host must set
+  `VITE_CHAT_API_URL` for the RAG chat).
+
+## PENDING (non-code / from the practice)
+- **Client validation** — see `VALIDATION-CHECKLIST.md` (epidemiology figures, AI
+  claim, ablation/électroporation, épreuve d'effort text, spelling).
+- **Dr Sofiane** — surname, bio, diplomas, photo (brief gives only name + 6 areas +
   photo order #4; nothing more exists — do not fabricate).
-- Remaining 2 exam videos (Épreuve d'effort, Doppler).
-- ✅ DONE: all 8 pathology + news cover images replaced (public/images/patho-*, news-*).
-- ✅ DONE: Consultations booking + chat assistant button → Dr's Doctolib
-  (`utils/doctolibModal.js` `openDoctolib()` = same-tab redirect; Doctolib blocks
-  iframe embedding via X-Frame-Options SAMEORIGIN, so no in-site embed possible).
-- ✅ DONE: **Review QR** added to the footer ("Votre avis compte", brand column) —
-  `public/images/qr-avis.png` (source: `content/Dr.Amraoui Review QR-4.png`).
-- Chat assistant: the Doctolib booking button was added then removed per request
-  (`openDoctolib` now only used by the Consultations page).
-- PARKED: "Nos Spécialités" (8) — add a section or skip? (QUESTIONS-FOR-CLIENT.md #1)
+- **2 remaining exam videos** — Épreuve d'effort + Doppler (Doppler hub has no
+  inline video slot yet). Prompts in `gemini-video-prompts.md`.
+- **PARKED decision** — "Nos Spécialités" (8): add a section or skip?
+  (`QUESTIONS-FOR-CLIENT.md` #1).
 
 ## Technical notes
 - **RAG chat** needs `.env` → `VITE_CHAT_API_URL=https://cardio-rag-backend.onrender.com`
