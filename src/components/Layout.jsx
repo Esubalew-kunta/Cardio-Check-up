@@ -4,6 +4,7 @@ import Footer from './Footer.jsx'
 import UrgencyDisclaimer from './UrgencyDisclaimer.jsx'
 import MobileBookingBar from './MobileBookingBar.jsx'
 import FloatingContactButtons from './FloatingContactButtons.jsx'
+import BackToTop from './BackToTop.jsx'
 import BookingModal from './BookingModal.jsx'
 import AiChatModal from './AiChatModal.jsx'
 import PageLoader from './PageLoader.jsx'
@@ -25,6 +26,7 @@ export default function Layout() {
       <Footer />
       <MobileBookingBar />
       <FloatingContactButtons />
+      <BackToTop />
       <BookingModal />
       <AiChatModal />
     </>

@@ -2,6 +2,7 @@ import Seo from '../components/Seo.jsx'
 import Breadcrumb from '../components/Breadcrumb.jsx'
 import Reveal from '../components/Reveal.jsx'
 import ArticleCard from '../components/ArticleCard.jsx'
+import CtaStrip from '../components/CtaStrip.jsx'
 import { getPathologies } from '../data/site.js'
 
 export default function Pathologies() {
@@ -45,6 +46,12 @@ export default function Pathologies() {
           </div>
         </div>
       </section>
+
+      <CtaStrip
+        title="Prendre rendez-vous"
+        subtitle="Une question sur une pathologie ? Parlons-en, nous vous orientons."
+        secondary={{ label: 'Voir nos examens →', to: '/#examens' }}
+      />
     </>
   )
 }

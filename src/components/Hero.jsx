@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import EcgLine from './EcgLine.jsx'
+import { openBookingModal } from '../utils/bookingModal.js'
 
 const TRUST = ['Conventionnée Secteur 2', 'Expertise reconnue en France et en Europe']
 
@@ -39,6 +41,23 @@ export default function Hero() {
             Cardio Check-up, centre médical de cardiologie au cœur de Paris. Bilan
             cardiovasculaire, dépistage et suivi personnalisé de votre santé.
           </p>
+
+          {/* Primary conversion action, front and centre in the hero */}
+          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+            <button
+              type="button"
+              onClick={openBookingModal}
+              className="inline-flex min-h-[3rem] items-center justify-center rounded-full bg-signal px-7 py-3 text-base font-semibold tracking-[0.03em] text-white shadow-lg hover:bg-signal-deep transition-colors"
+            >
+              Prendre rendez-vous
+            </button>
+            <Link
+              to="/#examens"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-offwhite hover:text-gold transition-colors"
+            >
+              Découvrir nos examens <span aria-hidden="true">→</span>
+            </Link>
+          </div>
 
           {/* Trust bar (merged into hero) — wraps cleanly on small screens */}
           <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-offwhite/15 pt-6">

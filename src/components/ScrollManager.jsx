@@ -5,7 +5,10 @@ import { useLocation } from 'react-router-dom'
 // jump to the top — unless the URL carries a hash, in which case we scroll to
 // that element (used for homepage anchors like /#examens and /#faq).
 export default function ScrollManager() {
-  const { pathname, hash } = useLocation()
+  // `key` is unique per navigation entry, unlike pathname/hash: clicking an
+  // anchor link (e.g. /#examens) while already on that exact URL doesn't
+  // change pathname or hash, so those alone would silently no-op the scroll.
+  const { pathname, hash, key } = useLocation()
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -23,7 +26,7 @@ export default function ScrollManager() {
     }
 
     window.scrollTo({ top: 0, behavior: 'auto' })
-  }, [pathname, hash])
+  }, [pathname, hash, key])
 
   return null
 }

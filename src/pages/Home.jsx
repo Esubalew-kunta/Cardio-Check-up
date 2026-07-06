@@ -6,6 +6,7 @@ import Services from '../components/Services.jsx'
 import ReassuranceStrip from '../components/ReassuranceStrip.jsx'
 import Faq from '../components/Faq.jsx'
 import BlogPreview from '../components/BlogPreview.jsx'
+import CtaStrip from '../components/CtaStrip.jsx'
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -40,6 +41,11 @@ export default function Home() {
       <ReassuranceStrip />
       <Faq />
       <BlogPreview />
+      <CtaStrip
+        title="Prendre rendez-vous"
+        subtitle="Cabinet Cardio Check-up, Paris 17 · Réponse sous 24 à 48h"
+        secondary={{ label: 'Voir nos examens →', to: '/#examens' }}
+      />
     </>
   )
 }
