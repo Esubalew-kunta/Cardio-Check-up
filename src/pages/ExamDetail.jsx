@@ -6,6 +6,7 @@ import FaqAccordion from '../components/FaqAccordion.jsx'
 import DoctorMiniCard from '../components/DoctorMiniCard.jsx'
 import CtaStrip from '../components/CtaStrip.jsx'
 import ExamHub from '../components/ExamHub.jsx'
+import ExamVideo from '../components/ExamVideo.jsx'
 import { useReveal } from '../hooks/useReveal.js'
 import { getExam, doctorsForExam } from '../data/site.js'
 import { openBookingModal } from '../utils/bookingModal.js'
@@ -16,36 +17,6 @@ function Reveal({ children, className = '' }) {
   return (
     <div ref={ref} className={`reveal ${visible ? 'is-visible' : ''} ${className}`}>
       {children}
-    </div>
-  )
-}
-
-function VideoBlock({ videoId, name }) {
-  if (videoId) {
-    return (
-      <div className="aspect-video overflow-hidden rounded-xl shadow-lg">
-        <iframe
-          src={`https://www.youtube.com/embed/${videoId}`}
-          title={`Vidéo explicative : ${name}`}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="h-full w-full border-0"
-        />
-      </div>
-    )
-  }
-  // Placeholder until a real video ID is supplied.
-  return (
-    <div className="aspect-video grid place-items-center rounded-xl bg-burgundy-deep shadow-lg">
-      <div className="flex flex-col items-center text-center px-6">
-        <span className="grid place-items-center h-16 w-16 rounded-full border-2 border-gold/70">
-          <svg viewBox="0 0 24 24" className="h-7 w-7 translate-x-0.5 fill-gold" aria-hidden="true">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        </span>
-        <p className="mt-4 text-sm font-medium text-offwhite/80">Voir la vidéo explicative</p>
-      </div>
     </div>
   )
 }
@@ -127,7 +98,7 @@ export default function ExamDetail() {
                 ))}
               </div>
             </div>
-            <VideoBlock videoId={exam.videoId} name={exam.name} />
+            <ExamVideo videoId={exam.videoId} name={exam.name} />
           </Reveal>
         </div>
       </section>

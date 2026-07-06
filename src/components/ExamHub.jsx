@@ -4,6 +4,7 @@ import Breadcrumb from './Breadcrumb.jsx'
 import FaqAccordion from './FaqAccordion.jsx'
 import CtaStrip from './CtaStrip.jsx'
 import AnatomyFigure from './AnatomyFigure.jsx'
+import ExamVideo from './ExamVideo.jsx'
 import { useReveal } from '../hooks/useReveal.js'
 import { doctorsForExam } from '../data/site.js'
 import { openBookingModal } from '../utils/bookingModal.js'
@@ -105,6 +106,16 @@ export default function ExamHub({ exam }) {
               <p className="mt-7 max-w-2xl text-ink/75 leading-relaxed">{exam.introLead}</p>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* S1.5 — Explainer video, before the sub-exam grid */}
+      <section className="bg-cream pb-16 sm:pb-20">
+        <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          <Reveal>
+            <p className="eyebrow text-burgundy mb-4 text-center">En vidéo</p>
+            <ExamVideo videoId={exam.videoId} name={exam.name} />
+          </Reveal>
         </div>
       </section>
 

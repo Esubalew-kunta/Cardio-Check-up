@@ -9,14 +9,14 @@ remaining videos.
 |------|--------|------------|
 | ECG | ✅ done | `DEB-WcBdBR8` |
 | Échographie cardiaque (ETT) | ✅ done | `OWkstGh5i0U` |
-| Épreuve d'effort | ⏳ to generate | — |
-| Doppler vasculaire | ⏳ to generate | — |
+| Épreuve d'effort | ✅ done | `SuGp0YwWZzo` |
+| Doppler vasculaire | ✅ done | `tc7KTED100U` |
 
 > To add a new one: generate → upload to YouTube (Unlisted is fine) → give the
-> link. Set `videoId` on the exam in `src/data/site.js`. NOTE: the Doppler exam is
-> a **hub page** (`ExamHub.jsx`) with no inline video slot yet — decide placement
-> when its clip is ready (homepage card auto-plays it; a small "En vidéo" section
-> can be added to the hub).
+> link. Set `videoId` on the exam in `src/data/site.js`. The Doppler hub page
+> (`ExamHub.jsx`) now has its own "En vidéo" section (shared `ExamVideo.jsx`
+> component, also used by `ExamDetail.jsx`), in addition to autoplaying on
+> its homepage card.
 
 ---
 
@@ -41,25 +41,33 @@ remaining videos.
 > of field. Mood: reassuring, precise, premium. Photorealistic, cinematic. No
 > text, no logos, no captions, no irradiation devices. 10 seconds, 16:9.
 
-## 3. Épreuve d'effort — ⏳ TO GENERATE
+## 3. Épreuve d'effort — ✅ DONE (`SuGp0YwWZzo`)
 > A calm, photorealistic medical explainer clip in a bright, modern cardiology
-> cabinet with natural daylight. A middle-aged patient walks steadily on a
-> medical treadmill, small ECG electrodes on the chest and a blood-pressure cuff
-> on the arm; a cardiologist stands nearby watching a monitor that shows heart
-> rate and an ECG trace. Bright, airy, high-key lighting, clean clinical space
-> with warm tones. Camera: slow smooth arc around the patient, then a gentle
-> push-in to the monitor. Mood: controlled, safe, reassuring, premium.
-> Photorealistic, cinematic. No text, no logos, no captions. 10 seconds, 16:9.
+> cabinet with natural daylight and warm cream tones. A middle-aged patient
+> walks steadily on a medical treadmill, small ECG electrodes on the chest and
+> a blood-pressure cuff on the arm; a cardiologist stands nearby watching a
+> monitor that shows heart rate and a live ECG trace. Camera: slow, smooth arc
+> around the patient, then a gentle push-in to the monitor. Lighting: high-key,
+> airy, clean clinical space. Mood: controlled, safe, reassuring, premium.
+> Audio: a calm, warm, professional English voiceover, clearly spoken, says:
+> "This is a cardiac stress test — walking under gradually increasing effort,
+> while your heart rhythm and blood pressure are safely monitored throughout."
+> No on-screen text, no logos, no captions, no interface overlays.
+> Photorealistic, cinematic. 10 seconds, 16:9.
 
-## 4. Échographie Doppler vasculaire — ⏳ TO GENERATE
+## 4. Échographie Doppler vasculaire — ✅ DONE (`tc7KTED100U`)
 > A calm, photorealistic medical explainer clip in a bright, modern vascular
-> ultrasound room with soft natural daylight. A doctor slowly glides an ultrasound
-> Doppler probe with gel along a patient's neck (carotid area); on the screen, a
-> colour Doppler image shows blood flow in red and blue moving through the
-> vessels. Clean, airy, high-key lighting, warm neutral tones. Camera: smooth
-> gentle move from the probe on the skin to the colour-flow image on the monitor,
-> shallow depth of field. Mood: precise, reassuring, premium. Photorealistic,
-> cinematic. No text, no logos, no captions. 10 seconds, 16:9.
+> ultrasound room with soft natural daylight and warm neutral tones. A doctor
+> slowly glides an ultrasound Doppler probe with gel along a patient's neck
+> (carotid area); on the screen, a colour Doppler image shows blood flow in
+> red and blue moving through the vessels. Camera: smooth, gentle move from
+> the probe on the skin to the colour-flow image on the monitor, shallow depth
+> of field. Lighting: high-key, airy, clean clinical space. Mood: precise,
+> reassuring, premium. Audio: a calm, warm, professional English voiceover,
+> clearly spoken, says: "This Doppler ultrasound checks blood flow to your
+> brain, painlessly detecting narrowing in the neck arteries to assess stroke
+> risk." No on-screen text, no logos, no captions, no interface overlays.
+> Photorealistic, cinematic. 10 seconds, 16:9.
 
 ---
 

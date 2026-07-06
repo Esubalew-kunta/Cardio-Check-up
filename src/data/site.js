@@ -602,7 +602,7 @@ export const SERVICES = [
       "L'épreuve d'effort évalue le comportement de votre cœur pendant un effort physique progressif et contrôlé, réalisé sur un vélo ou un tapis de marche, sous surveillance médicale continue. Votre ECG, votre tension artérielle et vos symptômes sont enregistrés tout au long de l'effort, augmenté par paliers jusqu'à un niveau adapté à vos capacités.",
       "Cet examen permet de dépister une insuffisance coronarienne (un rétrécissement des artères du cœur), d'évaluer la tolérance à l'effort, de rechercher des troubles du rythme déclenchés par l'effort, ou de contrôler l'efficacité d'un traitement. Il n'est pas douloureux, bien qu'il demande un effort physique réel ; il dure environ 30 minutes au total, préparation et récupération comprises.",
     ],
-    videoId: '',
+    videoId: 'SuGp0YwWZzo', // Épreuve d'effort — explainer video
     symptomPills: ["Douleur à l'effort", 'Essoufflement', 'Avant le sport', 'Suivi coronarien'],
     symptomContext:
       "L'épreuve d'effort est indiquée pour explorer une douleur ou un essoufflement survenant à l'effort, dépister une atteinte des artères coronaires, ou évaluer le cœur avant une reprise sportive. (Texte à faire relire avant publication.)",
@@ -647,7 +647,7 @@ export const SERVICES = [
     why: 'Explorer les artères et les veines : cou, jambes, bras, reins et aorte.',
     symptoms: "Douleurs à la marche, jambes lourdes, hypertension, dépistage d'anévrisme.",
     desc: 'Six explorations Doppler en un seul rendez-vous, pour les artères et les veines, par le médecin vasculaire.',
-    videoId: '',
+    videoId: 'tc7KTED100U', // Doppler vasculaire — explainer video (homepage card; no inline slot on the hub page yet)
     doctorNote:
       "Chaque examen est réalisé personnellement par le Dr Hakem, de l'acquisition des images à l'interprétation. Le compte-rendu vous est remis et expliqué le jour même, en consultation.",
     // Animated anatomy figure: base image + per-territory highlight points
