@@ -241,7 +241,9 @@ export default function Services() {
 
         {/* One block per group */}
         {EXAM_GROUPS.map((group, gi) => {
-          const items = SERVICES.filter((s) => s.group === group.key)
+          // 'epreuve-effort' (Épreuve d'effort / stress test) is hidden from this
+          // overview grid at the client's request; its detail page still exists.
+          const items = SERVICES.filter((s) => s.group === group.key && s.id !== 'epreuve-effort')
           if (!items.length) return null
           return (
             <div
