@@ -6,7 +6,7 @@ export default function ExamVideo({ videoId, name }) {
     return (
       <div className="aspect-video overflow-hidden rounded-xl shadow-lg">
         <iframe
-          src={`https://www.youtube.com/embed/${videoId}`}
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&iv_load_policy=3&hl=fr&cc_load_policy=1&cc_lang_pref=fr`}
           title={`Vidéo explicative : ${name}`}
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

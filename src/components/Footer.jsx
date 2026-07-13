@@ -61,14 +61,22 @@ export default function Footer() {
                 Votre avis compte
               </p>
               <div className="flex items-center gap-3.5">
-                <img
-                  src="/images/qr-avis.png"
-                  alt="QR code pour laisser un avis au cabinet Cardio Check-up"
-                  className="h-24 w-24 shrink-0 rounded-lg bg-white"
-                  loading="lazy"
-                />
+                <a
+                  href={CONTACT.review}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Laisser un avis sur Google"
+                  className="shrink-0 rounded-lg transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
+                >
+                  <img
+                    src="/images/qr-avis.png"
+                    alt="QR code pour laisser un avis au cabinet Cardio Check-up"
+                    className="h-24 w-24 rounded-lg bg-white"
+                    loading="lazy"
+                  />
+                </a>
                 <p className="max-w-[9rem] text-xs leading-relaxed text-offwhite/60">
-                  Scannez pour partager votre expérience.
+                  Scannez ou cliquez pour partager votre expérience.
                 </p>
               </div>
             </div>

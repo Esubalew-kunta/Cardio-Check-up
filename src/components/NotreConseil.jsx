@@ -61,7 +61,7 @@ export default function NotreConseil() {
             Six médecins, une exigence commune
           </h2>
           <p className="mt-5 text-ink/75 leading-relaxed">
-            Une équipe resserrée, réunie autour du Dr Amraoui, Chairperson de l'EHRA 2026, pour un
+            Une équipe resserrée, réunie autour du Dr Amraoui, pour un
             suivi cardiovasculaire attentif et personnalisé, du dépistage au traitement.
           </p>
         </div>

@@ -38,7 +38,7 @@ export default function StatsRow({ stats }) {
   return (
     <div
       ref={ref}
-      className="grid sm:grid-cols-3 gap-10 sm:gap-6 sm:divide-x divide-gold/30 border-t border-gold/30 pt-12"
+      className={`grid ${stats.length >= 3 ? 'sm:grid-cols-3' : stats.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-1'} gap-10 sm:gap-6 sm:divide-x divide-gold/30 border-t border-gold/30 pt-12`}
     >
       {stats.map((stat, i) => (
         <div key={i} className={i === 0 ? 'text-center sm:text-left' : 'text-center sm:text-left sm:pl-6'}>

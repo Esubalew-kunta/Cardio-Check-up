@@ -2,8 +2,7 @@ import { useReveal } from '../hooks/useReveal.js'
 
 const ITEMS = [
   { big: 'Indolore', label: 'Tous nos examens sont sans douleur' },
-  { big: '10 min', label: "Pose de l'appareil par l'assistante médicale" },
-  { big: 'Jour J', label: 'Résultats commentés le jour même' },
+  { big: '10 min', label: "Pose de l'appareil" },
 ]
 
 // Slim reassurance band replacing the removed Parcours section on the homepage.
@@ -15,7 +14,7 @@ export default function ReassuranceStrip() {
         ref={ref}
         className={`reveal ${visible ? 'is-visible' : ''} mx-auto max-w-5xl px-5 sm:px-8 py-16 sm:py-20`}
       >
-        <div className="grid gap-10 sm:grid-cols-3 text-center sm:divide-x divide-gold/20">
+        <div className="grid gap-10 sm:grid-cols-2 text-center sm:divide-x divide-gold/20">
           {ITEMS.map((item) => (
             <div key={item.big} className="px-4">
               <p className="font-display text-4xl sm:text-5xl font-semibold text-gold leading-none">

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useReveal } from '../hooks/useReveal.js'
 import { SERVICES, EXAM_GROUPS } from '../data/site.js'
@@ -32,110 +32,59 @@ function CardPoster({ icon }) {
   )
 }
 
-// Minimal, on-brand video facade. Nothing plays on load. The first press mounts
-// the YouTube embed with its chrome stripped; the button then toggles play/pause
-// via the IFrame postMessage API. When no videoId exists, a soft poster is shown.
+// On-brand click-to-play video facade. Nothing loads until the first press, to
+// keep the page light. Pressing play mounts the YouTube embed with its NATIVE
+// controls (play/pause, quality selector, captions, fullscreen), French UI and
+// French subtitles on by default. When no videoId exists, a soft poster is shown.
 function CardVideo({ id, name, icon }) {
-  const containerRef = useRef(null)
-  const iframeRef = useRef(null)
   const [started, setStarted] = useState(false)
-  const [playing, setPlaying] = useState(false)
   if (!id) return <CardPoster icon={icon} />
-  const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`
+  // maxresdefault is the sharpest thumbnail; fall back to hqdefault when a video
+  // has no HD thumbnail (avoids a broken image).
+  const poster = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
+  const fallback = `https://img.youtube.com/vi/${id}/hqdefault.jpg`
 
-  const command = (func) =>
-    iframeRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func, args: [] }),
-      '*',
+  if (started) {
+    return (
+      <div className="relative w-full aspect-video overflow-hidden bg-burgundy-deep">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1&fs=1&iv_load_policy=3&hl=fr&cc_load_policy=1&cc_lang_pref=fr`}
+          title={`Vidéo : ${name}`}
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+          allowFullScreen
+          className="absolute inset-0 h-full w-full"
+        />
+      </div>
     )
-
-  const toggle = () => {
-    if (!started) {
-      setStarted(true)
-      setPlaying(true)
-      return
-    }
-    if (playing) {
-      command('pauseVideo')
-      setPlaying(false)
-    } else {
-      command('playVideo')
-      setPlaying(true)
-    }
-  }
-
-  const toggleFullscreen = () => {
-    const el = containerRef.current
-    if (!el) return
-    const fsEl = document.fullscreenElement || document.webkitFullscreenElement
-    if (fsEl === el) {
-      const exit = document.exitFullscreen || document.webkitExitFullscreen
-      exit?.call(document)
-      return
-    }
-    if (!started) {
-      setStarted(true)
-      setPlaying(true)
-    }
-    const req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen
-    req?.call(el)
   }
 
   return (
-    <div ref={containerRef} className="relative w-full aspect-video overflow-hidden bg-burgundy-deep">
-      {started ? (
-        <iframe
-          ref={iframeRef}
-          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&enablejsapi=1&controls=0&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3&fs=1&disablekb=1&vq=hd720`}
-          title={`Vidéo : ${name}`}
-          allow="autoplay; encrypted-media; fullscreen"
-          allowFullScreen
-          className="pointer-events-none absolute inset-0 h-full w-full"
-        />
-      ) : (
-        <img
-          src={thumb}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      )}
-
+    <button
+      type="button"
+      onClick={() => setStarted(true)}
+      aria-label={`Lire la vidéo : ${name}`}
+      className="group/vid relative block w-full aspect-video overflow-hidden bg-burgundy-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+    >
+      <img
+        src={poster}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        onError={(e) => {
+          if (!e.currentTarget.src.endsWith('hqdefault.jpg')) e.currentTarget.src = fallback
+        }}
+        className="absolute inset-0 h-full w-full object-cover"
+      />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-burgundy-deep/85 via-burgundy-deep/10 to-transparent" />
-      <span className="pointer-events-none absolute bottom-4 left-4 right-28 text-sm font-medium text-offwhite/95 line-clamp-1 drop-shadow">
+      <span className="pointer-events-none absolute bottom-4 left-4 right-16 text-sm font-medium text-offwhite/95 line-clamp-1 drop-shadow">
         {name}
       </span>
-      <div className="absolute bottom-3 right-3 flex items-center gap-2">
-        <button
-          type="button"
-          onClick={toggleFullscreen}
-          aria-label={`Plein écran : ${name}`}
-          className="grid h-10 w-10 place-items-center rounded-full bg-burgundy-deep/70 text-offwhite shadow-md backdrop-blur-sm transition-colors duration-200 hover:bg-burgundy-deep focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-        >
-          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M3 16v3a2 2 0 0 0 2 2h3" />
-          </svg>
-        </button>
-        <button
-          type="button"
-          onClick={toggle}
-          aria-label={playing ? `Mettre en pause : ${name}` : `Lire la vidéo : ${name}`}
-          className="grid h-11 w-11 place-items-center rounded-full bg-gold text-burgundy-deep shadow-md transition-transform duration-200 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
-        >
-          {playing ? (
-            <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
-              <rect x="6" y="5" width="4" height="14" rx="1" />
-              <rect x="14" y="5" width="4" height="14" rx="1" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" className="h-5 w-5 translate-x-0.5 fill-current" aria-hidden="true">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          )}
-        </button>
-      </div>
-    </div>
+      <span className="absolute bottom-3 right-3 grid h-11 w-11 place-items-center rounded-full bg-gold text-burgundy-deep shadow-md transition-transform duration-200 group-hover/vid:scale-105">
+        <svg viewBox="0 0 24 24" className="h-5 w-5 translate-x-0.5 fill-current" aria-hidden="true">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </span>
+    </button>
   )
 }
 

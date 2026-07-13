@@ -16,7 +16,8 @@ export const CONTACT = {
   whatsapp: 'https://wa.me/33755505258',
   email: 'secretariatdramraoui@myeva.ovh',
   emailHref: 'mailto:secretariatdramraoui@myeva.ovh',
-  doctolib: 'https://www.doctolib.fr/cardiologue/neuilly-sur-seine/sana-amraoui',
+  doctolib: 'https://www.doctolib.fr/cardiologue/paris/sana-amraoui',
+  review: 'https://g.page/r/CduP-ZEHa8huEAE/review',
   youtube: 'https://youtube.com/@drsanaamraoui',
   instagram: 'https://instagram.com/dr_rythmo',
   linkedin: 'https://www.linkedin.com/',
@@ -44,19 +45,9 @@ export const LEGAL_NAV = [
 // §4.3 — Dr Amraoui's social-proof numbers (her profile page only).
 export const STATS = [
   {
-    value: 'EHRA 2026',
+    value: '40+',
     isText: true,
-    line: "Chairperson de l'European Heart Rhythm Association",
-  },
-  {
-    value: 3,
-    suffix: '',
     line: 'Publications dans des revues internationales : JACC, Europace, Heart Rhythm',
-  },
-  {
-    value: 9000,
-    suffix: '',
-    line: 'Consultations humanitaires par an au Maroc',
   },
 ]
 
@@ -70,16 +61,16 @@ export const DOCTORS = [
     name: 'Dr Sana Amraoui',
     specialty: 'Cardiologue rythmologue interventionnelle',
     specialtyShort: 'Cardiologue rythmologue', // compact label for the homepage team card
-    credibility: "Responsable d'unité · Service de rythmologie",
+    credibility: 'Cheffe de service · Rythmologie (électrophysiologie)',
     isFounder: true,
-    badge: 'Chairperson EHRA 2026',
     demo: false,
     photo: '/images/doctor-portrait.jpg',
     doctolib: CONTACT.doctolib,
+    expertiseOrder: ['rythmologie', 'ecg', 'holter-ecg'], // chip display priority on her cards/profile
     bioShort:
-      'Cardiologue rythmologue interventionnelle, le Dr Amraoui coordonne le conseil Cardio Check-up et dirige une unité de rythmologie.',
+      'Cardiologue rythmologue interventionnelle, le Dr Amraoui coordonne le conseil Cardio Check-up et dirige le service de rythmologie.',
     bio:
-      "Diplômée de la faculté de médecine de Bordeaux et de la London School of Economics, ancienne cheffe de clinique du CHU de Bordeaux, le Dr Amraoui est responsable d'unité au service de rythmologie de l'Hôpital Américain de Paris. Elle a complété sa formation par des fellowships à St Thomas' Hospital (Londres) et à Columbia (New York). Elle accompagne ses patients dans le dépistage, le diagnostic et le suivi des maladies cardiovasculaires et des troubles du rythme cardiaque.",
+      "Diplômée de la faculté de médecine de Bordeaux et de la London School of Economics, ancienne cheffe de clinique du CHU de Bordeaux, le Dr Amraoui est cheffe du service de rythmologie (électrophysiologie) de l'Hôpital Américain de Paris. Elle a complété sa formation par des fellowships à St Thomas' Hospital (Londres) et à Columbia (New York). Elle accompagne ses patients dans le diagnostic et le traitement des troubles du rythme cardiaque. Spécialisée en cardiologie et en rythmologie, elle a recours à des outils tridimensionnels innovants pour traiter les arythmies cardiaques. Son expertise médicale, alliée à son sens de la communication et à son empathie — qui sont sa marque de fabrique — place le patient au cœur de sa prise en charge.",
     highlightLabel: 'Rythmologie interventionnelle',
     // TODO: validation médicale — affirmations à valider avant publication (brief §12)
     highlight:
@@ -167,7 +158,7 @@ export const DOCTORS = [
     // are pending and must be completed before go-live.
     slug: 'sofiane',
     order: 4,
-    name: 'Dr Sofiane',
+    name: 'Dr Sofiane Sroutta-Paillusseau',
     specialty: 'Cardiologue',
     credibility: 'Cardiologie · Consultation, ECG et échographie cardiaque',
     isFounder: false,
@@ -177,9 +168,9 @@ export const DOCTORS = [
     doctolib: CONTACT.doctolib,
     badge: 'Cardiologie générale',
     bioShort:
-      'Cardiologue, le Dr Sofiane assure les consultations de cardiologie, la prise en charge des facteurs de risque et la réalisation des ECG et échographies cardiaques.',
+      'Cardiologue, le Dr Sroutta-Paillusseau assure les consultations de cardiologie, la prise en charge des facteurs de risque et la réalisation des ECG et échographies cardiaques.',
     bio:
-      "Cardiologue au sein de Cardio Check-up, le Dr Sofiane prend en charge les consultations de cardiologie, le dépistage et le suivi des facteurs de risque cardiovasculaire (notamment l'hypertension artérielle) et l'exploration de la douleur thoracique, et réalise les électrocardiogrammes et les échographies cardiaques. (Biographie complète à compléter avant la mise en ligne.)",
+      "Cardiologue au sein de Cardio Check-up, le Dr Sroutta-Paillusseau prend en charge les consultations de cardiologie, le dépistage et le suivi des facteurs de risque cardiovasculaire (notamment l'hypertension artérielle) et l'exploration de la douleur thoracique, et réalise les électrocardiogrammes et les échographies cardiaques. (Biographie complète à compléter avant la mise en ligne.)",
     timeline: [],
     procedures: [
       'Consultation de cardiologie',
@@ -288,7 +279,7 @@ export const SERVICES = [
     group: 'consultation', // listed under /consultations, not in the exams grid
 
     headline: 'Un bilan complet de la santé de votre cœur, en un rendez-vous',
-    reassurance: 'Sans préparation · ECG et échographie sur place · Résultats commentés le jour même',
+    reassurance: 'Sans préparation · ECG et échographie sur place · Résultats commentés par votre médecin',
     why: 'Pour faire le point sur la santé de votre cœur.',
     symptoms: 'Bilan de prévention, suivi de routine, avant une activité sportive.',
     desc: 'Consultation complète associant un ECG de repos et une échographie cardiaque trans-thoracique (ETT).',
@@ -304,7 +295,7 @@ export const SERVICES = [
       { title: 'Consultation', text: 'Le cardiologue fait le point sur vos antécédents, vos symptômes et votre mode de vie.' },
       { title: 'Électrocardiogramme', text: "Un enregistrement rapide et indolore de l'activité électrique de votre cœur." },
       { title: 'Échographie cardiaque', text: 'Une échographie (ETT) pour visualiser la structure et le fonctionnement du cœur.' },
-      { title: 'Résultats commentés', text: 'Le médecin vous explique les résultats et les éventuelles suites, le jour même.' },
+      { title: 'Résultats commentés', text: 'Le médecin vous explique les résultats et les éventuelles suites.' },
     ],
     preparation: [
       'Aucun jeûne nécessaire : vous pouvez manger normalement.',
@@ -328,7 +319,7 @@ export const SERVICES = [
       },
       {
         q: 'Quand ai-je les résultats ?',
-        a: 'Les résultats vous sont expliqués et commentés par le médecin le jour même de votre rendez-vous.',
+        a: 'Les résultats sont interprétés et commentés par le médecin et vous sont transmis dès leur analyse médicale.',
       },
     ],
     doctorSlugs: ['sana-amraoui'],
@@ -357,7 +348,7 @@ export const SERVICES = [
       { title: 'Installation', text: "Vous êtes allongé(e) et détendu(e) ; l'assistante médicale pose quelques électrodes sur la poitrine, les bras et les jambes." },
       { title: 'Enregistrement', text: "Le tracé de l'activité électrique du cœur s'enregistre en quelques secondes, sans aucune gêne." },
       { title: 'Lecture', text: "Le cardiologue analyse le tracé à la recherche d'une anomalie du rythme ou de la conduction." },
-      { title: 'Résultats', text: 'Les résultats vous sont expliqués sur place, le jour même.' },
+      { title: 'Résultats', text: 'Le cardiologue vous explique les résultats et les éventuelles suites.' },
     ],
     preparation: [
       'Aucune préparation particulière : vous pouvez manger et prendre vos traitements normalement.',
@@ -401,7 +392,7 @@ export const SERVICES = [
       { title: 'Installation', text: 'Vous êtes allongé(e) sur le côté gauche, le thorax dégagé.' },
       { title: 'Échographie', text: 'Le cardiologue déplace une sonde sur la poitrine pour visualiser le cœur en mouvement.' },
       { title: 'Analyse', text: "La taille des cavités, la contraction du muscle et l'état des valves sont évalués en direct." },
-      { title: 'Résultats', text: 'Le médecin vous explique les résultats le jour même.' },
+      { title: 'Résultats', text: 'Le médecin vous explique les résultats et les éventuelles suites.' },
     ],
     preparation: [
       'Aucun jeûne nécessaire : vous pouvez manger normalement.',
@@ -641,15 +632,13 @@ export const SERVICES = [
     group: 'vasculaire',
     headline: 'Échographie Doppler vasculaire',
     reassurance:
-      "Un examen indolore et précis pour explorer la circulation du sang (artères et veines) et vous expliquer chaque résultat avec clarté, le jour même.",
-    introLead:
-      "Six explorations, une seule prise de rendez-vous. Repérez en un coup d'œil celle qui vous concerne : chaque carte mène directement à sa fiche détaillée.",
-    why: 'Explorer les artères et les veines : cou, jambes, bras, reins et aorte.',
+      "Un examen indolore et précis pour explorer la circulation du sang (artères et veines) et vous expliquer chaque résultat avec clarté.",
+    why: 'Explorer les artères et les veines : carotides, artères des membres inférieurs, aorte, artères rénales, etc.',
     symptoms: "Douleurs à la marche, jambes lourdes, hypertension, dépistage d'anévrisme.",
-    desc: 'Six explorations Doppler en un seul rendez-vous, pour les artères et les veines, par le médecin vasculaire.',
+    desc: 'Six explorations Doppler en un seul rendez-vous, pour les artères et les veines, par un médecin spécialisé en pathologie vasculaire.',
     videoId: 'tc7KTED100U', // Doppler vasculaire — explainer video (homepage card; no inline slot on the hub page yet)
     doctorNote:
-      "Chaque examen est réalisé personnellement par le Dr Hakem, de l'acquisition des images à l'interprétation. Le compte-rendu vous est remis et expliqué le jour même, en consultation.",
+      "Chaque examen est réalisé personnellement par le Dr Hakem, de l'acquisition des images à l'interprétation. Le compte-rendu vous est remis et expliqué en consultation.",
     // Animated anatomy figure: base image + per-territory highlight points
     // (x/y as % of the image). Tuned to public/images/anatomy-vascular.jpg.
     anatomy: {
@@ -788,11 +777,11 @@ export const SERVICES = [
       },
       {
         q: "Ai-je besoin d'une ordonnance ?",
-        a: 'Une prescription de votre médecin est généralement nécessaire. En cas de doute, notre secrétariat vous renseigne.',
+        a: 'Une prescription de votre médecin est généralement nécessaire pour les examens complémentaires. En cas de doute, notre secrétariat vous renseigne.',
       },
       {
         q: 'Quand aurai-je les résultats ?',
-        a: 'Les résultats vous sont expliqués par le médecin le jour même de votre examen.',
+        a: 'Les résultats sont interprétés par le médecin et vous sont transmis dès leur analyse médicale.',
       },
     ],
     doctorSlugs: ['rabiaa-hakem'],
@@ -896,11 +885,11 @@ export const FAQ = [
   },
   {
     q: 'Quand vais-je recevoir mes résultats ?',
-    a: 'Pour les examens réalisés au cabinet, vos résultats vous sont expliqués par le médecin le jour même de votre rendez-vous.',
+    a: 'Pour les examens réalisés au cabinet, vos résultats sont interprétés par le médecin et vous sont transmis dès leur analyse médicale.',
   },
   {
     q: 'Faut-il une ordonnance pour prendre rendez-vous ?',
-    a: 'Une prescription de votre médecin est généralement nécessaire pour les examens. En cas de doute, notre secrétariat vous renseigne.',
+    a: 'Une prescription de votre médecin est généralement nécessaire pour les examens complémentaires. En cas de doute, notre secrétariat vous renseigne.',
   },
   {
     q: "Que faire en cas d'urgence ?",
@@ -914,7 +903,7 @@ export const PARCOURS = [
   { n: '01', title: 'Examens indolores', text: "Nos examens sont indolores et n'entravent pas vos activités quotidiennes." },
   { n: '02', title: 'Pose rapide', text: "La pose est réalisée par l'assistante médicale en une dizaine de minutes." },
   { n: '03', title: 'Rendez-vous en ligne', text: 'Réservez directement depuis le site, en quelques clics. Notre équipe vous contacte pour confirmer votre créneau.' },
-  { n: '04', title: 'Résultats le jour même', text: 'Vos résultats vous sont communiqués le jour même de votre examen.' },
+  { n: '04', title: 'Résultats commentés', text: 'Vos résultats vous sont expliqués et commentés par le médecin.' },
 ]
 
 // Paris métro line colors (official RATP palette)
@@ -954,9 +943,19 @@ export const doctorsForExam = (examSlug) => {
   return DOCTORS.filter((d) => exam.doctorSlugs?.includes(d.slug))
 }
 
-// Exams a given doctor performs (derived from each exam's doctorSlugs).
-export const examsForDoctor = (doctorSlug) =>
-  SERVICES.filter((s) => s.doctorSlugs?.includes(doctorSlug))
+// Exams a given doctor performs (derived from each exam's doctorSlugs). Chip
+// display order follows the doctor's optional `expertiseOrder` (exam ids listed
+// there come first, in that order); the rest keep SERVICES order.
+export const examsForDoctor = (doctorSlug) => {
+  const exams = SERVICES.filter((s) => s.doctorSlugs?.includes(doctorSlug))
+  const order = getDoctor(doctorSlug)?.expertiseOrder
+  if (!order?.length) return exams
+  const rank = (id) => {
+    const i = order.indexOf(id)
+    return i === -1 ? order.length : i
+  }
+  return [...exams].sort((a, b) => rank(a.id) - rank(b.id))
+}
 
 // ── Blog / Actualités ────────────────────────────────────────────────────
 // SEO + GEO editorial. Each post is self-contained. `author` is a doctor slug
@@ -1163,7 +1162,7 @@ export const POSTS = [
       { type: 'h2', text: 'Le jour J, étape par étape' },
       {
         type: 'p',
-        text: "Le rendez-vous se déroule sans surprise : un temps d'échange avec le cardiologue sur vos antécédents et votre mode de vie, puis l'électrocardiogramme (rapide et indolore) et enfin l'échographie cardiaque, qui visualise la structure et le fonctionnement de votre cœur grâce à une simple sonde posée sur la peau. Les résultats vous sont expliqués le jour même.",
+        text: "Le rendez-vous se déroule sans surprise : un temps d'échange avec le cardiologue sur vos antécédents et votre mode de vie, puis l'électrocardiogramme (rapide et indolore) et enfin l'échographie cardiaque, qui visualise la structure et le fonctionnement de votre cœur grâce à une simple sonde posée sur la peau. Les résultats vous sont ensuite expliqués par le cardiologue.",
       },
       {
         type: 'quote',
